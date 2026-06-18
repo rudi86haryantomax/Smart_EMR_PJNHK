@@ -65,7 +65,7 @@ INDIKATOR_SLKI = [
     "Ventilasi Spontan (L.01007)",
     # ── Sirkulasi & Jantung ───────────────────────────────────────────────────
     "Curah Jantung (L.02008)",
-    "Integritas Kardiovaskular (L.02009)",
+    "Keseimbangan Asam Basa (L.02009)",
     "Perfusi Miokard (L.02010)",
     "Perfusi Perifer (L.02011)",
     "Tingkat Perdarahan (L.02012)",
@@ -79,6 +79,7 @@ INDIKATOR_SLKI = [
     "Berat Badan (L.03018)",
     "Fungsi Gastrointestinal (L.03019)",
     "Nafsu Makan (L.03024)",
+    "Keseimbangan Elektrolit (L.03021)",
     # ── Eliminasi ─────────────────────────────────────────────────────────────
     "Eliminasi Fekal (L.04033)",
     "Eliminasi Urin (L.04034)",
@@ -112,13 +113,6 @@ INDIKATOR_SLKI = [
     # ── Pertumbuhan & Perkembangan ────────────────────────────────────────────
     "Ketahanan Personal (L.09074)",
     "Penyesuaian Sosial (L.13121)",
-    # ── Elektrolit & Asam-Basa ────────────────────────────────────────────────
-    "Keseimbangan Elektrolit (L.03021)",
-    "Keseimbangan Asam Basa (L.02009)",
-    # ── Termoregulasi ─────────────────────────────────────────────────────────
-    "Termoregulasi (L.14134)",
-    # ── Citra Diri ────────────────────────────────────────────────────────────
-    "Citra Tubuh (L.09067)",
 ]
 
 MASTER_DX_TO_SLKI = {
@@ -143,15 +137,16 @@ MASTER_DX_TO_SLKI = {
     "D.0017": {"kata_kunci": "Perfusi Serebral",      "kode_luaran": "L.02014", "narasi": "Perfusi Serebral Meningkat (L.02014)"},
     "D.0018": {"kata_kunci": "Perfusi Pulmonal",      "kode_luaran": "L.02013", "narasi": "Perfusi Pulmonal Meningkat (L.02013)"},
     "D.0019": {"kata_kunci": "Perfusi Perifer",       "kode_luaran": "L.02011", "narasi": "Perfusi Perifer Meningkat (L.02011)"},
-    # ── Nutrisi & Cairan ──────────────────────────────────────────────────────
+    # ── Nutrisi & Cairan ───────────────────────────────────────────────
     "D.0020": {"kata_kunci": "Status Nutrisi",        "kode_luaran": "L.03030", "narasi": "Status Nutrisi Membaik (L.03030)"},
-    "D.0021": {"kata_kunci": "Berat Badan",           "kode_luaran": "L.03018", "narasi": "Berat Badan Membaik (L.03018)"},
+    "D.0021": {"kata_kunci": "Keseimbangan Asam Basa","kode_luaran": "L.02009", "narasi": "Keseimbangan Asam Basa Membaik (L.02009)"},
     "D.0022": {"kata_kunci": "Status Cairan",         "kode_luaran": "L.03028", "narasi": "Status Cairan Membaik (L.03028)"},
     "D.0023": {"kata_kunci": "Status Cairan",         "kode_luaran": "L.03028", "narasi": "Status Cairan Membaik (L.03028)"},
     "D.0024": {"kata_kunci": "Fungsi Gastrointestinal","kode_luaran": "L.03019", "narasi": "Fungsi Gastrointestinal Membaik (L.03019)"},
     "D.0025": {"kata_kunci": "Nafsu Makan",           "kode_luaran": "L.03024", "narasi": "Nafsu Makan Membaik (L.03024)"},
     "D.0026": {"kata_kunci": "Status Nutrisi",        "kode_luaran": "L.03030", "narasi": "Status Nutrisi Membaik (L.03030)"},
     # ── Eliminasi ─────────────────────────────────────────────────────────────
+    "D.0037": {"kata_kunci": "keseimbangan Elektrolit", "kode_luaran": "L.03021", "narasi": "Keseimbangan Elektrolit Membaik (L.03021)"},
     "D.0038": {"kata_kunci": "Eliminasi Fekal",       "kode_luaran": "L.04033", "narasi": "Eliminasi Fekal Membaik (L.04033)"},
     "D.0039": {"kata_kunci": "Eliminasi Urin",        "kode_luaran": "L.04034", "narasi": "Eliminasi Urin Membaik (L.04034)"},
     "D.0040": {"kata_kunci": "Eliminasi Fekal",       "kode_luaran": "L.04033", "narasi": "Eliminasi Fekal Membaik (L.04033)"},
@@ -212,13 +207,14 @@ SDKI_NAME_MAPPING = {
     "D.0019": "Risiko Perfusi Perifer Tidak Efektif",
     # ── Nutrisi & Cairan ──────────────────────────────────────────────────────
     "D.0020": "Defisit Nutrisi",
-    "D.0021": "Berat Badan Lebih",
+    "D.0021": "Ketidakseimbangan Asam Basa",
     "D.0022": "Hipervolemia",
     "D.0023": "Hipovolemia",
     "D.0024": "Gangguan Menelan",
     "D.0025": "Ketidakstabilan Kadar Glukosa Darah",
     "D.0026": "Risiko Defisit Nutrisi",
     "D.0027": "Risiko Berat Badan Lebih",
+    "D.0037": "Risiko Ketidakseimbangan Elektrolit",
     # ── Eliminasi ─────────────────────────────────────────────────────────────
     "D.0038": "Konstipasi",
     "D.0039": "Gangguan Eliminasi Urin",
@@ -259,12 +255,6 @@ SDKI_NAME_MAPPING = {
     "D.0137": "Risiko Cedera",
     "D.0142": "Risiko Infeksi",
     "D.0143": "Infeksi",
-    # ── Elektrolit & Asam-Basa ────────────────────────────────────────────────
-    "D.0021": "Risiko Ketidakseimbangan Asam-Basa",
-    "D.0037": "Risiko Ketidakseimbangan Elektrolit",
-    # ── Termoregulasi ─────────────────────────────────────────────────────────
-    "D.0130": "Hipertermia",
-    "D.0131": "Hipotermia",
 }
 
 DX_TO_SLKI_MAPPING = {
@@ -291,12 +281,13 @@ DX_TO_SLKI_MAPPING = {
     "D.0019": {"kode_luaran": "L.02011", "narasi": "Perfusi Perifer Meningkat (L.02011)"},
     # ── Nutrisi & Cairan ──────────────────────────────────────────────────────
     "D.0020": {"kode_luaran": "L.03030", "narasi": "Status Nutrisi Membaik (L.03030)"},
-    "D.0021": {"kode_luaran": "L.03018", "narasi": "Berat Badan Membaik (L.03018)"},
+    "D.0021": {"kode_luaran": "L.02009", "narasi": "Keseimbangan Asam Basa Membaik (L.02009)"},
     "D.0022": {"kode_luaran": "L.03028", "narasi": "Status Cairan Membaik (L.03028)"},
     "D.0023": {"kode_luaran": "L.03028", "narasi": "Status Cairan Membaik (L.03028)"},
     "D.0024": {"kode_luaran": "L.03019", "narasi": "Fungsi Gastrointestinal Membaik (L.03019)"},
     "D.0025": {"kode_luaran": "L.03028", "narasi": "Status Cairan Membaik (L.03028)"},
     "D.0026": {"kode_luaran": "L.03030", "narasi": "Status Nutrisi Membaik (L.03030)"},
+    "D.0037": {"kode_luaran": "L.03021", "narasi": "Keseimbangan Elektrolit Membaik (L.03021)"},
     # ── Eliminasi ─────────────────────────────────────────────────────────────
     "D.0038": {"kode_luaran": "L.04033", "narasi": "Eliminasi Fekal Membaik (L.04033)"},
     "D.0039": {"kode_luaran": "L.04034", "narasi": "Eliminasi Urin Membaik (L.04034)"},
@@ -334,14 +325,6 @@ DX_TO_SLKI_MAPPING = {
     "D.0137": {"kode_luaran": "L.14136", "narasi": "Tingkat Cedera Menurun (L.14136)"},
     "D.0142": {"kode_luaran": "L.14137", "narasi": "Tingkat Infeksi Menurun (L.14137)"},
     "D.0143": {"kode_luaran": "L.14137", "narasi": "Tingkat Infeksi Menurun (L.14137)"},
-    # ── Elektrolit & Asam-Basa ────────────────────────────────────────────────
-    "D.0021": {"kode_luaran": "L.02009", "narasi": "Keseimbangan Asam Basa Membaik (L.02009)"},
-    "D.0037": {"kode_luaran": "L.03021", "narasi": "Keseimbangan Elektrolit Membaik (L.03021)"},
-    # ── Termoregulasi ─────────────────────────────────────────────────────────
-    "D.0130": {"kode_luaran": "L.14134", "narasi": "Termoregulasi Membaik (L.14134)"},
-    "D.0131": {"kode_luaran": "L.14134", "narasi": "Termoregulasi Membaik (L.14134)"},
-    # ── Citra Tubuh ───────────────────────────────────────────────────────────
-    "D.0082": {"kode_luaran": "L.09067", "narasi": "Citra Tubuh Meningkat (L.09067)"},
 }
 
 
@@ -350,17 +333,27 @@ DX_TO_SLKI_MAPPING = {
 # =============================================================================
 
 def transcribe_audio(audio_bytes: bytes) -> str:
-    """Mengubah audio bytes menjadi teks menggunakan Google Speech Recognition."""
+    """Mengubah audio bytes (WAV) menjadi teks menggunakan Google Speech Recognition.
+
+    Mengembalikan teks hasil transkripsi, atau pesan error yang diawali '[' jika gagal.
+    Caller harus mengecek apakah hasil dimulai dengan '[' untuk mendeteksi kegagalan.
+    """
     if not SPEECH_AVAILABLE:
-        return "[Fitur speech recognition tidak tersedia]"
-    recognizer = sr.Recognizer()
-    audio_file = io.BytesIO(audio_bytes)
-    with sr.AudioFile(audio_file) as source:
-        audio_data = recognizer.record(source)
-        try:
-            return recognizer.recognize_google(audio_data, language="id-ID")
-        except Exception:
-            return "[Gagal mengenali suara]"
+        return "[Fitur speech recognition tidak tersedia. Instal: pip install SpeechRecognition streamlit-mic-recorder]"
+    try:
+        recognizer = sr.Recognizer()
+        audio_file = io.BytesIO(audio_bytes)
+        with sr.AudioFile(audio_file) as source:
+            audio_data = recognizer.record(source)
+        return recognizer.recognize_google(audio_data, language="id-ID")
+    except sr.UnknownValueError:
+        return "[Suara tidak dapat dikenali — coba ucapkan lebih jelas dan perlahan]"
+    except sr.RequestError as exc:
+        logger.error("Google Speech API error: %s", exc)
+        return "[Gagal terhubung ke layanan Google Speech Recognition — periksa koneksi internet]"
+    except Exception as exc:
+        logger.error("transcribe_audio error: %s", exc)
+        return "[Gagal memproses audio — pastikan mikrofon aktif dan format WAV didukung]"
 
 
 # =============================================================================
@@ -381,12 +374,15 @@ def init_session() -> None:
         "emergency_logs":   [],
         "checked_items":    {},
         "hasil_cdss":       None,
-        "daftar_diagnosis": [
-            {"id": 1, "nama": "Bersihan Jalan Napas Tidak Efektif (D.0001)", "status": "Belum Teratasi"},
-            {"id": 2, "nama": "Nyeri Akut (D.0077)",                         "status": "Belum Teratasi"},
-        ],
+        "daftar_diagnosis": [],
+        "selected_dx_codes": set(),
         "soap_A": "",
         "soap_P": "",
+        # ── Voice-to-Text ─────────────────────────────────────────────────────
+        "s_text_area":     "",   # Nilai kolom S (teks manual + VTT)
+        "o_text_area":     "",   # Nilai kolom O (teks manual + VTT)
+        "last_audio_s_id": None, # ID rekaman S terakhir yang sudah ditranskripsi
+        "last_audio_o_id": None, # ID rekaman O terakhir yang sudah ditranskripsi
     }
     for key, val in defaults.items():
         if key not in st.session_state:
@@ -549,9 +545,6 @@ def _parse_intervensi(detail: str) -> list[str]:
 
 
 # =============================================================================
-# CDSS LOKAL (FALLBACK)
-# =============================================================================
-
 # CDSS LOKAL (FALLBACK)
 # =============================================================================
 
@@ -2024,7 +2017,7 @@ def local_cdss_rule_engine(s_text: str, o_text: str) -> list[dict]:
         rekomendasi.append({
             "kode_diagnosa": "D.0021",
             "diagnosa_keperawatan": (
-                "Risiko Ketidakseimbangan Asam-Basa d.d Perfusi Jaringan Tidak Efektif / "
+                "Ketidakseimbangan Asam-Basa d.d Perfusi Jaringan Tidak Efektif / "
                 "Sepsis / Ketoasidosis / Gagal Ginjal / Ventilasi Tidak Adekuat."
             ),
             "luaran_keperawatan": "Keseimbangan Asam Basa Membaik (L.02009)",
@@ -2351,7 +2344,6 @@ def local_cdss_rule_engine(s_text: str, o_text: str) -> list[dict]:
         })
 
     return rekomendasi
-
 
 
 # =============================================================================
@@ -2724,20 +2716,81 @@ def main_app() -> None:
         else:
             st.info("Aman: Belum ada aktivitas bypass manual pada sesi ini.")
 
+    # ── Voice to Text Input ───────────────────────────────────────────────────
+    if SPEECH_AVAILABLE:
+        with st.container(border=True):
+            st.markdown("#### 🎙️ Input Suara — Voice to Text")
+            st.caption(
+                "Tekan **Mulai Rekam**, ucapkan temuan klinis, lalu tekan **Selesai**. "
+                "Teks akan otomatis ditambahkan ke kolom S atau O di bawah. "
+                "Bisa dilanjutkan dengan pengetikan manual."
+            )
+            vcol1, vcol2 = st.columns(2)
+
+            with vcol1:
+                st.markdown("**🗣️ Rekam Data Subjektif (S)**")
+                audio_s = mic_recorder(
+                    start_prompt="🎤 Mulai Rekam S",
+                    stop_prompt="⏹ Selesai Rekam S",
+                    key="mic_s",
+                    format="wav",
+                )
+                if audio_s and audio_s.get("id") != st.session_state.last_audio_s_id:
+                    st.session_state.last_audio_s_id = audio_s["id"]
+                    with st.spinner("🔄 Mengonversi suara subjektif ke teks..."):
+                        hasil_s = transcribe_audio(audio_s["bytes"])
+                    if not hasil_s.startswith("["):
+                        prev = st.session_state.s_text_area
+                        st.session_state.s_text_area = (
+                            (prev + " " + hasil_s).strip() if prev else hasil_s
+                        )
+                        st.toast("✅ Teks subjektif berhasil ditambahkan!", icon="🎙️")
+                    else:
+                        st.warning(f"⚠️ VTT-S: {hasil_s}")
+
+            with vcol2:
+                st.markdown("**🗣️ Rekam Data Objektif (O)**")
+                audio_o = mic_recorder(
+                    start_prompt="🎤 Mulai Rekam O",
+                    stop_prompt="⏹ Selesai Rekam O",
+                    key="mic_o",
+                    format="wav",
+                )
+                if audio_o and audio_o.get("id") != st.session_state.last_audio_o_id:
+                    st.session_state.last_audio_o_id = audio_o["id"]
+                    with st.spinner("🔄 Mengonversi suara objektif ke teks..."):
+                        hasil_o = transcribe_audio(audio_o["bytes"])
+                    if not hasil_o.startswith("["):
+                        prev = st.session_state.o_text_area
+                        st.session_state.o_text_area = (
+                            (prev + " " + hasil_o).strip() if prev else hasil_o
+                        )
+                        st.toast("✅ Teks objektif berhasil ditambahkan!", icon="🎙️")
+                    else:
+                        st.warning(f"⚠️ VTT-O: {hasil_o}")
+    else:
+        st.info(
+            "ℹ️ Fitur Voice to Text tidak aktif. "
+            "Instal dengan: `pip install SpeechRecognition streamlit-mic-recorder`",
+            icon="🎙️",
+        )
+
     col1, col2 = st.columns(2)
     with col1:
         s_input = st.text_area(
-            "S (Subjektif)",
-            placeholder="Masukkan keluhan subjektif pasien...",
-            height=120,
-        )
+            "📋 S (Subjektif)" + (" — VTT Aktif 🎙️" if SPEECH_AVAILABLE else ""),
+            placeholder="Masukkan keluhan subjektif pasien atau gunakan rekam suara di atas...",
+            height=150,
+            key="s_text_area",
+        )  
     with col2:
         o_input = st.text_area(
-            "O (Objektif: Data TTV/Monitor/Px.Fisik/Penunjang)",
-            placeholder="Masukkan pemeriksaan objektif, TTV, dan kondisi fisik aktual...",
-            height=120,
+            "📊 O (Objektif: TTV/Monitor/Px.Fisik/Penunjang)" + (" — VTT Aktif 🎙️" if SPEECH_AVAILABLE else ""),
+            placeholder="Masukkan pemeriksaan objektif atau gunakan rekam suara di atas...",
+            height=150,
+            key="o_text_area",
         )
-
+        
     if st.button("Formulasikan Standar 3S", type="primary"):
         if not s_input.strip() and not o_input.strip():
             st.warning("⚠️ Mohon isi minimal satu kolom data S atau O.")
@@ -2747,11 +2800,14 @@ def main_app() -> None:
                 hasil_cdss          = call_cdss_api(s_input, o_input)
 
             if data_asuhan:
-                st.session_state.checked_items  = {}
-                st.session_state.daftar_asuhan  = data_asuhan
-                st.session_state.hasil_cdss     = hasil_cdss
-                st.session_state.order_list     = {
+                st.session_state.checked_items     = {}
+                st.session_state.daftar_asuhan     = data_asuhan
+                st.session_state.hasil_cdss        = hasil_cdss
+                st.session_state.order_list        = {
                     a["kode_diagnosa"]: i + 1 for i, a in enumerate(data_asuhan)
+                }
+                st.session_state.selected_dx_codes = {
+                    a["kode_diagnosa"] for a in data_asuhan
                 }
                 st.caption(f"ℹ️ Sumber CDSS: **{sumber}**")
                 st.rerun()
@@ -2766,39 +2822,92 @@ def main_app() -> None:
             st.error(f"🚨 **CDSS ALERT:** {cdss_data['analisis']}")
 
         st.write("---")
-        st.subheader("🔢 Atur Urutan Prioritas Diagnosa")
+        st.subheader("☑️ Pilih Diagnosa yang Akan Digunakan")
+        st.caption(
+            "CDSS mendeteksi diagnosa berikut. "
+            "Hilangkan centang untuk **mengecualikan** diagnosa tertentu dari CPPT & rencana asuhan."
+        )
 
-        n    = len(st.session_state.daftar_asuhan)
-        cols = st.columns(n)
+        if "selected_dx_codes" not in st.session_state:
+            st.session_state.selected_dx_codes = {
+                a["kode_diagnosa"] for a in st.session_state.daftar_asuhan
+            }
 
-        for i, asuhan in enumerate(st.session_state.daftar_asuhan):
-            kode         = asuhan.get("kode_diagnosa", "ERR")
-            current_prio = st.session_state.order_list.get(kode, i + 1)
-            with cols[i]:
-                st.selectbox(
-                    f"Urutan {kode}",
-                    options=list(range(1, n + 1)),
-                    index=current_prio - 1,
-                    key=f"prio_select_{kode}",
-                    on_change=handle_priority_swap,
-                    args=(kode,),
-                )
-
-        with st.form("form_asuhan"):
-            sorted_diagnosa = sorted(
-                st.session_state.daftar_asuhan,
-                key=lambda x: st.session_state.order_list.get(x["kode_diagnosa"], 99),
+        for asuhan in st.session_state.daftar_asuhan:
+            kode       = asuhan.get("kode_diagnosa", "ERR")
+            short_name = SDKI_NAME_MAPPING.get(kode, kode)
+            is_sel     = kode in st.session_state.selected_dx_codes
+            new_val    = st.checkbox(
+                f"**{kode}** — {short_name}",
+                value=is_sel,
+                key=f"select_dx_{kode}",
             )
-            for asuhan in sorted_diagnosa:
-                st.write("---")
-                render_checklist(asuhan, asuhan.get("kode_diagnosa", "ERR"))
+            if new_val:
+                st.session_state.selected_dx_codes.add(kode)
+            else:
+                st.session_state.selected_dx_codes.discard(kode)
 
-            st.write(" ")
-            if st.form_submit_button("Simpan & Finalisasi CPPT", type="primary"):
-                st.session_state.draft_cppt = generate_cppt_and_logbook(
-                    sorted_diagnosa, s_input, o_input
+        # Filter asuhan berdasarkan yang dipilih user
+        asuhan_terpilih = [
+            a for a in st.session_state.daftar_asuhan
+            if a["kode_diagnosa"] in st.session_state.selected_dx_codes
+        ]
+
+        if not asuhan_terpilih:
+            st.warning("⚠️ Pilih minimal satu diagnosa untuk melanjutkan rencana asuhan.")
+        else:
+            st.write("---")
+            st.subheader("🔢 Atur Urutan Prioritas Diagnosa")
+
+            n    = len(asuhan_terpilih)
+            cols = st.columns(n)
+
+            for i, asuhan in enumerate(asuhan_terpilih):
+                kode         = asuhan.get("kode_diagnosa", "ERR")
+                current_prio = st.session_state.order_list.get(kode, i + 1)
+                with cols[i]:
+                    st.selectbox(
+                        f"Urutan {kode}",
+                        options=list(range(1, n + 1)),
+                        index=min(current_prio - 1, n - 1),
+                        key=f"prio_select_{kode}",
+                        on_change=handle_priority_swap,
+                        args=(kode,),
+                    )
+
+            with st.form("form_asuhan"):
+                sorted_diagnosa = sorted(
+                    asuhan_terpilih,
+                    key=lambda x: st.session_state.order_list.get(x["kode_diagnosa"], 99),
                 )
-                st.rerun()
+                for asuhan in sorted_diagnosa:
+                    st.write("---")
+                    render_checklist(asuhan, asuhan.get("kode_diagnosa", "ERR"))
+
+                st.write(" ")
+                if st.form_submit_button("Simpan & Finalisasi CPPT", type="primary"):
+                    # Bangun daftar_diagnosis dinamis dari diagnosa yang dipilih
+                    new_daftar_dx = []
+                    for idx, asuhan in enumerate(sorted_diagnosa, 1):
+                        kode_dx    = asuhan.get("kode_diagnosa", "ERR")
+                        short_name = SDKI_NAME_MAPPING.get(kode_dx, "Diagnosa Tidak Diketahui")
+                        slki_info  = DX_TO_SLKI_MAPPING.get(kode_dx, {})
+                        luaran     = slki_info.get(
+                            "narasi", asuhan.get("luaran_keperawatan", "")
+                        )
+                        new_daftar_dx.append({
+                            "id":     idx,
+                            "nama":   f"{short_name} ({kode_dx})",
+                            "luaran": luaran,
+                            "kode":   kode_dx,
+                            "status": "Belum Teratasi",
+                        })
+                    st.session_state.daftar_diagnosis = new_daftar_dx
+                    update_soap_from_status()
+                    st.session_state.draft_cppt = generate_cppt_and_logbook(
+                        sorted_diagnosa, s_input, o_input
+                    )
+                    st.rerun()
 
     if st.session_state.draft_cppt:
         st.subheader("✍️ Edit CPPT & Logbook")
@@ -2810,23 +2919,31 @@ def main_app() -> None:
         st.write("---")
         st.subheader("📋 Evaluasi Diagnosis & Luaran Pasien")
 
-        for index, diag in enumerate(st.session_state.daftar_diagnosis):
-            col1_diag, col2_diag = st.columns([3, 2])
-            with col1_diag:
-                st.markdown(f"**{index + 1}. {diag['nama']}**")
-            with col2_diag:
-                status_opsi  = ["Belum Teratasi", "Teratasi Sebagian", "Teratasi (Selesai)"]
-                default_idx  = status_opsi.index(diag["status"])
-                selected_status = st.selectbox(
-                    f"Status Masalah {diag['id']}",
-                    options=status_opsi,
-                    index=default_idx,
-                    key=f"status_diag_{diag['id']}",
-                    label_visibility="collapsed",
-                )
-                if selected_status != diag["status"]:
-                    st.session_state.daftar_diagnosis[index]["status"] = selected_status
-                    update_soap_from_status()
+        if not st.session_state.daftar_diagnosis:
+            st.info(
+                "ℹ️ Belum ada diagnosa yang difinalisasi. "
+                "Klik **Simpan & Finalisasi CPPT** di atas untuk memuat daftar evaluasi."
+            )
+        else:
+            for index, diag in enumerate(st.session_state.daftar_diagnosis):
+                col1_diag, col2_diag = st.columns([3, 2])
+                with col1_diag:
+                    st.markdown(f"**{index + 1}. {diag['nama']}**")
+                    if diag.get("luaran"):
+                        st.caption(f"🎯 Luaran SLKI: {diag['luaran']}")
+                with col2_diag:
+                    status_opsi  = ["Belum Teratasi", "Teratasi Sebagian", "Teratasi (Selesai)"]
+                    default_idx  = status_opsi.index(diag["status"])
+                    selected_status = st.selectbox(
+                        f"Status Masalah {diag['id']}",
+                        options=status_opsi,
+                        index=default_idx,
+                        key=f"status_diag_{diag['id']}",
+                        label_visibility="collapsed",
+                    )
+                    if selected_status != diag["status"]:
+                        st.session_state.daftar_diagnosis[index]["status"] = selected_status
+                        update_soap_from_status()
 
         st.subheader("✍️ Hasil Analisis & Rencana Asuhan Standar 3S (A & P)")
         col_A, col_P = st.columns(2)
@@ -2868,17 +2985,17 @@ def login_page() -> None:
             st.write("---")
 
             sif_kerja = st.selectbox(
-                "⏰ Sif Tugas Saat Ini:",
+                "⏰ Shif Tugas Saat Ini:",
                 ["Pagi (07:00 - 14:00)", "Sore (14:00 - 21:00)", "Malam (21:00 - 07:00)"],
             )
             shift_clean = sif_kerja.split()[0]
 
             st.write("<br>", unsafe_allow_html=True)
-            st.markdown("🎯 **Otentikasi Utama (Sesuai Regulasi EMRAM Lvl 7)**")
+            st.markdown("🎯 **Otentikasi Utama**")
 
             mock_finger = st.selectbox(
-                "Simulasi Perangkat USB Scanner:",
-                ["Sentuh Jari: Rudi", "Sentuh Jari: Jule", "Sidik Jari Tidak Terdaftar"],
+                "Simulasi Finger Print:",
+                ["Rudi", "Jule", "Sidik Jari Tidak Terdaftar"],
             )
 
             if st.button(
@@ -2886,7 +3003,7 @@ def login_page() -> None:
                 type="primary",
                 use_container_width=True,
             ):
-                user_map    = {"Sentuh Jari: Rudi": "rudi", "Sentuh Jari: Jule": "jule"}
+                user_map    = {"Rudi": "rudi", "Jule": "jule"}
                 target_user = user_map.get(mock_finger)
                 if target_user:
                     with st.spinner("🔄 Membaca enkripsi template biometrik..."):
