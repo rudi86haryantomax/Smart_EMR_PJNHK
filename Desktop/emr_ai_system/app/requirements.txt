@@ -5,3 +5,4 @@ requests
 athropic
 SpeechRecognition
 streamlit-mic-recorder
+PyAudio
