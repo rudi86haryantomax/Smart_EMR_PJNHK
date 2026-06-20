@@ -2,3 +2,6 @@ streamlit
 pandas
 plotly
 requests
+athropic
+SpeechRecognition
+streamlit-mic-recorder
