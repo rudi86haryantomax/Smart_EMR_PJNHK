@@ -15,7 +15,7 @@ from typing import Dict
 import sys
 import os
 from pathlib import Path
-from app.services.cdss_engine import analyze_clinical_trends_improved
+from services.cdss_engine import analyze_clinical_trends_improved
 import pandas as pd
 import plotly.express as px
 import requests
