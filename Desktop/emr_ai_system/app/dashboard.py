@@ -2978,7 +2978,7 @@ def main_app() -> None:
         logout()
 
     st.sidebar.write("---")
-    with st.sidebar.expander("🛠️ Alat Simulasi Input Data Klinis Riil"):
+    with st.sidebar.expander("Input Data Luaran / SLKI"):
         st.caption("Suntikkan skor perkembangan indikator asuhan secara berkala.")
         indikator_pilihan = st.selectbox("Pilih Indikator Evaluasi:", INDIKATOR_SLKI)
         skor_pilihan      = st.slider("Skor Hasil Evaluasi (1–5):", 1, 5, 3)
