@@ -7,6 +7,7 @@ import re
 import hashlib
 import hmac
 import logging
+import random
 import sqlite3
 import time
 from contextlib import contextmanager
@@ -479,7 +480,14 @@ def init_session() -> None:
         "user_id":          None,
         "shift":            None,
         "login_at":         None,
-        "episode_id":       "EP-2026-00123",
+        "episode_id":       None,
+        "pasien_dipilih":   False,
+        "pasien_no_rm":     "",
+        "pasien_nama":      "",
+        "pasien_tgl_lahir": "",
+        "pasien_jk":        "",
+        "pasien_ruangan":   "",
+        "pasien_dpjp":      "",
         "daftar_asuhan":    None,
         "draft_cppt":       None,
         "order_list":       {},
@@ -518,11 +526,14 @@ def logout(reason: str = "") -> None:
         "logged_in", "user_id", "shift", "login_at",
         "daftar_asuhan", "draft_cppt", "order_list",
         "logbook_payload", "checked_items", "hasil_cdss",
-        "sumber_cdss_terakhir",
+        "sumber_cdss_terakhir", "episode_id", "pasien_dipilih",
+        "pasien_no_rm", "pasien_nama", "pasien_tgl_lahir",
+        "pasien_jk", "pasien_ruangan", "pasien_dpjp",
     ]
     for key in keys_to_clear:
         st.session_state[key] = None
     st.session_state.logged_in = False
+    st.session_state.pasien_dipilih = False
     if reason:
         st.warning(reason)
     st.rerun()
@@ -559,6 +570,47 @@ def init_local_database() -> None:
             )
         """)
         conn.commit()
+
+        # ── Master Data Pasien ───────────────────────────────────────────────
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS pasien (
+                id               INTEGER PRIMARY KEY AUTOINCREMENT,
+                episode_id       TEXT    NOT NULL UNIQUE,
+                no_rm            TEXT    NOT NULL,
+                nama_pasien      TEXT    NOT NULL,
+                tanggal_lahir    TEXT,
+                jenis_kelamin    TEXT,
+                ruangan          TEXT,
+                dpjp             TEXT,
+                dibuat_pada      TEXT    NOT NULL,
+                status           TEXT    NOT NULL DEFAULT 'AKTIF'
+            )
+        """)
+        conn.commit()
+
+        if conn.execute("SELECT COUNT(*) FROM pasien").fetchone()[0] == 0:
+            now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            daftar_pasien_awal = [
+                # episode_id,      no_rm,           nama_pasien,         tanggal_lahir, jenis_kelamin, ruangan,                 dpjp,                  dibuat_pada, status
+                ("EP-2026-00123", "00-12-34-56", "Budi Santoso",     "1968-03-11", "Laki-laki", "ICCU - Bed 3",          "dr. Andi, Sp.JP",     now_str, "AKTIF"),
+                ("EP-2026-00124", "00-12-34-57", "Siti Aminah",      "1975-07-22", "Perempuan", "ICCU - Bed 1",          "dr. Andi, Sp.JP",     now_str, "AKTIF"),
+                ("EP-2026-00125", "00-12-34-58", "Ahmad Wijaya",     "1959-11-05", "Laki-laki", "ICU - Bed 2",           "dr. Lestari, Sp.JP",  now_str, "AKTIF"),
+                ("EP-2026-00126", "00-12-34-59", "Dewi Lestari",     "1982-02-14", "Perempuan", "Ruang Mawar - Bed 4",   "dr. Hartono, Sp.JP",  now_str, "AKTIF"),
+                ("EP-2026-00127", "00-12-34-60", "Hendra Gunawan",   "1970-09-30", "Laki-laki", "Ruang Melati - Bed 1",  "dr. Lestari, Sp.JP",  now_str, "AKTIF"),
+                ("EP-2026-00128", "00-12-34-61", "Maria Magdalena",  "1963-12-18", "Perempuan", "ICCU - Bed 5",          "dr. Andi, Sp.JP",     now_str, "AKTIF"),
+                ("EP-2026-00129", "00-12-34-62", "Joko Susilo",      "1977-05-08", "Laki-laki", "Ruang Anggrek - Bed 2", "dr. Hartono, Sp.JP",  now_str, "AKTIF"),
+                ("EP-2026-00130", "00-12-34-63", "Ani Suryani",      "1990-01-25", "Perempuan", "Ruang Mawar - Bed 1",   "dr. Lestari, Sp.JP",  now_str, "AKTIF"),
+                ("EP-2026-00131", "00-12-34-64", "Bambang Hermawan", "1955-06-17", "Laki-laki", "ICU - Bed 4",           "dr. Andi, Sp.JP",     now_str, "AKTIF"),
+                ("EP-2026-00132", "00-12-34-65", "Rina Wulandari",   "1985-10-03", "Perempuan", "Ruang Melati - Bed 3",  "dr. Hartono, Sp.JP",  now_str, "AKTIF"),
+            ]
+            conn.executemany(
+                """INSERT INTO pasien
+                   (episode_id, no_rm, nama_pasien, tanggal_lahir, jenis_kelamin,
+                    ruangan, dpjp, dibuat_pada, status)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                daftar_pasien_awal,
+            )
+            conn.commit()
 
         if conn.execute("SELECT COUNT(*) FROM pelayanan_slki_evaluasi").fetchone()[0] == 0:
             mock_data = [
@@ -632,6 +684,101 @@ def fetch_real_slki_trends(episode_id: str) -> pd.DataFrame:
         logger.error("fetch_real_slki_trends gagal: %s", exc)
         st.error(f"⚠️ Gagal memuat data database lokal: {exc}")
         return pd.DataFrame()
+
+
+# ── Manajemen Identitas Pasien ───────────────────────────────────────────────
+
+def generate_episode_id() -> str:
+    """Buat ID episode unik baru, format EP-<tahun>-<5 digit acak>."""
+    with get_db() as conn:
+        while True:
+            kandidat = f"EP-{datetime.now().year}-{random.randint(10000, 99999)}"
+            cek = conn.execute(
+                "SELECT 1 FROM pasien WHERE episode_id = ?", (kandidat,)
+            ).fetchone()
+            if not cek:
+                return kandidat
+
+
+def get_all_pasien(hanya_aktif: bool = True) -> list[dict]:
+    """Ambil daftar pasien (default hanya status AKTIF) untuk dropdown pemilihan."""
+    with get_db() as conn:
+        query = "SELECT * FROM pasien"
+        params: tuple = ()
+        if hanya_aktif:
+            query += " WHERE status = ?"
+            params = ("AKTIF",)
+        query += " ORDER BY dibuat_pada DESC"
+        rows = conn.execute(query, params).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_pasien_by_episode(episode_id: str) -> dict | None:
+    with get_db() as conn:
+        row = conn.execute(
+            "SELECT * FROM pasien WHERE episode_id = ?", (episode_id,)
+        ).fetchone()
+    return dict(row) if row else None
+
+
+def insert_pasien(
+    no_rm: str,
+    nama_pasien: str,
+    tanggal_lahir: str = "",
+    jenis_kelamin: str = "",
+    ruangan: str = "",
+    dpjp: str = "",
+) -> str:
+    """Daftarkan pasien baru (admisi) dan kembalikan episode_id yang baru dibuat."""
+    episode_id = generate_episode_id()
+    with get_db() as conn:
+        conn.execute(
+            """INSERT INTO pasien
+               (episode_id, no_rm, nama_pasien, tanggal_lahir, jenis_kelamin,
+                ruangan, dpjp, dibuat_pada, status)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'AKTIF')""",
+            (
+                episode_id, no_rm.strip(), nama_pasien.strip(), tanggal_lahir,
+                jenis_kelamin, ruangan.strip(), dpjp.strip(),
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            ),
+        )
+        conn.commit()
+    return episode_id
+
+
+def set_active_patient(episode_id: str, pasien_data: dict | None = None) -> None:
+    """Terapkan pasien terpilih ke session_state dan reset working-state klinis
+    milik pasien sebelumnya (asuhan, draft CPPT, dsb) agar tidak tertukar."""
+    if pasien_data is None:
+        pasien_data = get_pasien_by_episode(episode_id) or {}
+
+    st.session_state.update({
+        "episode_id":      episode_id,
+        "pasien_no_rm":    pasien_data.get("no_rm", ""),
+        "pasien_nama":     pasien_data.get("nama_pasien", ""),
+        "pasien_tgl_lahir": pasien_data.get("tanggal_lahir", ""),
+        "pasien_jk":       pasien_data.get("jenis_kelamin", ""),
+        "pasien_ruangan":  pasien_data.get("ruangan", ""),
+        "pasien_dpjp":     pasien_data.get("dpjp", ""),
+        "pasien_dipilih":  True,
+        # ── Reset working-state klinis: data pasien lama tidak boleh terbawa ──
+        "daftar_asuhan":    None,
+        "draft_cppt":       None,
+        "order_list":       {},
+        "logbook_payload":  [],
+        "checked_items":    {},
+        "hasil_cdss":       None,
+        "sumber_cdss_terakhir": "",
+        "daftar_diagnosis": [],
+        "selected_dx_codes": set(),
+        "soap_A":           "",
+        "soap_P":           "",
+        "s_text_area":      "",
+        "o_text_area":      "",
+        "last_audio_s_id":  None,
+        "last_audio_o_id":  None,
+    })
 
 
 # =============================================================================
@@ -2116,7 +2263,7 @@ def local_cdss_rule_engine(
     # L3. Hipomagnesemia & Hipofosfatemia (sering luput di ICU jantung)
     mg_phos_kw = ["hipomagnesemia", "magnesium rendah", "mg rendah", "mg <1.5",
                   "hipofosfatemia", "fosfat rendah", "po4 rendah",
-                  "refeeding syndrome", "aritmia refrakter", "prolonged qt","torsade",
+                  "refeeding syndrome", "aritmia refrakter", "prolonged qt", "torsade",
                   "tetani", "kram halus", "tanda chvostek", "tanda trousseau"]
     if "D.0037" in force_codes_set or sum(1 for kw in mg_phos_kw if kw in combined) >= 2:
         rekomendasi.append({
@@ -2952,6 +3099,84 @@ def update_soap_from_status() -> None:
 
 
 # =============================================================================
+# KOMPONEN UI: PEMILIHAN / PENDAFTARAN PASIEN
+# =============================================================================
+
+def render_pemilihan_pasien(key_prefix: str) -> dict | None:
+    """
+    Render UI untuk memilih pasien yang sudah terdaftar ATAU mendaftarkan
+    pasien baru (admisi). Pilihan/registrasi yang sudah dikonfirmasi disimpan
+    di session_state agar tetap ada di render berikutnya (mis. saat tombol
+    login/ganti-pasien ditekan). Mengembalikan dict data pasien terpilih,
+    atau None jika belum ada pasien yang dipilih/didaftarkan.
+    """
+    state_key = f"_{key_prefix}_pasien_aktif"
+    if state_key not in st.session_state:
+        st.session_state[state_key] = None
+
+    mode = st.radio(
+        "Sumber Identitas Pasien:",
+        ["📋 Pilih Pasien Terdaftar", "🆕 Pasien Baru (Admisi)"],
+        key=f"{key_prefix}_mode",
+        horizontal=True,
+    )
+
+    if mode.startswith("📋"):
+        daftar = get_all_pasien()
+        if not daftar:
+            st.info("Belum ada data pasien tersimpan. Silakan daftarkan pasien baru terlebih dahulu.")
+            st.session_state[state_key] = None
+        else:
+            opsi = {
+                f"{p['nama_pasien']} — No RM {p['no_rm']} ({p['ruangan'] or 'Ruangan belum diisi'})": p
+                for p in daftar
+            }
+            label_pilihan = st.selectbox(
+                "Pilih Pasien:", list(opsi.keys()), key=f"{key_prefix}_select"
+            )
+            st.session_state[state_key] = opsi[label_pilihan]
+    else:
+        with st.form(key=f"{key_prefix}_form_baru", clear_on_submit=True):
+            c1, c2 = st.columns(2)
+            with c1:
+                no_rm = st.text_input("No. Rekam Medis (RM): *", placeholder="00-12-34-56")
+                nama  = st.text_input("Nama Pasien: *", placeholder="Nama lengkap pasien")
+                tgl_lahir = st.text_input("Tanggal Lahir (YYYY-MM-DD):", placeholder="1980-01-31")
+            with c2:
+                jk = st.selectbox("Jenis Kelamin:", ["Laki-laki", "Perempuan"])
+                ruangan = st.text_input("Ruangan / Bed:", placeholder="ICCU - Bed 1")
+                dpjp = st.text_input("DPJP:", placeholder="dr. ..., Sp.JP")
+
+            submit_baru = st.form_submit_button(
+                "✅ Daftarkan & Gunakan Pasien Ini", use_container_width=True
+            )
+            if submit_baru:
+                if not no_rm.strip() or not nama.strip():
+                    st.error("No. Rekam Medis dan Nama Pasien wajib diisi.")
+                    st.session_state[state_key] = None
+                else:
+                    new_episode_id = insert_pasien(
+                        no_rm=no_rm,
+                        nama_pasien=nama,
+                        tanggal_lahir=tgl_lahir.strip(),
+                        jenis_kelamin=jk,
+                        ruangan=ruangan,
+                        dpjp=dpjp,
+                    )
+                    st.session_state[state_key] = get_pasien_by_episode(new_episode_id)
+                    st.success(f"Pasien **{nama}** berhasil didaftarkan. Episode: `{new_episode_id}`")
+
+    pasien_terpilih = st.session_state[state_key]
+    if pasien_terpilih:
+        st.caption(
+            f"✅ Pasien aktif: **{pasien_terpilih['nama_pasien']}** "
+            f"— No RM `{pasien_terpilih['no_rm']}` "
+            f"— Episode `{pasien_terpilih['episode_id']}`"
+        )
+    return pasien_terpilih
+
+
+# =============================================================================
 # APLIKASI UTAMA
 # =============================================================================
 
@@ -2960,6 +3185,19 @@ def main_app() -> None:
     if _session_expired():
         logout("⏰ Sesi Anda telah berakhir (1 jam). Silakan login kembali.")
 
+    # ── Guard: pastikan pasien sudah dipilih sebelum mengakses CPPT ───────────
+    if not st.session_state.get("pasien_dipilih") or not st.session_state.get("episode_id"):
+        st.warning("⚠️ Belum ada pasien yang dipilih. Silakan pilih atau daftarkan pasien terlebih dahulu.")
+        with st.container(border=True):
+            st.markdown("#### 🛏️ Pilih / Daftarkan Pasien")
+            pasien_pilihan = render_pemilihan_pasien("main_guard")
+            if pasien_pilihan and st.button("➡️ Mulai Asuhan untuk Pasien Ini", type="primary"):
+                set_active_patient(pasien_pilihan["episode_id"], pasien_pilihan)
+                st.rerun()
+        if st.sidebar.button("Logout"):
+            logout()
+        st.stop()
+
     # Inisialisasi soap_P jika baru pertama render
     if not st.session_state.soap_P:
         update_soap_from_status()
@@ -2967,7 +3205,22 @@ def main_app() -> None:
     # ── Sidebar ──────────────────────────────────────────────────────────────
     st.sidebar.write(f"👤 User: **{st.session_state.user_id.upper()}**")
     st.sidebar.write(f"⏰ Sif Kerja: **{st.session_state.shift}**")
+    st.sidebar.write("---")
+    st.sidebar.markdown("**🛏️ Pasien Aktif**")
+    st.sidebar.write(f"🧑 Nama: **{st.session_state.pasien_nama}**")
+    st.sidebar.write(f"🪪 No. RM: `{st.session_state.pasien_no_rm}`")
+    if st.session_state.pasien_ruangan:
+        st.sidebar.write(f"🛌 Ruangan: **{st.session_state.pasien_ruangan}**")
     st.sidebar.write(f"🏷️ ID Episode: `{st.session_state.episode_id}`")
+
+    with st.sidebar.expander("🔄 Ganti / Daftarkan Pasien Lain"):
+        st.caption("Mengganti pasien akan mereset draf CPPT & asuhan yang sedang dikerjakan.")
+        pasien_baru = render_pemilihan_pasien("sidebar_ganti")
+        if pasien_baru and st.button("Terapkan Pasien Ini", key="btn_terapkan_pasien_sidebar"):
+            set_active_patient(pasien_baru["episode_id"], pasien_baru)
+            st.sidebar.success(f"Pasien aktif diganti ke {pasien_baru['nama_pasien']}.")
+            time.sleep(0.4)
+            st.rerun()
 
     remaining = SESSION_TTL - int(
         (datetime.now() - st.session_state.login_at).total_seconds() / 60
@@ -2978,7 +3231,7 @@ def main_app() -> None:
         logout()
 
     st.sidebar.write("---")
-    with st.sidebar.expander("Input Data Luaran / SLKI"):
+    with st.sidebar.expander("Input Luaran / SLKI"):
         st.caption("Suntikkan skor perkembangan indikator asuhan secara berkala.")
         indikator_pilihan = st.selectbox("Pilih Indikator Evaluasi:", INDIKATOR_SLKI)
         skor_pilihan      = st.slider("Skor Hasil Evaluasi (1–5):", 1, 5, 3)
@@ -2996,6 +3249,10 @@ def main_app() -> None:
 
     # ── Konten Utama ─────────────────────────────────────────────────────────
     st.title("🫀 CATATAN PERKEMBANGAN PASIEN TERINTEGRASI")
+    st.markdown(
+        f"##### 🧑 {st.session_state.pasien_nama}  |  No. RM `{st.session_state.pasien_no_rm}`  "
+        f"|  {st.session_state.pasien_ruangan or '-'}  |  Episode `{st.session_state.episode_id}`"
+    )
 
     render_grafik_slki(st.session_state.episode_id)
     st.write(" ")
@@ -3402,7 +3659,6 @@ def login_page() -> None:
                         "user_id":    target_user,
                         "shift":      shift_clean,
                         "login_at":   datetime.now(),
-                        "episode_id": "EP-2026-00123",
                     })
                     st.rerun()
                 else:
@@ -3437,7 +3693,6 @@ def login_page() -> None:
                             "user_id":    u_clean,
                             "shift":      shift_clean,
                             "login_at":   datetime.now(),
-                            "episode_id": "EP-2026-00123",
                         })
                         st.rerun()
                     else:
