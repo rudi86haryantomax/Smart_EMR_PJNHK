@@ -6,4 +6,3 @@ anthropic
 SpeechRecognition
 streamlit-mic-recorder
 PyAudio
-portaudio19-dev
