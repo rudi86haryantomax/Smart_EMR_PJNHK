@@ -2116,7 +2116,7 @@ def local_cdss_rule_engine(
     # L3. Hipomagnesemia & Hipofosfatemia (sering luput di ICU jantung)
     mg_phos_kw = ["hipomagnesemia", "magnesium rendah", "mg rendah", "mg <1.5",
                   "hipofosfatemia", "fosfat rendah", "po4 rendah",
-                  "refeeding syndrome", "aritmia refrakter", "prolonged qt",
+                  "refeeding syndrome", "aritmia refrakter", "prolonged qt","torsade",
                   "tetani", "kram halus", "tanda chvostek", "tanda trousseau"]
     if "D.0037" in force_codes_set or sum(1 for kw in mg_phos_kw if kw in combined) >= 2:
         rekomendasi.append({
