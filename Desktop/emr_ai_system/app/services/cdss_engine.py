@@ -101,8 +101,8 @@ class NumericValueParser:
             'high': (120, 300)
         },
         'systolic_bp': {
-            'critical_low': (0, 90),
-            'normal': (90, 180),
+            'critical_low': (0, 91),   # FIX: TD=90 sebelumnya jatuh ke 'normal' (off-by-one)
+            'normal': (91, 180),
             'high': (180, 300)
         },
         'lactate': {
@@ -126,14 +126,17 @@ class NumericValueParser:
     
     # Pemetaan eksplisit per-diagnosis untuk menghindari global overshoot (v2.1)
     PARAM_TO_DIAGNOSIS = {
-        'spo2': ['D.0003', 'D.0005'],               
-        'hemoglobin': ['D.0012', 'D.0009'],         
-        'ejection_fraction': ['D.0008', 'D.0022'],  
-        'troponin': ['D.0015', 'D.0008'],           
-        'bnp': ['D.0008', 'D.0022'],                
-        'heart_rate': ['D.0008', 'D.0015', 'D.0023'], 
-        'systolic_bp': ['D.0008', 'D.0023'],        
-        'lactate': ['D.0009', 'D.0008', 'D.0003']   
+        'spo2': ['D.0003', 'D.0005'],
+        'hemoglobin': ['D.0012', 'D.0009'],
+        'ejection_fraction': ['D.0008', 'D.0022', 'D.0011', 'D.0016'],
+        'troponin': ['D.0015', 'D.0008', 'D.0016'],
+        'bnp': ['D.0008', 'D.0022', 'D.0016'],
+        'heart_rate': ['D.0008', 'D.0015', 'D.0023', 'D.0109', 'D.0011'],
+        'systolic_bp': ['D.0008', 'D.0023', 'D.0109', 'D.0011'],
+        # PATCH (2026-06): lactate kini juga boost D.0109 (Risiko Syok) --
+        # laktat meningkat adalah penanda hipoperfusi jaringan paling
+        # langsung dipakai secara klinis untuk identifikasi syok.
+        'lactate': ['D.0009', 'D.0008', 'D.0003', 'D.0109']
     }
     
     REGEX_PATTERNS = {
@@ -151,11 +154,13 @@ class NumericValueParser:
         ],
         'heart_rate': [
             r'(?i)(?:hr|heart\s+rate)[:\s]*(\d+)\s*(?:bpm)?',
-            r'(?i)denyut\s+jantung[:\s]*(\d+)'
+            r'(?i)denyut\s+jantung[:\s]*(\d+)',
+            r'(?i)\bnadi\b[:\s]*(\d+)'  # FIX: singkatan ICU "Nadi" (paling umum dipakai perawat, sebelumnya tidak terbaca)
         ],
         'systolic_bp': [
             r'(?i)(?:bp|blood\s+pressure|tekanan\s+darah)[:\s]*(\d+)\s*/\s*\d+',
-            r'(?i)sistolik[:\s]*(\d+)'
+            r'(?i)sistolik[:\s]*(\d+)',
+            r'(?i)\btd\b[:\s]*(\d+)\s*/\s*\d+'  # FIX: singkatan ICU "TD" (sebelumnya tidak terbaca)
         ],
         'troponin': [
             r'(?i)troponin\s+[it][:\s]*(\d+(?:\.\d+)?)',
@@ -426,7 +431,425 @@ class WeightedKeywordScorer:
             },
             'threshold': 6,
             'high_priority_threshold': 3
-        }
+        },
+
+        # =====================================================================
+        # PATCH (2026-06): 36 diagnosis baru ditambahkan agar setara cakupan
+        # local_cdss_rule_engine() (49 rule blok, 45 kode unik) di dashboard.py.
+        # Bobot keyword di-set 4 (high_priority) dengan threshold=8 -- ini
+        # secara matematis SETARA aturan asli "minimal 2 kata kunci cocok"
+        # di local_cdss_rule_engine, sambil otomatis mewarisi semua kapabilitas
+        # v2.0 yang TIDAK dimiliki engine lokal: negation detection (mis. teks
+        # "tidak ada edema" tidak akan salah trigger), weighted ranking/priority,
+        # dan sinergi dengan numeric findings (lab/TTV) bila relevan.
+        # =====================================================================
+        'D.0006': {  # Risiko Aspirasi
+            'high_priority': {
+                'disfagia': 4, 'kesulitan menelan': 4, 'penurunan refleks menelan': 4, 'ngt': 4,
+                'sonde': 4, 'penurunan kesadaran': 4, 'trakeostomi': 4, 'muntah berulang': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0017': {  # Risiko Perfusi Serebral Tidak Efektif
+            'high_priority': {
+                'stroke': 4, 'tia': 4, 'penurunan kesadaran': 4, 'hemiparesis': 4, 'afasia': 4, 'tekanan intrakranial': 4,
+                'tic': 4, 'gcs menurun': 4, 'papil edema': 4, 'carotid stenosis': 4, 'atrial fibrilasi': 4,
+                'emboli serebral': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0020': {  # Defisit Nutrisi
+            'high_priority': {
+                'berat badan turun': 4, 'bb turun': 4, 'bmi rendah': 4, 'malnutrisi': 4, 'anoreksia': 4,
+                'mual': 4, 'tidak mau makan': 4, 'albumin rendah': 4, 'protein rendah': 4, 'kachexia': 4,
+                'penurunan nafsu makan': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0025': {  # Ketidakstabilan Kadar Glukosa Darah
+            'high_priority': {
+                'hipoglikemia': 4, 'hiperglikemia': 4, 'gula darah': 4, 'gdp': 4, 'gds': 4, 'hba1c': 4,
+                'diabetes': 4, 'dm': 4, 'dextrose': 4, 'pusing gula': 4, 'keringat gula': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0039': {  # Gangguan Eliminasi Urin
+            'high_priority': {
+                'urin sedikit': 4, 'oliguria': 4, 'anuria': 4, 'retensi urin': 4, 'disuria': 4, 'urgensi': 4,
+                'frekuensi bak': 4, 'kateter urin': 4, 'kreatinin meningkat': 4, 'gagal ginjal': 4,
+                'azotemia': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0038': {  # Konstipasi
+            'high_priority': {
+                'konstipasi': 4, 'bab keras': 4, 'tidak bab': 4, 'susah bab': 4, 'feses keras': 4,
+                'distensi abdomen': 4, 'kembung': 4, 'perut keras': 4, 'ileus': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0040': {  # Diare
+            'high_priority': {
+                'diare': 4, 'bab cair': 4, 'bab >3x': 4, 'feses cair': 4, 'mencret': 4, 'gastroenteritis': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0056': {  # Intoleransi Aktivitas
+            'high_priority': {
+                'sesak saat aktivitas': 4, 'lelah': 4, 'lemah': 4, 'tidak mampu beraktivitas': 4,
+                'dyspnea on effort': 4, 'doe': 4, 'aktivitas terbatas': 4, 'toleransi rendah': 4,
+                'kelelahan ekstrem': 4, 'kapasitas fungsional rendah': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0055': {  # Gangguan Pola Tidur
+            'high_priority': {
+                'insomnia': 4, 'tidak bisa tidur': 4, 'sering terbangun': 4, 'tidur tidak nyenyak': 4,
+                'gelisah malam': 4, 'gangguan tidur': 4, 'nyeri mengganggu tidur': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0057': {  # Keletihan
+            'high_priority': {
+                'kelelahan kronis': 4, 'fatigue': 4, 'tidak bertenaga': 4, 'exhausted': 4, 'lemah berat': 4,
+                'tidak mampu konsentrasi karena lelah': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0062': {  # Gangguan Komunikasi Verbal
+            'high_priority': {
+                'afasia': 4, 'tidak bisa bicara': 4, 'bicara pelo': 4, 'disartria': 4, 'sulit berkomunikasi': 4,
+                'gagap baru': 4, 'pasca stroke bicara': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0063': {  # Konfusi Akut
+            'high_priority': {
+                'bingung': 4, 'disorientasi': 4, 'konfusi': 4, 'delirium': 4, 'gelisah tanpa sebab': 4,
+                'agitasi': 4, 'tidak kenal keluarga': 4, 'halusinasi': 4, 'bingung waktu tempat': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0077': {  # Nyeri Akut
+            'high_priority': {
+                'nyeri': 4, 'sakit': 4, 'pain': 4, 'vas': 4, 'nrs': 4, 'visual analogue scale': 4,
+                'nyeri dada': 4, 'nyeri perut': 4, 'nyeri kepala': 4, 'nyeri luka': 4, 'nyeri post op': 4,
+                'nyeri saat napas': 4, 'nyeri sternotomi': 4, 'nyeri luka sternum': 4, 'nyeri pasca cabg': 4,
+                'nyeri pasca operasi jantung': 4, 'nyeri post operasi jantung': 4, 'nyeri sternum': 4,
+                'nyeri dada post op': 4, 'nyeri thoracotomy': 4, 'nyeri insisi dada': 4, 'nyeri pasca torakotomi': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0078': {  # Nyeri Kronis
+            'high_priority': {
+                'nyeri kronis': 4, 'nyeri berulang': 4, 'nyeri >3 bulan': 4, 'nyeri persisten': 4,
+                'neuropati': 4, 'nyeri neuropatik': 4, 'nyeri sudah lama': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0080': {  # Ansietas
+            'high_priority': {
+                'cemas': 4, 'khawatir': 4, 'takut': 4, 'ansietas': 4, 'gelisah': 4, 'panik': 4, 'jantung berdebar karena takut': 4,
+                'tidak tenang': 4, 'anxious': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0129': {  # Gangguan Integritas Kulit/Jaringan
+            'high_priority': {
+                'luka': 4, 'dekubitus': 4, 'kemerahan kulit': 4, 'gesekan': 4, 'tirah baring': 4,
+                'bedrest lama': 4, 'luka tekan': 4, 'pressure injury': 4, 'pressure ulcer': 4,
+                'luka bakar': 4, 'lecet': 4, 'bulla': 4, 'vesikel': 4, 'ulkus': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0142': {  # Risiko Infeksi
+            'high_priority': {
+                'iv line': 4, 'kateter': 4, 'operasi': 4, 'leukosit tinggi': 4, 'demam': 4, 'suhu >38': 4,
+                'suhu >38.5': 4, 'pneumonia': 4, 'invasif': 4, 'wbc tinggi': 4, 'infeksi': 4, 'sepsis': 4,
+                'iak': 4, 'isk': 4, 'hap': 4, 'vap': 4, 'clabsi': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0136': {  # Risiko Jatuh
+            'high_priority': {
+                'risiko jatuh': 4, 'morse fall': 4, 'lansia': 4, 'lemah': 4, 'vertigo': 4, 'pusing berdiri': 4,
+                'riwayat jatuh': 4, 'sedatif': 4, 'diuretik malam': 4, 'balance terganggu': 4,
+                'gaya berjalan tidak stabil': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0131': {  # Hipotermia
+            'high_priority': {
+                'hipotermia': 4, 'suhu rendah': 4, 'suhu <36': 4, 'suhu <35': 4, 'menggigil berat': 4,
+                'kedinginan': 4, 'cold exposure': 4, 'akral sangat dingin': 4, 'perioperatif hipotermia': 4,
+                'post bypass hipotermia': 4, 'ttm': 4, 'target temperature management': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0109': {  # Risiko Syok
+            'high_priority': {
+                'syok': 4, 'hipotensi berat': 4, 'td sistolik <90': 4, 'td <90/60': 4, 'map rendah': 4,
+                'map <65': 4, 'tachycardia kompensasi': 4, 'oliguria syok': 4, 'mottling': 4, 'nadi filiform': 4,
+                'capillary refill >3': 4, 'lactic acidosis': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0004': {  # Gangguan Ventilasi Spontan
+            'high_priority': {
+                'ventilasi mekanik': 4, 'tidak bisa napas spontan': 4, 'apnea': 4, 'apnoe': 4,
+                'gagal napas': 4, 'respiratory failure': 4, 'fio2 tinggi': 4, 'peep': 4, 'mode vc': 4,
+                'mode pc': 4, 'ards': 4, 'kelelahan otot napas': 4, 'tidak bisa lepas ventilator': 4,
+                'tergantung ventilator': 4, 'drive napas hilang': 4, 'co2 retensi berat': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0002': {  # Gangguan Penyapihan Ventilator
+            'high_priority': {
+                'penyapihan': 4, 'weaning': 4, 'sapih ventilator': 4, 'trial sbt': 4, 'sbt': 4, 'spontaneous breathing trial': 4,
+                'gagal weaning': 4, 'ekstubasi': 4, 'rencana ekstubasi': 4, 'psmv': 4, 'psv mode': 4,
+                'cpap mode': 4, 'rapid shallow breathing': 4, 'rsbi': 4, 'tidak toleran sbt': 4,
+                'distress pasca ekstubasi': 4, 'reintubasi': 4, 'post extubation stridor': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0007': {  # Gangguan Sirkulasi Spontan
+            'high_priority': {
+                'henti jantung': 4, 'cardiac arrest': 4, 'vf': 4, 'ventrikel fibrilasi': 4, 'pulseless vt': 4,
+                'vt tanpa nadi': 4, 'asistol': 4, 'pea': 4, 'rosc': 4, 'return of spontaneous circulation': 4,
+                'post rosc': 4, 'rjp': 4, 'resusitasi': 4, 'defibrilasi': 4, 'defibrillasi': 4, 'aed': 4,
+                'tidak ada nadi': 4, 'henti nafas dan jantung': 4, 'dnr': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0010': {  # Risiko Gangguan Sirkulasi Spontan
+            'high_priority': {
+                'risiko henti jantung': 4, 'aritmia mengancam': 4, 'vt stabil': 4, 'blok av derajat 3': 4,
+                'blok av total': 4, 'av block komplit': 4, 'qt memanjang': 4, 'lqts': 4, 'torsades': 4,
+                'torsade de pointes': 4, 'bradikardi berat': 4, 'hr < 40': 4, 'bradikardia simtomatik': 4,
+                'sinkop berulang': 4, 'pre-arrest': 4, 'deteriorasi klinis cepat': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0011': {  # Risiko Penurunan Curah Jantung
+            'high_priority': {
+                'risiko penurunan curah jantung': 4, 'ef borderline': 4, 'ef 40': 4, 'disfungsi diastolik': 4,
+                'hipertrofi ventrikel': 4, 'hipertensi tidak terkontrol': 4, 'stenosis aorta berat': 4,
+                'regurgitasi mitral': 4, 'mr berat': 4, 'as berat': 4, 'kardiomiopati': 4, 'amyloidosis jantung': 4,
+                'miokarditis': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0014': {  # Gangguan Perfusi Serebral
+            'high_priority': {
+                'stroke iskemik': 4, 'stroke hemoragik': 4, 'ich': 4, 'sah': 4, 'penurunan gcs': 4,
+                'gcs turun': 4, 'hemiplegia': 4, 'hemiparesis aktual': 4, 'afasia aktual': 4, 'disartria berat': 4,
+                'hemianopia': 4, 'ptosis mendadak': 4, 'deviasi mata': 4, 'babinski positif': 4,
+                'perdarahan intra serebral': 4, 'infark serebri': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0013': {  # Risiko Perfusi Pulmonal Tidak Efektif
+            'high_priority': {
+                'emboli paru': 4, 'pulmonary embolism': 4, 'pe': 4, 'tromboemboli': 4, 'dvt': 4,
+                'deep vein thrombosis': 4, 'nyeri dada pleuritik': 4, 'hemoptisis': 4, 'tachycardia tanpa sebab': 4,
+                'd-dimer tinggi': 4, 'troponin naik pe': 4, 'strain ventrikel kanan': 4, 's1q3t3': 4,
+                'hipoksia mendadak': 4, 'wells score': 4, 'right heart strain': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0016': {  # Gangguan Status Kardiopulmonal
+            'high_priority': {
+                'gagal napas dan jantung bersamaan': 4, 'acute cor pulmonale': 4, 'right heart failure akut': 4,
+                'pulmonary hypertension krisis': 4, 'hipertensi pulmonal berat': 4, 'phtn': 4,
+                'svri tinggi': 4, 'pvri tinggi': 4, 'right ventricular failure': 4, 'rvf': 4, 'hepatojugular reflux': 4,
+                'pericardial effusion': 4, 'tamponade': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0037': {  # Risiko Ketidakseimbangan Elektrolit
+            'high_priority': {
+                'hipokalemia': 4, 'hiperkalemia': 4, 'kalium rendah': 4, 'kalium tinggi': 4, 'k+ rendah': 4,
+                'k+ tinggi': 4, 'k <3': 4, 'k >5.5': 4, 'k <3.5': 4, 'k >6': 4, 'kelemahan otot': 4,
+                'kram otot': 4, 'aritmia elektrolit': 4, 'gelombang u': 4, 'gelombang t tinggi': 4,
+                'peaked t wave': 4, 'serum kalium': 4, 'hipokalemi': 4, 'hiperkalemi': 4, 'hiponatremia': 4,
+                'hipernatremia': 4, 'natrium rendah': 4, 'natrium tinggi': 4, 'na rendah': 4, 'na tinggi': 4,
+                'na <130': 4, 'na >150': 4, 'siadh': 4, 'dilusi natrium': 4, 'sodium rendah': 4,
+                'hiponatrem': 4, 'hipernatrem': 4, 'penurunan kesadaran elektrolit': 4, 'kejang elektrolit': 4,
+                'hipomagnesemia': 4, 'magnesium rendah': 4, 'mg rendah': 4, 'mg <1.5': 4, 'hipofosfatemia': 4,
+                'fosfat rendah': 4, 'po4 rendah': 4, 'refeeding syndrome': 4, 'aritmia refrakter': 4,
+                'prolonged qt': 4, 'tetani': 4, 'kram halus': 4, 'tanda chvostek': 4, 'tanda trousseau': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0021': {  # Ketidakseimbangan Asam-Basa
+            'high_priority': {
+                'asidosis metabolik': 4, 'alkalosis metabolik': 4, 'asidosis respiratorik': 4,
+                'alkalosis respiratorik': 4, 'ph rendah': 4, 'ph tinggi': 4, 'ph <7.35': 4, 'ph >7.45': 4,
+                'bikarbonat rendah': 4, 'bikarbonat tinggi': 4, 'be negatif': 4, 'base excess negatif': 4,
+                'laktat tinggi': 4, 'lactat': 4, 'lactic': 4, 'agd asidosis': 4, 'agd alkalosis': 4,
+                'ketoasidosis': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0130': {  # Hipertermia
+            'high_priority': {
+                'demam tinggi': 4, 'hipertermia': 4, 'suhu >39': 4, 'suhu 40': 4, 'suhu 39': 4, 'fever': 4,
+                'suhu tubuh meningkat': 4, 'panas tinggi': 4, 'hiperpireksia': 4, 'demam pasca operasi': 4,
+                'demam hari ke': 4, 'febris': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0143': {  # Infeksi (Sepsis)
+            'high_priority': {
+                'sepsis': 4, 'septik': 4, 'septic shock': 4, 'syok sepsis': 4, 'pct tinggi': 4, 'procalcitonin tinggi': 4,
+                'qsofa': 4, 'sofa score': 4, 'bakteremia': 4, 'infeksi sistemik': 4, 'wbc >12000': 4,
+                'wbc <4000': 4, 'bandemia': 4, 'kultur positif': 4, 'bacteremia': 4, 'fungemia': 4,
+                'candida sistemik': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0054': {  # Gangguan Mobilitas Fisik
+            'high_priority': {
+                'tidak bisa bergerak': 4, 'hemiplegia': 4, 'paraplegia': 4, 'tetraplegia': 4, 'kelemahan anggota gerak': 4,
+                'imobilisasi': 4, 'bedrest total': 4, 'kekuatan otot menurun': 4, 'tidak bisa berdiri sendiri': 4,
+                'kekuatan otot 0': 4, 'kekuatan otot 1': 4, 'kekuatan otot 2': 4, 'pasca operasi mobilitas': 4,
+                'post stroke mobilitas': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0058': {  # Hambatan Ambulasi
+            'high_priority': {
+                'tidak bisa berjalan': 4, 'kesulitan berjalan': 4, 'gaya berjalan terganggu': 4,
+                'membutuhkan alat bantu jalan': 4, 'walker': 4, 'kruk': 4, 'tripod': 4, 'kursi roda': 4,
+                'pasca amputasi': 4, 'luka kaki diabetik': 4, 'neuropati perifer berat': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0082': {  # Gangguan Citra Tubuh
+            'high_priority': {
+                'tidak menerima kondisi': 4, 'malu dengan kondisi fisik': 4, 'menolak melihat luka': 4,
+                'cemas dengan perubahan tubuh': 4, 'tidak percaya diri': 4, 'merasa tidak sempurna': 4,
+                'pasca amputasi perasaan': 4, 'scar sternotomi': 4, 'bekas operasi': 4, 'stoma': 4,
+                'body image terganggu': 4
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
+        'D.0087': {  # Ketidakberdayaan
+            'high_priority': {
+                'merasa tidak berguna': 4, 'putus asa': 4, 'tidak ada harapan': 4, 'menyerah': 4,
+                'tidak mau berobat': 4, 'menolak terapi': 4, 'pasrah berlebihan': 4, 'depresi berat klinis': 4,
+                'tidak mau makan karena putus asa': 4, 'tidak mau rehabilitasi': 4, 'niat bunuh diri': 4,
+            },
+            'medium_priority': {},
+            'low_priority': {},
+            'threshold': 8,
+            'high_priority_threshold': 4
+        },
     }
     
     @staticmethod
@@ -513,16 +936,31 @@ class CardiacSpecificRules:
         """Detect cardiogenic shock pattern"""
         shock_keywords = [
             'cardiogenic shock', 'syok kardiogenik', 'shock', 'hypotension',
-            'hipotensi', 'poor perfusion', 'perfusi buruk', 'cold extremities'
+            'hipotensi', 'poor perfusion', 'perfusi buruk', 'cold extremities',
+            # FIX: dukungan sirkulasi mekanik & vasopresor/inotropik dosis tinggi
+            # adalah indikator klinis kuat syok kardiogenik refrakter, sebelumnya
+            # sama sekali tidak dikenali oleh engine.
+            'iabp', 'intra-aortic balloon', 'norepinephrine', 'norepinefrin',
+            'vasopressin', 'farpresin', 'adrenalin', 'epinephrine',
+            'dobutamin', 'dobutamine', 'milrinone'
         ]
         text_lower = text.lower()
         has_shock_indicators = any(contains_keyword(text_lower, kw) for kw in shock_keywords)
-        
-        # Additional check: SBP < 90 + tachycardia
+
+        # Additional check: SBP <= 90 + tachycardia
+        # FIX: boundary diperbaiki dari "< 90" menjadi "<= 90" (TD 90 tetap signifikan
+        # secara klinis terutama disertai takikardia berat / aritmia)
         if 'systolic_bp' in numeric_findings and 'heart_rate' in numeric_findings:
-            if numeric_findings['systolic_bp'] < 90 and numeric_findings['heart_rate'] > 100:
+            if numeric_findings['systolic_bp'] <= 90 and numeric_findings['heart_rate'] > 100:
                 has_shock_indicators = True
-        
+
+        # FIX: ≥2 obat vasopressor/inotropik berbeda = indikator kuat syok refrakter
+        pressor_drugs = ['norepinephrine', 'norepinefrin', 'vasopressin', 'farpresin',
+                          'adrenalin', 'epinephrine', 'dobutamin', 'dobutamine', 'milrinone']
+        pressor_count = sum(1 for kw in pressor_drugs if contains_keyword(text_lower, kw))
+        if pressor_count >= 2:
+            has_shock_indicators = True
+
         return has_shock_indicators
     
     @staticmethod
@@ -538,8 +976,12 @@ class CardiacSpecificRules:
     
     @staticmethod
     def is_on_ecmo_vad(text: str) -> bool:
-        """Detect if patient is on ECMO/VAD support"""
-        support_keywords = ['ecmo', 'vad', 'impella', 'tandem heart', 'mechanical support']
+        """Detect if patient is on ECMO/VAD/IABP support"""
+        support_keywords = [
+            'ecmo', 'vad', 'impella', 'tandem heart', 'mechanical support',
+            'iabp', 'intra-aortic balloon', 'intra aortic balloon',
+            'balon pompa intra aorta'  # FIX: IABP sebelumnya tidak terdeteksi sama sekali
+        ]
         text_lower = text.lower()
         return any(contains_keyword(text_lower, kw) for kw in support_keywords)
 
@@ -596,6 +1038,173 @@ class ImprovedCDSSEngine:
         'D.0023': {
             'name': 'Hipovolemia',
             'luaran': 'Status Cairan Membaik (L.03028)'
+        },
+
+        # =====================================================================
+        # PATCH (2026-06): Pelengkapan MASTER_DIAGNOSES dari 9 -> 45 kode unik,
+        # setara cakupan local_cdss_rule_engine() (49 rule blok) di dashboard.py.
+        # Sebelumnya, diagnosis berikut HANYA bisa muncul lewat fallback mentah
+        # (keyword-only, tanpa scoring/numeric/negation) karena tidak terdaftar
+        # di engine utama (v2.0) -- termasuk D.0109 (Risiko Syok) & D.0011
+        # (Risiko Penurunan Curah Jantung) yang krusial untuk kasus syok kardiak.
+        #
+        # Catatan penggabungan kode (lihat juga DIAGNOSIS_KEYWORDS):
+        #  - D.0037 di lokal punya 3 blok terpisah (Kalium/Natrium/Mg-Fosfat) ->
+        #    digabung jadi 1 diagnosis "Risiko Ketidakseimbangan Elektrolit"
+        #    dengan keyword gabungan (SDKI memang satu kode untuk ketiganya).
+        #  - D.0077 di lokal punya 2 blok (nyeri umum + nyeri kardiak/sternotomi)
+        #    -> digabung jadi 1 (sama-sama "Nyeri Akut").
+        #  - D.0131 di lokal KOLISI: dipakai untuk 2 diagnosis BERBEDA
+        #    ("Risiko Komplikasi Pascabedah" dan "Hipotermia"). Kode D.0131
+        #    yang benar menurut SDKI adalah Hipotermia, jadi itu yang dipakai
+        #    di sini. "Risiko Komplikasi Pascabedah" BUKAN label SDKI baku dan
+        #    substansinya sudah tercakup diagnosis lain (D.0012 Perdarahan,
+        #    D.0142 Infeksi, D.0001/0003/0005 respirasi, D.0008/0011 kardiak)
+        #    -- lihat dashboard.py untuk perbaikan kode di sisi local engine.
+        # =====================================================================
+        'D.0006': {
+            'name': 'Risiko Aspirasi',
+            'luaran': 'Tingkat Aspirasi Menurun (L.01006)'
+        },
+        'D.0017': {
+            'name': 'Risiko Perfusi Serebral Tidak Efektif',
+            'luaran': 'Perfusi Serebral Meningkat (L.02014)'
+        },
+        'D.0020': {
+            'name': 'Defisit Nutrisi',
+            'luaran': 'Status Nutrisi Membaik (L.03030)'
+        },
+        'D.0025': {
+            'name': 'Ketidakstabilan Kadar Glukosa Darah',
+            'luaran': 'Kestabilan Kadar Glukosa Darah Membaik (L.03022)'
+        },
+        'D.0039': {
+            'name': 'Gangguan Eliminasi Urin',
+            'luaran': 'Eliminasi Urin Membaik (L.04034)'
+        },
+        'D.0038': {
+            'name': 'Konstipasi',
+            'luaran': 'Eliminasi Fekal Membaik (L.04033)'
+        },
+        'D.0040': {
+            'name': 'Diare',
+            'luaran': 'Eliminasi Fekal Membaik (L.04033)'
+        },
+        'D.0056': {
+            'name': 'Intoleransi Aktivitas',
+            'luaran': 'Toleransi Aktivitas Meningkat (L.05047)'
+        },
+        'D.0055': {
+            'name': 'Gangguan Pola Tidur',
+            'luaran': 'Status Tidur Membaik (L.05045)'
+        },
+        'D.0057': {
+            'name': 'Keletihan',
+            'luaran': 'Konservasi Energi Meningkat (L.05040)'
+        },
+        'D.0062': {
+            'name': 'Gangguan Komunikasi Verbal',
+            'luaran': 'Komunikasi Verbal Meningkat (L.13118)'
+        },
+        'D.0063': {
+            'name': 'Konfusi Akut',
+            'luaran': 'Orientasi Kognitif Meningkat (L.09082)'
+        },
+        'D.0077': {
+            'name': 'Nyeri Akut',
+            'luaran': 'Tingkat Nyeri Menurun (L.08066)'
+        },
+        'D.0078': {
+            'name': 'Nyeri Kronis',
+            'luaran': 'Tingkat Nyeri Menurun (L.08066)'
+        },
+        'D.0080': {
+            'name': 'Ansietas',
+            'luaran': 'Tingkat Ansietas Menurun (L.09093)'
+        },
+        'D.0129': {
+            'name': 'Gangguan Integritas Kulit/Jaringan',
+            'luaran': 'Integritas Kulit dan Jaringan Meningkat (L.14125)'
+        },
+        'D.0142': {
+            'name': 'Risiko Infeksi',
+            'luaran': 'Tingkat Infeksi Menurun (L.14137)'
+        },
+        'D.0136': {
+            'name': 'Risiko Jatuh',
+            'luaran': 'Tingkat Jatuh Menurun (L.14138)'
+        },
+        'D.0131': {
+            'name': 'Hipotermia',
+            'luaran': 'Termoregulasi Membaik (L.14134)'
+        },
+        'D.0109': {
+            'name': 'Risiko Syok',
+            'luaran': 'Status Kardiopulmonal Membaik (L.02016)'
+        },
+        'D.0004': {
+            'name': 'Gangguan Ventilasi Spontan',
+            'luaran': 'Ventilasi Spontan Meningkat (L.01007)'
+        },
+        'D.0002': {
+            'name': 'Gangguan Penyapihan Ventilator',
+            'luaran': 'Penyapihan Ventilator Meningkat (L.01002)'
+        },
+        'D.0007': {
+            'name': 'Gangguan Sirkulasi Spontan',
+            'luaran': 'Sirkulasi Spontan Meningkat (L.02015)'
+        },
+        'D.0010': {
+            'name': 'Risiko Gangguan Sirkulasi Spontan',
+            'luaran': 'Sirkulasi Spontan Meningkat (L.02015)'
+        },
+        'D.0011': {
+            'name': 'Risiko Penurunan Curah Jantung',
+            'luaran': 'Curah Jantung Meningkat (L.02008)'
+        },
+        'D.0014': {
+            'name': 'Gangguan Perfusi Serebral',
+            'luaran': 'Perfusi Serebral Meningkat (L.02014)'
+        },
+        'D.0013': {
+            'name': 'Risiko Perfusi Pulmonal Tidak Efektif',
+            'luaran': 'Perfusi Pulmonal Meningkat (L.02013)'
+        },
+        'D.0016': {
+            'name': 'Gangguan Status Kardiopulmonal',
+            'luaran': 'Status Kardiopulmonal Membaik (L.02016)'
+        },
+        'D.0037': {
+            'name': 'Risiko Ketidakseimbangan Elektrolit',
+            'luaran': 'Keseimbangan Elektrolit Membaik (L.03021)'
+        },
+        'D.0021': {
+            'name': 'Ketidakseimbangan Asam-Basa',
+            'luaran': 'Keseimbangan Asam Basa Membaik (L.02009)'
+        },
+        'D.0130': {
+            'name': 'Hipertermia',
+            'luaran': 'Termoregulasi Membaik (L.14134)'
+        },
+        'D.0143': {
+            'name': 'Infeksi (Sepsis)',
+            'luaran': 'Tingkat Infeksi Menurun (L.14137)'
+        },
+        'D.0054': {
+            'name': 'Gangguan Mobilitas Fisik',
+            'luaran': 'Mobilitas Fisik Meningkat (L.05042)'
+        },
+        'D.0058': {
+            'name': 'Hambatan Ambulasi',
+            'luaran': 'Ambulasi Meningkat (L.05001)'
+        },
+        'D.0082': {
+            'name': 'Gangguan Citra Tubuh',
+            'luaran': 'Citra Tubuh Meningkat (L.09067)'
+        },
+        'D.0087': {
+            'name': 'Ketidakberdayaan',
+            'luaran': 'Tingkat Stres Menurun (L.09092)'
         }
     }
     
@@ -654,10 +1263,16 @@ class ImprovedCDSSEngine:
                 # Boost untuk D.0012 (Perdarahan) pada post-op
                 if diagnosis_code == 'D.0012':
                     cardiac_boost += 3
+                # PATCH: post-op cardiac juga relevan untuk risiko infeksi
+                if diagnosis_code == 'D.0142':
+                    cardiac_boost += 2
             
             if is_hf:
                 # Boost untuk D.0008, D.0022, D.0003, D.0005 pada HF
                 if diagnosis_code in ['D.0008', 'D.0022', 'D.0003', 'D.0005']:
+                    cardiac_boost += 2
+                # PATCH: HF dekompensata juga relevan untuk status kardiopulmonal
+                if diagnosis_code == 'D.0016':
                     cardiac_boost += 2
             
             if is_acs:
@@ -669,10 +1284,20 @@ class ImprovedCDSSEngine:
                 # Boost untuk D.0008, D.0009 pada shock
                 if diagnosis_code in ['D.0008', 'D.0009']:
                     cardiac_boost += 3
+                # PATCH: syok kardiogenik secara klinis = Risiko Syok (D.0109)
+                # & Risiko Penurunan Curah Jantung (D.0011) -- sebelumnya kedua
+                # diagnosis ini tidak ada sama sekali di v2.0 (lihat patch
+                # MASTER_DIAGNOSES di atas) sehingga tidak pernah terdeteksi.
+                if diagnosis_code in ['D.0109', 'D.0011', 'D.0016']:
+                    cardiac_boost += 3
             
             if is_on_support:
-                # Boost untuk D.0012 pada ECMO (anticoagulation risk)
+                # Boost untuk D.0012 pada ECMO/IABP (risiko perdarahan kanulasi/sheath)
                 if diagnosis_code == 'D.0012':
+                    cardiac_boost += 2
+                # PATCH: dukungan mekanis (ECMO/VAD/IABP) = indikator independen
+                # disfungsi sirkulasi berat, relevan untuk D.0011 & D.0109
+                if diagnosis_code in ['D.0011', 'D.0109']:
                     cardiac_boost += 2
             
             # Calculate final score
@@ -869,8 +1494,29 @@ class ImprovedCDSSEngine:
 
 
 def analyze_clinical_trends_improved(s_text: str, o_text: str) -> Dict:
-    """Main function yang compatible dengan existing Streamlit dashboard"""
-    if not s_text or not o_text:
+    """
+    Main function yang compatible dengan existing Streamlit dashboard.
+
+    FIX (akar masalah "hanya 1 diagnosa muncul"): guard sebelumnya
+    mensyaratkan S **dan** O harus sama-sama terisi ("if not s_text or
+    not o_text"). Pada kasus pasien tersedasi/terintubasi/IABP (persis
+    seperti kasus di screenshot), kolom S (Subjektif) SECARA KLINIS WAJAR
+    kosong karena pasien tidak bisa menyampaikan keluhan -- sementara
+    kolom O (Objektif) berisi data vital yang sangat kritis (TD, HR,
+    vasopresor, IABP, oliguria, ventilator). Guard lama membuat seluruh
+    engine v2.0 (weighted scoring + numeric parsing + cardiac rules)
+    di-skip total dan mengembalikan 0 rekomendasi -- meskipun datanya
+    sangat layak dianalisis. Akibatnya pipeline di dashboard.py jatuh ke
+    fallback yang lebih lemah (API eksternal tidak lengkap / local
+    keyword fallback), yang hanya berhasil meloloskan 1 diagnosa.
+
+    Sekarang engine tetap berjalan selama SALAH SATU dari S atau O
+    terisi; hanya menolak jika KEDUANYA benar-benar kosong.
+    """
+    s_text = s_text or ""
+    o_text = o_text or ""
+
+    if not s_text.strip() and not o_text.strip():
         return {
             "status": "empty",
             "analisis": "",
