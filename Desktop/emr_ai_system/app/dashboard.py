@@ -1,9 +1,7 @@
 # =============================================================================
 # Smart EMR - RSJPDHK | Dashboard CPPT Keperawatan
 # =============================================================================
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 import io
 import re
 import hashlib
@@ -17,7 +15,7 @@ from typing import Dict
 import sys
 import os
 from pathlib import Path
-from services.cdss_engine import analyze_clinical_trends_improved
+from app.services.cdss_engine import analyze_clinical_trends_improved
 import pandas as pd
 import plotly.express as px
 import requests
@@ -2666,7 +2664,8 @@ def bridge_engine(main_engine_output, s_text, o_text):
 
     # 3. Ambil rekomendasi diagnosa berprioritas dari Engine Utama
     final_recommendations = []
-    
+    codes_already_added = set()
+
     for rec in main_recommendations:
         # Ambil kode diagnosa dari engine utama (Misal: 'D.0008')
         main_code = rec.get('code', '').upper().strip()
@@ -2691,6 +2690,29 @@ def bridge_engine(main_engine_output, s_text, o_text):
             rec['diagnosa_keperawatan'] = rec.get('name')
             
         final_recommendations.append(rec)
+        codes_already_added.add(main_code)
+
+    # 3b. FIX (akar masalah ke-2, defense-in-depth): sebelumnya loop di atas
+    # HANYA mengiterasi main_recommendations. Kalau CDSS v2.0 mengembalikan
+    # 0 rekomendasi (mis. S & O sama-sama minim info, atau bug lain di
+    # engine utama membuatnya nihil), local_res yang SUDAH dihitung di atas
+    # langsung dibuang diam-diam -- meski keyword-fallback-nya sendiri
+    # berhasil menemukan kecocokan. Sekarang temuan lokal yang belum
+    # terwakili di main_recommendations tetap disertakan, supaya tidak ada
+    # sinyal klinis yang hilang tanpa jejak.
+    for kode_lokal, item in local_code_mapping.items():
+        if kode_lokal in codes_already_added:
+            continue
+        nama_dx = (item.get('diagnosa_keperawatan', '') or kode_lokal).split(' b.d')[0].strip()
+        final_recommendations.append({
+            **item,
+            'code': kode_lokal,
+            'name': nama_dx or kode_lokal,
+            'priority': item.get('priority', 'MEDIUM'),
+            'score': item.get('score', 0),
+        })
+        codes_already_added.add(kode_lokal)
+
     priority_weights = {'CRITICAL': 0, 'HIGH': 1, 'MEDIUM': 2, 'LOW': 3}
     final_recommendations.sort(key=lambda x: (priority_weights.get(x.get('priority', 'MEDIUM'), 2), -x.get('score', 0)))
 
@@ -3058,6 +3080,24 @@ def main_app() -> None:
             icon="🎙️",
         )
 
+    # FIX: Streamlit melarang `st.session_state[key] = ...` dilakukan SETELAH
+    # widget dengan key tersebut sudah diinstansiasi pada run yang sama
+    # (-> StreamlitAPIException: "cannot be modified after the widget ...
+    # is instantiated"). Sebelumnya reset dilakukan di dalam `if st.button():`
+    # yang dieksekusi SETELAH `st.text_area(key="s_text_area"/"o_text_area")`
+    # di atasnya sudah dirender pada run yang sama -> selalu meledak saat
+    # tombol diklik. Solusi resmi Streamlit: pindahkan modifikasi session_state
+    # ke fungsi `on_click` callback. Callback dijalankan SEBELUM script
+    # di-rerun & widget diinstansiasi ulang, sehingga saat text_area dirender
+    # lagi pada run berikutnya, ia membaca nilai session_state yang sudah
+    # kosong tanpa konflik. (st.rerun() manual juga tidak diperlukan lagi --
+    # klik tombol otomatis memicu rerun.)
+    def _reset_s_text() -> None:
+        st.session_state.s_text_area = ""
+
+    def _reset_o_text() -> None:
+        st.session_state.o_text_area = ""
+
     col1, col2 = st.columns(2)
     with col1:
         s_input = st.text_area(
@@ -3066,11 +3106,12 @@ def main_app() -> None:
             height=150,
             key="s_text_area",
         )
-        if st.button(
-            "🗑️ Hapus & Reset Kolom S", key="clear_s_btn", use_container_width=True
-        ):
-            st.session_state.s_text_area = ""
-            st.rerun()
+        st.button(
+            "🗑️ Hapus & Reset Kolom S",
+            key="clear_s_btn",
+            use_container_width=True,
+            on_click=_reset_s_text,
+        )
     with col2:
         o_input = st.text_area(
             "📊 O (Objektif: TTV/Monitor/Px.Fisik/Penunjang)" + (" — VTT Aktif 🎙️" if SPEECH_AVAILABLE else ""),
@@ -3078,11 +3119,13 @@ def main_app() -> None:
             height=150,
             key="o_text_area",
         )
-        if st.button(
-            "🗑️ Hapus & Reset Kolom O", key="clear_o_btn", use_container_width=True
-        ):
-            st.session_state.o_text_area = ""
-            st.rerun()
+        st.button(
+            "🗑️ Hapus & Reset Kolom O",
+            key="clear_o_btn",
+            use_container_width=True,
+            on_click=_reset_o_text,
+        )
+
 
     if st.button("Formulasikan Standar 3S", type="primary"):
         if not s_input.strip() and not o_input.strip():
