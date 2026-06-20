@@ -3,7 +3,7 @@
 # =============================================================================
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(_file_)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import io
 import re
 import hashlib
