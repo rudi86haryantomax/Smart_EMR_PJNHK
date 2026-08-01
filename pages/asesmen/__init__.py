@@ -72,6 +72,22 @@ def _reset_form() -> None:
     _bersihkan_centang_intervensi()
 
 
+def reset_asesmen() -> None:
+    """
+    Titik masuk publik untuk memulai asesmen baru dari LUAR modul ini.
+
+    Dipakai oleh menu "Asesmen Baru" di sidebar (`app.py`), yang murni
+    tombol navigasi pindah `halaman` -- beda dari tombol
+    "➕ Buat asesmen baru" di `_tampilkan_hasil()` yang sudah memicu
+    `_reset_form()` sendiri lewat `on_click`. Tanpa titik masuk ini,
+    pindah ke menu "Asesmen Baru" cuma mengganti halaman tanpa
+    membersihkan draf S/O/penanda/diagnosis, karena `_init_state()`
+    memakai `setdefault` -- tidak pernah menimpa nilai yang sudah ada
+    di session_state.
+    """
+    _reset_form()
+
+
 # =====================================================
 # LANGKAH 1 -- INPUT
 # =====================================================
@@ -389,7 +405,7 @@ def _set_centang(kunci_list: list[str], nilai: bool) -> None:
 
 def _bersihkan_centang_intervensi(kode: str | None = None) -> None:
     """
-    Hapus state checkbox intervensi dari session.
+    Reset state checkbox intervensi ke tidak tercentang.
 
     Perlu dilakukan eksplisit: Streamlit menyimpan nilai widget di
     `session_state` berdasarkan key, dan nilai itu BERTAHAN meski
@@ -397,10 +413,21 @@ def _bersihkan_centang_intervensi(kode: str | None = None) -> None:
     asesmen baru lalu memilih diagnosis yang sama akan menampilkan
     tindakan yang sudah tercentang dari pasien sebelumnya — perawat
     melihat pilihan yang tidak pernah ia buat.
+
+    Nilai di-set jadi False, BUKAN dihapus (`del`). Fungsi ini juga
+    dipanggil dari `_reset_form()`, yang dijalankan lewat `on_click`
+    tombol "➕ Buat asesmen baru" di halaman hasil. `del` pada key
+    checkbox saat dipanggil dari dalam callback `on_click` memicu
+    galat session_state di tengah jalan — callback berhenti sebelum
+    sempat menuntaskan reset, sehingga `asesmen_tersimpan` gagal
+    berubah jadi None dan halaman hasil tidak pernah berpindah ke
+    form baru. Meng-set ke False aman dipanggil baik dari callback
+    maupun dari alur render biasa, dan tetap membuat checkbox tampil
+    kosong saat diagnosis yang sama dipakai lagi.
     """
     awalan = f"iv_{kode}_" if kode else "iv_"
     for kunci in [k for k in st.session_state if k.startswith(awalan)]:
-        del st.session_state[kunci]
+        st.session_state[kunci] = False
 
 
 def _pilih_intervensi(kode: str) -> None:
@@ -534,9 +561,14 @@ def _tampilkan_hasil(asesmen_id: int) -> None:
     tabel_asuhan.render(asesmen, tabel)
 
     st.divider()
-    if st.button("➕ Buat asesmen baru", type="primary", use_container_width=True):
-        _reset_form()
-        st.rerun()
+    
+    # Perbaikan pada tombol di bawah ini:
+    st.button(
+        "➕ Buat asesmen baru", 
+        type="primary", 
+        use_container_width=True,
+        on_click=_reset_form
+    )
 
 
 # =====================================================
