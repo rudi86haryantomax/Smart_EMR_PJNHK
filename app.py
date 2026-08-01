@@ -91,6 +91,8 @@ def _pilih_profesi() -> None:
         "Pilihan ini tidak membatasi akses dan tidak menyimpan identitas — "
         "hanya menentukan tampilan alur kerja."
     )
+    st.caption("Developed by Ns. Rudi Haryanto, S.Kep., M.M " \
+    "(rudi07haryanto@gmail.com)")
 
 
 def _peringatan_lingkungan() -> None:
@@ -143,6 +145,12 @@ def _sidebar() -> str:
         if lingkungan.bisa_diakses_publik() and lingkungan.mode_klinis():
             st.caption("⚠️ Aplikasi publik — jangan masukkan identitas pasien.")
         _status()
+
+        st.divider()
+        st.markdown("💬 [Saran & Masukan](https://forms.gle/mhmcJk7mHX4WNPBRA)")
+        st.caption("Developed by Ns. Rudi Haryanto, S.Kep., M.M " \
+            "(rudi07haryanto@gmail.com)")
+
 
     profesi = st.session_state.get("profesi", prof.DEFAULT)
     return st.session_state.get("halaman", prof.halaman_awal(profesi))
