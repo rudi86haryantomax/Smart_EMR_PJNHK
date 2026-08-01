@@ -1,0 +1,2546 @@
+{
+ "meta": {
+  "sumber": "SDKI_SLKI_SIKI_mapping_RSJPDHK_2026.xlsx",
+  "institusi": "RS Jantung dan Pembuluh Darah Harapan Kita",
+  "versi": "2026",
+  "standar": "SDKI/SLKI/SIKI - PPNI",
+  "jumlah_diagnosis": 55,
+  "catatan_lisensi": "Redaksi kriteria dan intervensi merupakan adaptasi kerja internal RSJPDHK, bukan salinan verbatim buku SDKI/SLKI/SIKI PPNI. Verifikasi terhadap buku resmi PPNI tetap diperlukan sebelum dipakai sebagai acuan legal atau audit klinis.",
+  "diperbarui_pada": "2026-07-31T03:28:51"
+ },
+ "diagnosis": [
+  {
+   "kode": "D.0001",
+   "nama": "Bersihan Jalan Napas Tidak Efektif",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Batuk tidak efektif",
+     "Tidak mampu batuk",
+     "Sputum berlebih",
+     "Mengi wheezing",
+     "Ronkhi kering"
+    ],
+    "minor": [
+     "Dispnea",
+     "Sulit bicara",
+     "Ortopnea",
+     "Gelisah",
+     "Sianosis",
+     "Bunyi napas menurun",
+     "Frekuensi napas berubah",
+     "Pola napas berubah"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.01001",
+    "nama": "Bersihan Jalan Napas Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor pola napas (frekuensi, kedalaman, usaha napas)",
+     "Monitor bunyi napas tambahan (mis. gurgling, mengi, ronkhi)",
+     "Monitor sputum (jumlah, warna, aroma)"
+    ],
+    "terapeutik": [
+     "Posisikan semi-Fowler atau Fowler",
+     "Lakukan penghisapan lendir kurang dari 15 detik jika perlu",
+     "Berikan oksigen jika perlu"
+    ],
+    "edukasi": [
+     "Anjurkan asupan cairan 2000 ml/hari jika tidak ada kontraindikasi",
+     "Ajarkan teknik batuk efektif"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian bronkodilator, ekspektoran, atau mukolitik, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0002",
+   "nama": "Gangguan Penyapihan Ventilator",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Dispnea",
+     "Kelelahan",
+     "Penurunan saturasi oksigen",
+     "Penggunaan otot bantu napas meningkat",
+     "Frekuensi napas meningkat dari baseline"
+    ],
+    "minor": [
+     "Gelisah",
+     "Cemas",
+     "Agitasi",
+     "Diaforesis",
+     "Tekanan darah meningkat dari baseline",
+     "Warna kulit pucat atau sianosis"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.01002",
+    "nama": "Penyapihan Ventilator Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor status pernapasan dan oksigenasi (frekuensi, kedalaman napas, penggunaan otot bantu napas)",
+     "Monitor tanda kelelahan otot pernapasan",
+     "Monitor efektivitas ventilasi mekanik sebelum penyapihan"
+    ],
+    "terapeutik": [
+     "Berikan periode istirahat sebelum melakukan penyapihan",
+     "Lakukan penyapihan bertahap sesuai protokol unit",
+     "Posisikan pasien semi-Fowler"
+    ],
+    "edukasi": [
+     "Jelaskan tujuan dan prosedur penyapihan pada pasien/keluarga",
+     "Ajarkan teknik relaksasi napas"
+    ],
+    "kolaborasi": [
+     "Kolaborasi penyesuaian mode dan parameter ventilator dengan tim intensivis"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0003",
+   "nama": "Gangguan Pertukaran Gas",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Dispnea",
+     "Pco2 meningkat atau menurun",
+     "Po2 menurun",
+     "Takikardia",
+     "Ph arteri meningkat atau menurun",
+     "Bunyi napas tambahan"
+    ],
+    "minor": [
+     "Pusing",
+     "Penglihatan kabur",
+     "Sianosis",
+     "Diaforesis",
+     "Gelisah",
+     "Napas cuping hidung",
+     "Pola napas abnormal",
+     "Kesadaran menurun"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.01003",
+    "nama": "Pertukaran Gas Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor frekuensi, irama, kedalaman, dan upaya napas",
+     "Monitor saturasi oksigen",
+     "Monitor hasil analisa gas darah (AGD)"
+    ],
+    "terapeutik": [
+     "Atur interval pemantauan sesuai kondisi pasien",
+     "Dokumentasikan hasil pemantauan"
+    ],
+    "edukasi": [
+     "Jelaskan tujuan dan prosedur pemantauan",
+     "Informasikan hasil pemantauan, jika perlu"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian oksigen tambahan sesuai kebutuhan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0004",
+   "nama": "Gangguan Ventilasi Spontan",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Dispnea",
+     "Penggunaan otot bantu napas meningkat",
+     "Volume tidal menurun",
+     "Saturasi oksigen menurun"
+    ],
+    "minor": [
+     "Gelisah",
+     "Takikardia",
+     "Ph arteri menurun",
+     "Pco2 meningkat",
+     "Hipoksemia"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.01007",
+    "nama": "Ventilasi Spontan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi adanya kelelahan otot bantu napas",
+     "Monitor status respirasi dan oksigenasi"
+    ],
+    "terapeutik": [
+     "Pertahankan kepatenan jalan napas",
+     "Berikan posisi semi-Fowler",
+     "Berikan oksigenasi sesuai kebutuhan"
+    ],
+    "edukasi": [
+     "Ajarkan teknik bernapas efektif"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian bantuan ventilasi mekanik, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0005",
+   "nama": "Pola Napas Tidak Efektif",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Dispnea",
+     "Penggunaan otot bantu napas",
+     "Fase ekspirasi memanjang",
+     "Pola napas abnormal takipnea bradipnea hiperventilasi"
+    ],
+    "minor": [
+     "Ortopnea",
+     "Pernapasan pursed lip",
+     "Pernapasan cuping hidung",
+     "Diameter thoraks anterior posterior meningkat",
+     "Kapasitas vital menurun",
+     "Tekanan ekspirasi dan inspirasi menurun"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.01004",
+    "nama": "Pola Napas Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor kecepatan aliran oksigen",
+     "Monitor efektifitas terapi oksigen (mis. oksimetri, AGD)",
+     "Monitor tanda-tanda hipoventilasi"
+    ],
+    "terapeutik": [
+     "Pertahankan kepatenan jalan napas",
+     "Berikan oksigen tambahan sesuai kebutuhan",
+     "Gunakan perangkat oksigen yang sesuai dengan tingkat mobilitas pasien"
+    ],
+    "edukasi": [
+     "Ajarkan teknik napas dalam",
+     "Anjurkan melakukan aktivitas fisik secara bertahap sesuai toleransi"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian bronkodilator, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0006",
+   "nama": "Risiko Aspirasi",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Penurunan tingkat kesadaran",
+     "Gangguan menelan",
+     "Disfungsi batuk",
+     "Terpasang selang nasogastrik",
+     "Residu lambung meningkat",
+     "Sedasi"
+    ]
+   },
+   "luaran": {
+    "kode": "L.01006",
+    "nama": "Tingkat Aspirasi Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tingkat kesadaran, batuk, muntah, dan kemampuan menelan",
+     "Periksa residu lambung sebelum pemberian nutrisi enteral"
+    ],
+    "terapeutik": [
+     "Posisikan semi-Fowler 30-45 derajat saat pemberian nutrisi enteral",
+     "Pertahankan kepatenan jalan napas"
+    ],
+    "edukasi": [
+     "Anjurkan makan secara perlahan",
+     "Ajarkan strategi mencegah aspirasi pada keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan tim terapi wicara untuk evaluasi kemampuan menelan, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0007",
+   "nama": "Gangguan Sirkulasi Spontan",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Nadi tidak teraba",
+     "Tidak ada napas",
+     "Kesadaran menurun tiba tiba",
+     "Tekanan darah tidak terukur"
+    ],
+    "minor": [
+     "Gambaran ekg asistol pea vf vt",
+     "Saturasi oksigen menurun drastis",
+     "Akral dingin dan pucat"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.02015",
+    "nama": "Sirkulasi Spontan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi tanda henti jantung (nadi karotis tidak teraba, tidak bernapas)",
+     "Monitor irama jantung melalui monitor EKG"
+    ],
+    "terapeutik": [
+     "Lakukan kompresi dada berkualitas tinggi sesuai algoritma BHD/BHL",
+     "Pasang akses intravena/intraosseus",
+     "Siapkan defibrilator jika ada indikasi"
+    ],
+    "edukasi": [
+     "Jelaskan kondisi dan tindakan yang dilakukan kepada keluarga setelah kondisi stabil"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat resusitasi (epinefrin, amiodaron) sesuai protokol ACLS"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0008",
+   "nama": "Penurunan Curah Jantung",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Dispnea",
+     "Keletihan",
+     "Ortopnea",
+     "Paroxysmal nocturnal dyspnea",
+     "Perubahan irama ekg aritmia",
+     "Palpitasi",
+     "Edema",
+     "Peningkatan jvp",
+     "Distensi vena jugularis",
+     "Tekanan darah menurun",
+     "Tekanan darah meningkat",
+     "Nadi perifer lemah",
+     "Crt lambat",
+     "Kulit pucat",
+     "Sianosis",
+     "Ejeksi fraksi menurun"
+    ],
+    "minor": [
+     "Cemas",
+     "Gelisah",
+     "Murmur jantung",
+     "Berat badan meningkat drastis",
+     "Suara jantung s3 s4",
+     "Oliguria",
+     "Akral dingin",
+     "Pvr meningkat",
+     "Svr meningkat"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.02008",
+    "nama": "Curah Jantung Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi tanda/gejala primer penurunan curah jantung (mis. dispnea, kelelahan, edema, ortopnea, PND)",
+     "Identifikasi tanda/gejala sekunder penurunan curah jantung (mis. peningkatan BB, hepatomegali, JVP meningkat, ronkhi, oliguria)",
+     "Monitor tekanan darah dan nadi",
+     "Monitor intake dan output cairan",
+     "Monitor saturasi oksigen dan EKG 12 sadapan"
+    ],
+    "terapeutik": [
+     "Posisikan pasien semi-Fowler atau Fowler dengan kaki ke bawah atau posisi nyaman",
+     "Berikan diet jantung yang sesuai (mis. batasi asupan natrium dan cairan)",
+     "Berikan oksigen untuk mempertahankan saturasi oksigen > 94%"
+    ],
+    "edukasi": [
+     "Anjurkan beraktivitas fisik sesuai toleransi",
+     "Anjurkan beraktivitas fisik secara bertahap",
+     "Ajarkan pasien dan keluarga mengukur intake dan output cairan harian"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian antiaritmia atau inotropik, jika perlu",
+     "Rujuk ke program rehabilitasi jantung"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0009",
+   "nama": "Perfusi Perifer Tidak Efektif",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Pengisian kapiler lambat",
+     "Nadi perifer menurun atau tidak teraba",
+     "Akral dingin",
+     "Warna kulit pucat",
+     "Turgor kulit menurun"
+    ],
+    "minor": [
+     "Parastesia",
+     "Nyeri ekstremitas klaudikasio intermiten",
+     "Edema ekstremitas",
+     "Penyembuhan luka lambat",
+     "Indeks ankle brachial abi kurang dari 0 90",
+     "Bruit femoral"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.02011",
+    "nama": "Perfusi Perifer Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Periksa sirkulasi perifer (mis. nadi perifer, edema, CRT, warna, suhu, ankle-brachial index)",
+     "Monitor panas, kemerahan, rasa sakit, atau bengkak pada ekstremitas"
+    ],
+    "terapeutik": [
+     "Hindari pemasangan infus atau pengambilan darah di area keterbatasan sirkulasi",
+     "Hindari pengukuran tekanan darah pada ekstremitas dengan keterbatasan sirkulasi",
+     "Lakukan hidrasi kulit yang sesuai"
+    ],
+    "edukasi": [
+     "Anjurkan berhenti merokok",
+     "Anjurkan berolahraga rutin",
+     "Ajarkan program diet untuk memperbaiki sirkulasi (mis. batasi lemak jenuh, kolesterol)"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian antiplatelet atau vasodilator, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0010",
+   "nama": "Risiko Gangguan Sirkulasi Spontan",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Penyakit jantung berat",
+     "Syok berkepanjangan",
+     "Gangguan irama jantung mayor",
+     "Hipoksia berat",
+     "Gangguan elektrolit berat"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02015",
+    "nama": "Sirkulasi Spontan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tanda vital dan status hemodinamik secara ketat",
+     "Monitor irama EKG secara kontinu"
+    ],
+    "terapeutik": [
+     "Siapkan alat resusitasi di dekat pasien",
+     "Pertahankan akses intravena paten"
+    ],
+    "edukasi": [
+     "Jelaskan kondisi risiko pada keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemantauan berkala dengan tim kardiologi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0011",
+   "nama": "Risiko Penurunan Curah Jantung",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Perubahan afterload",
+     "Perubahan kontraktilitas",
+     "Perubahan heart rate",
+     "Perubahan preload",
+     "Hiperventilasi",
+     "Kerusakan miokard"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02008",
+    "nama": "Curah Jantung Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tekanan darah, nadi, dan status hemodinamik",
+     "Monitor tanda-tanda penurunan curah jantung secara preventif"
+    ],
+    "terapeutik": [
+     "Fasilitasi modifikasi gaya hidup sehat",
+     "Atur periode istirahat dan aktivitas untuk menghindari kelelahan otot jantung"
+    ],
+    "edukasi": [
+     "Anjurkan diet rendah garam dan kolesterol",
+     "Ajarkan mengenali gejala awal penurunan curah jantung (mis. sesak napas saat baring)"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemeriksaan penunjang berkala (EKG, Echocardiography)"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0012",
+   "nama": "Risiko Perdarahan",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Gangguan koagulasi trombositopenia",
+     "Efek agen farmakologis antikoagulan",
+     "Tindakan pembedahan",
+     "Riwayat perdarahan sebelumnya",
+     "Komplikasi kehamilan pascapartum"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02012",
+    "nama": "Tingkat Perdarahan Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tanda dan gejala perdarahan",
+     "Monitor nilai hematokrit/hemoglobin sebelum dan sesudah kehilangan darah",
+     "Monitor tanda vital ortostatik"
+    ],
+    "terapeutik": [
+     "Pertahankan bed rest selama perdarahan aktif",
+     "Batasi tindakan invasif, jika perlu",
+     "Gunakan kasur pencegah dekubitus untuk mengurangi risiko trauma"
+    ],
+    "edukasi": [
+     "Jelaskan tanda perdarahan dan anjurkan segera melapor jika terjadi",
+     "Anjurkan meningkatkan asupan makanan tinggi vitamin K, jika sesuai"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat pengontrol perdarahan (mis. asam traneksamat), jika perlu",
+     "Kolaborasi pemberian produk darah, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0013",
+   "nama": "Risiko Perfusi Gastrointestinal Tidak Efektif",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Perdarahan gastrointestinal akut",
+     "Trauma abdomen",
+     "Sindrom kompartemen abdomen",
+     "Aneurisma aorta abdomen",
+     "Varises gastroesofagus",
+     "Penurunan kinerja ventrikel kiri",
+     "Koagulopati mis anemia sel sabit koagulasi intravaskular diseminata",
+     "Penurunan konsentrasi hemoglobin",
+     "Keabnormalan masa protrombin dan atau masa tromboplastin parsial",
+     "Disfungsi hati mis sirosis hepatitis",
+     "Disfungsi ginjal mis ginjal polikistik stenosis arteri renalis",
+     "Disfungsi gastrointestinal",
+     "Hiperglikemia",
+     "Ketidakstabilan hemodinamik",
+     "Efek agen farmakologis",
+     "Usia lebih dari 60 tahun",
+     "Efek samping tindakan mis pembedahan jantung"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02010",
+    "nama": "Perfusi Gastrointestinal Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Periksa tanda perfusi gastrointestinal (bising usus, distensi abdomen, nyeri tekan abdomen)",
+     "Monitor tanda perdarahan gastrointestinal (hematemesis, melena, penurunan hemoglobin)",
+     "Monitor status hemodinamik dan kinerja ventrikel kiri, khususnya pada pasien kardiak berisiko tinggi"
+    ],
+    "terapeutik": [
+     "Pertahankan tirah baring selama fase akut jika ditemukan tanda perdarahan",
+     "Pasang akses intravena untuk antisipasi resusitasi cairan, jika perlu"
+    ],
+    "edukasi": [
+     "Jelaskan tanda dan gejala penurunan perfusi gastrointestinal yang harus segera dilaporkan",
+     "Anjurkan modifikasi diet sesuai kondisi (mis. rendah residu pada risiko tinggi)"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemeriksaan penunjang (endoskopi, USG abdomen) jika ditemukan tanda perdarahan atau iskemia",
+     "Kolaborasi dengan ahli gizi untuk konseling nutrisi sesuai kondisi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0014",
+   "nama": "Risiko Perfusi Miokard Tidak Efektif",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Hipertensi",
+     "Hiperlipidemia",
+     "Riwayat penyakit jantung koroner",
+     "Aterosklerosis arteri koroner",
+     "Kadar troponin atau ck mb meningkat",
+     "Spasme arteri koroner"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02010",
+    "nama": "Perfusi Miokard Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor keluhan nyeri dada (lokasi, durasi, faktor pemicu/pereda)",
+     "Monitor EKG 12 sadapan secara berkala",
+     "Monitor enzim jantung (troponin, CK-MB)"
+    ],
+    "terapeutik": [
+     "Berikan lingkungan tenang dan minim stres",
+     "Batasi aktivitas selama periode risiko tinggi"
+    ],
+    "edukasi": [
+     "Jelaskan tanda gejala serangan jantung yang harus segera dilaporkan",
+     "Anjurkan modifikasi gaya hidup (diet rendah lemak, berhenti merokok)"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian terapi antiplatelet/statin sesuai program"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0016",
+   "nama": "Risiko Perfusi Serebral Tidak Efektif",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Hipertensi",
+     "Aterosklerosis",
+     "Aneurisma serebral",
+     "Embolisme",
+     "Koagulopati",
+     "Riwayat stroke sebelumnya"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02014",
+    "nama": "Perfusi Serebral Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tingkat kesadaran dan tanda vital",
+     "Monitor reaksi pupil",
+     "Monitor tanda peningkatan tekanan darah mendadak"
+    ],
+    "terapeutik": [
+     "Pertahankan posisi kepala netral dan elevasi 30 derajat",
+     "Minimalkan aktivitas yang meningkatkan tekanan intrakranial (mengejan, batuk keras)"
+    ],
+    "edukasi": [
+     "Anjurkan menghindari manuver valsava",
+     "Jelaskan tanda bahaya stroke (FAST) pada keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian antihipertensi/antikoagulan sesuai indikasi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0017",
+   "nama": "Risiko Perfusi Perifer Tidak Efektif",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Diabetes melitus",
+     "Hipertensi",
+     "Merokok",
+     "Gaya hidup kurang gerak",
+     "Kadar kolesterol tinggi",
+     "Prosedur endovaskular"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02011",
+    "nama": "Perfusi Perifer Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor nadi perifer dan CRT secara berkala",
+     "Monitor perubahan warna kulit dan suhu ekstremitas"
+    ],
+    "terapeutik": [
+     "Hindari penekanan pada area ekstremitas berisiko",
+     "Jaga kehangatan ekstremitas"
+    ],
+    "edukasi": [
+     "Anjurkan berhenti merokok",
+     "Anjurkan pemeriksaan kaki rutin bagi pasien diabetes"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemeriksaan ankle-brachial index (ABI) berkala, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0018",
+   "nama": "Berat Badan Lebih",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Imt lebih dari 25 kg per m2 pada dewasa",
+     "Berat dan panjang badan lebih dari persentil 95 pada anak kurang dari 2 tahun",
+     "Imt pada persentil ke 85 sampai 95 pada anak 2 sampai 18 tahun"
+    ],
+    "minor": [
+     "Tebal lipatan kulit trisep lebih dari 25 mm"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.03018",
+    "nama": "Berat Badan Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi kondisi kesehatan pasien yang dapat mempengaruhi berat badan",
+     "Monitor berat badan dan indeks massa tubuh (IMT) secara berkala"
+    ],
+    "terapeutik": [
+     "Hitung berat badan ideal pasien",
+     "Hitung persentase lemak dan otot tubuh pasien, jika perlu"
+    ],
+    "edukasi": [
+     "Jelaskan hubungan antara asupan makanan, aktivitas fisik, dan perubahan berat badan",
+     "Jelaskan risiko berat badan lebih terhadap kesehatan kardiovaskular"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan ahli gizi untuk menentukan target penurunan berat badan dan program diet yang sesuai"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0019",
+   "nama": "Defisit Nutrisi",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Berat badan menurun minimal 10 persen dibawah rentang ideal"
+    ],
+    "minor": [
+     "Cepat kenyang setelah makan",
+     "Kram atau nyeri abdomen",
+     "Nafsu makan menurun",
+     "Bising usus hiperaktif",
+     "Otot pengunyah dan menelan lemah",
+     "Membran mukosa pucat",
+     "Sariawan",
+     "Serum albumin turun",
+     "Rambut rontok berlebihan",
+     "Diare"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.03030",
+    "nama": "Status Nutrisi Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi status nutrisi dan alergi/intoleransi makanan",
+     "Monitor asupan makanan dan berat badan"
+    ],
+    "terapeutik": [
+     "Berikan makanan tinggi kalori tinggi protein sesuai kebutuhan",
+     "Sajikan makanan secara menarik dan sesuai suhu",
+     "Berikan suplemen makanan, jika perlu"
+    ],
+    "edukasi": [
+     "Ajarkan diet yang diprogramkan",
+     "Anjurkan posisi duduk saat makan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan ahli gizi untuk menentukan jumlah kalori dan jenis nutrien yang dibutuhkan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0020",
+   "nama": "Diare",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Defekasi lebih dari 3 kali dalam 24 jam",
+     "Feses lembek atau cair"
+    ],
+    "minor": [
+     "Urgensi",
+     "Nyeri atau kram abdomen",
+     "Frekuensi peristaltik meningkat",
+     "Bising usus hiperaktif",
+     "Mual muntah"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.04033",
+    "nama": "Eliminasi Fekal Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi penyebab diare (mis. inflamasi, infeksi, obat, ansietas)",
+     "Monitor warna, volume, frekuensi, konsistensi feses",
+     "Monitor tanda dan gejala hipovolemia"
+    ],
+    "terapeutik": [
+     "Berikan asupan cairan oral",
+     "Pasang jalur intravena, jika perlu"
+    ],
+    "edukasi": [
+     "Anjurkan menghindari makanan pembentuk gas/pedas/mengandung laktosa",
+     "Anjurkan melanjutkan pemberian ASI, jika bayi"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat antimotilitas/antispasmodik, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0022",
+   "nama": "Hipervolemia",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Ortopnea",
+     "Dispnea",
+     "Edema anasarka atau perifer",
+     "Berat badan meningkat dalam waktu singkat",
+     "Jvp meningkat",
+     "Refleks hepatojugular positif"
+    ],
+    "minor": [
+     "Distensi vena jugularis",
+     "Suara napas tambahan ronkhi",
+     "Hepatomegali",
+     "Oliguria",
+     "Kadar hb ht menurun",
+     "Tekanan darah meningkat"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.03028",
+    "nama": "Status Cairan Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Periksa tanda dan gejala hipervolemia",
+     "Monitor status hemodinamik dan intake-output cairan",
+     "Monitor efek samping diuretik"
+    ],
+    "terapeutik": [
+     "Batasi asupan cairan dan garam sesuai program",
+     "Timbang berat badan setiap hari pada waktu yang sama"
+    ],
+    "edukasi": [
+     "Anjurkan melapor jika terjadi peningkatan berat badan drastis",
+     "Ajarkan cara membatasi cairan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian diuretik sesuai program"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0023",
+   "nama": "Hipovolemia",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Merasa lemah",
+     "Mengeluh haus",
+     "Frekuensi nadi meningkat",
+     "Nadi teraba lemah",
+     "Tekanan darah menurun",
+     "Turgor kulit menurun",
+     "Membran mukosa kering",
+     "Volume urin menurun",
+     "Hematokrit meningkat"
+    ],
+    "minor": [
+     "Pengisian vena menurun",
+     "Status mental berubah",
+     "Suhu tubuh meningkat",
+     "Konsentrasi urin meningkat",
+     "Berat badan turun tiba tiba"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.03028",
+    "nama": "Status Cairan Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Periksa tanda dan gejala hipovolemia",
+     "Monitor intake dan output cairan"
+    ],
+    "terapeutik": [
+     "Hitung kebutuhan cairan",
+     "Berikan posisi modified Trendelenburg, jika perlu",
+     "Berikan asupan cairan oral"
+    ],
+    "edukasi": [
+     "Anjurkan memperbanyak asupan cairan oral",
+     "Anjurkan menghindari perubahan posisi mendadak"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian cairan IV isotonis/hipotonis dan produk darah sesuai indikasi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0027",
+   "nama": "Ketidakstabilan Kadar Glukosa Darah",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengantuk",
+     "Pusing",
+     "Kadar glukosa darah diluar rentang normal"
+    ],
+    "minor": [
+     "Lelah atau lesu",
+     "Mulut kering",
+     "Banyak minum polidipsi",
+     "Rasa haus meningkat",
+     "Jumlah urin meningkat poliuria",
+     "Kadar glukosa darah sewaktu fluktuatif",
+     "Tremor",
+     "Gemetar",
+     "Kesadaran menurun pada hipoglikemia berat",
+     "Palpitasi"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.03028",
+    "nama": "Kestabilan Kadar Glukosa Darah Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi kemungkinan penyebab hiperglikemia",
+     "Monitor kadar glukosa darah",
+     "Monitor tanda dan gejala hiperglikemia (poliuria, polidipsi, kelemahan)"
+    ],
+    "terapeutik": [
+     "Berikan asupan cairan oral",
+     "Konsultasikan dengan tim medis jika tanda hiperglikemia memburuk"
+    ],
+    "edukasi": [
+     "Anjurkan monitor kadar glukosa darah secara mandiri",
+     "Ajarkan pengelolaan diabetes (mis. penggunaan insulin, obat oral, monitor asupan makanan)"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian insulin sesuai program"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0029",
+   "nama": "Risiko Defisit Nutrisi",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Ketidakmampuan menelan atau mencerna makanan",
+     "Faktor ekonomi atau psikologis",
+     "Peningkatan kebutuhan metabolisme",
+     "Penurunan nafsu makan terkait penyakit"
+    ]
+   },
+   "luaran": {
+    "kode": "L.03030",
+    "nama": "Status Nutrisi Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor asupan makanan dan berat badan secara berkala",
+     "Identifikasi faktor risiko penurunan asupan nutrisi"
+    ],
+    "terapeutik": [
+     "Sajikan makanan yang menarik dan sesuai kebutuhan kalori"
+    ],
+    "edukasi": [
+     "Anjurkan pola makan teratur",
+     "Ajarkan cara memilih makanan bergizi"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan ahli gizi jika ditemukan tanda risiko yang memburuk"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0034",
+   "nama": "Risiko Ketidakseimbangan Elektrolit",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Diare atau muntah berlebihan",
+     "Gangguan fungsi ginjal",
+     "Penggunaan diuretik",
+     "Ketidakseimbangan cairan",
+     "Gangguan endokrin"
+    ]
+   },
+   "luaran": {
+    "kode": "L.03021",
+    "nama": "Keseimbangan Elektrolit Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor kadar elektrolit serum",
+     "Monitor tanda dan gejala ketidakseimbangan elektrolit (kelemahan otot, aritmia, kram)"
+    ],
+    "terapeutik": [
+     "Dokumentasikan hasil pemantauan elektrolit"
+    ],
+    "edukasi": [
+     "Jelaskan tanda dan gejala ketidakseimbangan elektrolit pada pasien/keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian suplemen elektrolit sesuai indikasi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0039",
+   "nama": "Risiko Syok",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Hipoksemia",
+     "Hipotensi",
+     "Kekurangan volume cairan",
+     "Sepsis",
+     "Sindrom respons inflamasi sistemik",
+     "Perdarahan masif"
+    ]
+   },
+   "luaran": {
+    "kode": "L.02016",
+    "nama": "Status Kardiopulmonal Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor status kardiopulmonal (frekuensi dan kekuatan nadi, frekuensi napas, tekanan darah)",
+     "Monitor status oksigenasi dan tingkat kesadaran",
+     "Monitor input dan output cairan"
+    ],
+    "terapeutik": [
+     "Berikan oksigen untuk mempertahankan saturasi oksigen > 94%",
+     "Pasang jalur intravena, jika perlu",
+     "Pasang kateter urine untuk menilai produksi urine, jika perlu"
+    ],
+    "edukasi": [
+     "Jelaskan tanda dan gejala awal syok pada pasien/keluarga",
+     "Anjurkan melapor jika menemukan tanda-tanda syok"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian cairan IV dan/atau produk darah, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0040",
+   "nama": "Gangguan Eliminasi Urin",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Desakan berkemih urgensi",
+     "Sering buang air kecil"
+    ],
+    "minor": [
+     "Nokturia",
+     "Mengompol",
+     "Enuresis",
+     "Distensi kandung kemih",
+     "Berkemih tidak tuntas hesitancy",
+     "Volume residu urin meningkat"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.04034",
+    "nama": "Eliminasi Urin Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi tanda dan gejala retensi atau inkontinensia urine",
+     "Monitor eliminasi urine (frekuensi, konsistensi, aroma, volume, warna)"
+    ],
+    "terapeutik": [
+     "Batasi asupan cairan menjelang tidur",
+     "Ambil sampel urine tengah (midstream), jika perlu pemeriksaan"
+    ],
+    "edukasi": [
+     "Ajarkan tanda dan gejala infeksi saluran kemih",
+     "Anjurkan minum cukup cairan pada siang hari"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemeriksaan urinalisis, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0042",
+   "nama": "Inkontinensia Urin Fungsional",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengompol sebelum mencapai toilet"
+    ],
+    "minor": [
+     "Waktu menuju toilet terlalu lama dibanding waktu antara desakan berkemih dan pengeluaran urin tak disengaja"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.04036",
+    "nama": "Kontinensia Urin Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi faktor penyebab inkontinensia (mobilitas, kognitif, lingkungan)",
+     "Monitor pola eliminasi urine"
+    ],
+    "terapeutik": [
+     "Sediakan alat bantu berkemih di dekat pasien (urinal/commode)",
+     "Lakukan penjadwalan waktu berkemih"
+    ],
+    "edukasi": [
+     "Ajarkan mengenali tanda akan berkemih dan segera merespons",
+     "Anjurkan modifikasi lingkungan agar mudah menjangkau toilet"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan fisioterapi bila terkait keterbatasan mobilitas"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0049",
+   "nama": "Konstipasi",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Defekasi kurang dari 3 kali seminggu",
+     "Pengeluaran feses lama dan sulit",
+     "Feses keras",
+     "Peristaltik usus menurun"
+    ],
+    "minor": [
+     "Mengejan saat defekasi",
+     "Distensi abdomen",
+     "Teraba massa pada rektal",
+     "Kelemahan umum",
+     "Bising usus menurun"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.04033",
+    "nama": "Eliminasi Fekal Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi masalah usus dan penggunaan obat pencahar",
+     "Monitor buang air besar (warna, frekuensi, konsistensi, volume)"
+    ],
+    "terapeutik": [
+     "Berikan air hangat setelah makan",
+     "Jadwalkan waktu defekasi bersama pasien"
+    ],
+    "edukasi": [
+     "Anjurkan mencatat warna, frekuensi, konsistensi feses",
+     "Anjurkan meningkatkan asupan serat dan cairan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat pencahar, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0050",
+   "nama": "Retensi Urin",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Sensasi penuh pada kandung kemih",
+     "Disuria atau anuria",
+     "Distensi kandung kemih"
+    ],
+    "minor": [
+     "Dribbling",
+     "Residu urine menetap setelah berkemih",
+     "Inkontinensia berlebih overflow",
+     "Kandung kemih teraba membesar"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.04034",
+    "nama": "Eliminasi Urin Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Periksa kondisi pasien (kesadaran, tanda vital, distensi kandung kemih)",
+     "Monitor keberhasilan kateterisasi"
+    ],
+    "terapeutik": [
+     "Lakukan kateterisasi urine dengan teknik aseptik",
+     "Jaga kebersihan area genital"
+    ],
+    "edukasi": [
+     "Jelaskan tujuan dan prosedur pemasangan kateter",
+     "Ajarkan tanda infeksi saluran kemih terkait kateter"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemeriksaan penunjang (USG kandung kemih), jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0054",
+   "nama": "Gangguan Mobilitas Fisik",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh sulit menggerakkan ekstremitas",
+     "Kekuatan otot menurun",
+     "Rentang gerak rom menurun"
+    ],
+    "minor": [
+     "Nyeri saat bergerak",
+     "Enggan melakukan pergerakan",
+     "Merasa cemas saat bergerak",
+     "Sendi kaku",
+     "Gerakan terbatas",
+     "Fisik lemah"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.05042",
+    "nama": "Mobilitas Fisik Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi toleransi fisik melakukan pergerakan",
+     "Monitor kondisi umum selama mobilisasi"
+    ],
+    "terapeutik": [
+     "Fasilitasi aktivitas mobilisasi dengan alat bantu, jika perlu",
+     "Libatkan keluarga untuk membantu pasien meningkatkan pergerakan"
+    ],
+    "edukasi": [
+     "Jelaskan tujuan dan prosedur mobilisasi",
+     "Anjurkan melakukan mobilisasi dini secara bertahap"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan fisioterapi untuk program latihan lanjutan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0055",
+   "nama": "Gangguan Pola Tidur",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh sulit tidur",
+     "Mengeluh sering terjaga",
+     "Mengeluh tidak puas tidur",
+     "Mengeluh pola tidur berubah",
+     "Mengeluh istirahat tidak cukup"
+    ],
+    "minor": [
+     "Mengeluh kemampuan beraktivitas menurun"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.05045",
+    "nama": "Status Tidur Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi pola aktivitas dan tidur",
+     "Identifikasi faktor pengganggu tidur (lingkungan, obat, psikologis)"
+    ],
+    "terapeutik": [
+     "Modifikasi lingkungan (pencahayaan, kebisingan, suhu, tempat tidur)",
+     "Tetapkan jadwal tidur rutin"
+    ],
+    "edukasi": [
+     "Jelaskan pentingnya tidur cukup selama sakit",
+     "Anjurkan menghindari makanan/minuman yang mengganggu tidur menjelang waktu tidur"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat tidur, jika sangat diperlukan dan sesuai indikasi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0056",
+   "nama": "Intoleransi Aktivitas",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh lelah",
+     "Frekuensi jantung meningkat lebih 20 persen saat aktivitas"
+    ],
+    "minor": [
+     "Dispnea saat atau setelah aktivitas",
+     "Merasa tidak nyaman setelah beraktivitas",
+     "Merasa lemah",
+     "Tekanan darah berubah lebih 20 persen saat aktivitas",
+     "Gambaran ekg menunjukkan iskemia",
+     "Gambaran ekg menunjukkan aritmia saat aktivitas",
+     "Sianosis"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.05047",
+    "nama": "Toleransi Aktivitas Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi gangguan fungsi tubuh yang mengakibatkan kelelahan",
+     "Monitor kelelahan fisik dan emosional",
+     "Monitor pola dan jam tidur"
+    ],
+    "terapeutik": [
+     "Sediakan lingkungan nyaman dan rendah stimulus (mis. cahaya, kebisingan)",
+     "Lakukan latihan rentang gerak pasif dan/atau aktif",
+     "Berikan aktivitas distraksi yang menenangkan"
+    ],
+    "edukasi": [
+     "Anjurkan tirah baring",
+     "Anjurkan melakukan aktivitas secara bertahap",
+     "Ajarkan strategi koping untuk mengurangi kelelahan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan ahli gizi tentang cara meningkatkan asupan makanan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0057",
+   "nama": "Keletihan",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Merasa kurang tenaga",
+     "Mengeluh lelah",
+     "Tampak lesu"
+    ],
+    "minor": [
+     "Merasa bersalah akibat tidak mampu menjalankan tanggung jawab",
+     "Libido menurun",
+     "Kebutuhan istirahat meningkat"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.05040",
+    "nama": "Konservasi Energi Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi gangguan fungsi tubuh yang mengakibatkan kelelahan",
+     "Monitor kelelahan fisik dan emosional"
+    ],
+    "terapeutik": [
+     "Sediakan lingkungan nyaman dan rendah stimulus",
+     "Berikan aktivitas distraksi yang menenangkan",
+     "Fasilitasi duduk di sisi tempat tidur jika tidak dapat berpindah atau berjalan"
+    ],
+    "edukasi": [
+     "Anjurkan tirah baring",
+     "Anjurkan melakukan aktivitas secara bertahap",
+     "Ajarkan strategi koping untuk mengurangi kelelahan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan ahli gizi tentang cara meningkatkan asupan makanan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0062",
+   "nama": "Gangguan Memori",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Tidak mampu mempelajari keterampilan baru",
+     "Mengeluh lupa",
+     "Tidak mampu mengingat informasi faktual",
+     "Tidak mampu mengingat perilaku tertentu yang pernah dilakukan"
+    ],
+    "minor": [
+     "Mengeluh sering lupa meletakkan barang",
+     "Tidak mampu melakukan kemampuan yang dipelajari sebelumnya",
+     "Lupa melakukan perilaku pada waktu yang dijadwalkan"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.09074",
+    "nama": "Memori Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi masalah memori yang dialami",
+     "Monitor perilaku dan perubahan memori selama terapi"
+    ],
+    "terapeutik": [
+     "Stimulasi memori dengan mengulang pikiran yang terakhir diucapkan pasien",
+     "Koreksi kesalahan orientasi",
+     "Berikan latihan orientasi"
+    ],
+    "edukasi": [
+     "Ajarkan teknik memori yang tepat (mis. imajinasi visual, mnemonic)",
+     "Anjurkan keluarga untuk terlibat dalam latihan memori"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan tim neurologi jika ditemukan gangguan progresif"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0063",
+   "nama": "Gangguan Menelan",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Batuk sebelum selama atau sesudah makan minum",
+     "Tersedak",
+     "Muntah sebelum menelan",
+     "Makanan tertinggal di rongga mulut"
+    ],
+    "minor": [
+     "Menolak makan",
+     "Mengeluh sulit menelan",
+     "Bolus masuk terlalu cepat",
+     "Refluks nasal",
+     "Tidak mampu membersihkan rongga mulut",
+     "Produksi saliva menurun atau meningkat",
+     "Pembengkakan laring atau faring"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.03019",
+    "nama": "Fungsi Gastrointestinal Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor kemampuan menelan",
+     "Identifikasi tanda dan gejala aspirasi"
+    ],
+    "terapeutik": [
+     "Berikan posisi duduk tegak/high-Fowler saat makan",
+     "Berikan makanan dengan konsistensi yang sesuai (lunak/cair kental)"
+    ],
+    "edukasi": [
+     "Ajarkan strategi mencegah aspirasi (makan perlahan, potongan kecil)",
+     "Anjurkan tidak berbicara saat makan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan terapis wicara untuk evaluasi dan latihan menelan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0064",
+   "nama": "Konfusi Akut",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Fluktuasi tingkat kesadaran yang muncul tiba tiba",
+     "Fluktuasi fungsi kognitif",
+     "Fluktuasi tingkat aktivitas psikomotorik"
+    ],
+    "minor": [
+     "Halusinasi",
+     "Gelisah",
+     "Mispersepsi",
+     "Gangguan memori"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.09082",
+    "nama": "Orientasi Kognitif Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi faktor risiko delirium (mis. usia lanjut, gangguan kognitif, infeksi, gangguan tidur)",
+     "Monitor status kognitif dan tingkat kesadaran secara berkala"
+    ],
+    "terapeutik": [
+     "Ciptakan lingkungan yang aman dan tenang",
+     "Gunakan orientasi realitas (jam, kalender, benda familiar)",
+     "Batasi jumlah pengunjung dan stimulus berlebihan"
+    ],
+    "edukasi": [
+     "Jelaskan kondisi delirium pada keluarga dan cara mendampingi pasien"
+    ],
+    "kolaborasi": [
+     "Kolaborasi identifikasi dan penanganan penyebab yang mendasari (infeksi, gangguan metabolik, efek obat)"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0077",
+   "nama": "Nyeri Akut",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh nyeri",
+     "Tampak meringis",
+     "Bersikap protektif waspada posisi menghindari nyeri",
+     "Gelisah",
+     "Frekuensi nadi meningkat",
+     "Sulit tidur"
+    ],
+    "minor": [
+     "Tekanan darah meningkat",
+     "Pola napas berubah",
+     "Diaforesis keringat dingin",
+     "Proses berpikir terganggu",
+     "Menarik diri"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.08066",
+    "nama": "Tingkat Nyeri Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi lokasi, karakteristik, durasi, frekuensi, kualitas, intensitas nyeri (PQRST)",
+     "Identifikasi skala nyeri",
+     "Identifikasi respons nyeri non-verbal"
+    ],
+    "terapeutik": [
+     "Berikan teknik nonfarmakologis untuk mengurangi rasa nyeri (mis. TENS, hipnosis, terapi pijat, teknik imajinasi terbimbing)",
+     "Kontrol lingkungan yang memperberat rasa nyeri (mis. suhu ruangan, pencahayaan, kebisingan)"
+    ],
+    "edukasi": [
+     "Jelaskan penyebab, periode, dan pemicu nyeri",
+     "Jelaskan strategi meredakan nyeri",
+     "Ajarkan teknik nonfarmakologis untuk mengurangi rasa nyeri secara mandiri"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian analgetik atau terapi spesifik (mis. ISDN pada nyeri dada kardiak), jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0078",
+   "nama": "Nyeri Kronis",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh nyeri yang berlangsung lebih dari 3 bulan",
+     "Tampak meringis",
+     "Gelisah",
+     "Tidak mampu menuntaskan aktivitas"
+    ],
+    "minor": [
+     "Merasa depresi",
+     "Merasa takut cedera berulang",
+     "Waspada",
+     "Pola tidur berubah",
+     "Anoreksia",
+     "Fokus menyempit"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.08066",
+    "nama": "Tingkat Nyeri Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi lokasi, karakteristik, durasi, frekuensi, kualitas, intensitas nyeri",
+     "Identifikasi pengaruh nyeri pada kualitas hidup"
+    ],
+    "terapeutik": [
+     "Berikan teknik nonfarmakologis untuk mengurangi nyeri",
+     "Fasilitasi istirahat dan tidur"
+    ],
+    "edukasi": [
+     "Jelaskan strategi meredakan nyeri",
+     "Ajarkan teknik nonfarmakologis untuk mengurangi nyeri"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian analgetik sesuai program, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0080",
+   "nama": "Ansietas",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Merasa bingung",
+     "Merasa khawatir dengan akibat dari kondisi yang dihadapi",
+     "Sulit berkonsentrasi",
+     "Tampak gelisah",
+     "Tampak tegang",
+     "Sulit tidur"
+    ],
+    "minor": [
+     "Mengeluh pusing",
+     "Anoreksia",
+     "Palpitasi",
+     "Merasa tidak berdaya",
+     "Frekuensi napas meningkat",
+     "Frekuensi nadi meningkat",
+     "Tekanan darah meningkat",
+     "Diaforesis",
+     "Tremor",
+     "Muka tampak pucat",
+     "Suara bergetar",
+     "Kontak mata buruk",
+     "Sering berkemih"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.09093",
+    "nama": "Tingkat Ansietas Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi saat tingkat ansietas berubah",
+     "Monitor tanda-tanda ansietas"
+    ],
+    "terapeutik": [
+     "Ciptakan suasana terapeutik untuk menumbuhkan kepercayaan",
+     "Pahami situasi yang membuat ansietas",
+     "Dengarkan dengan penuh perhatian"
+    ],
+    "edukasi": [
+     "Jelaskan prosedur termasuk sensasi yang mungkin dialami",
+     "Anjurkan keluarga untuk tetap bersama pasien",
+     "Latih teknik relaksasi"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat antiansietas, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0081",
+   "nama": "Berduka",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Merasa sedih",
+     "Merasa bersalah atau menyalahkan orang lain"
+    ],
+    "minor": [
+     "Menyalahkan diri sendiri atau orang lain",
+     "Perubahan tingkat aktivitas",
+     "Mimpi buruk atau gangguan tidur",
+     "Perubahan pola tidur",
+     "Perubahan kemampuan konsentrasi atau pencapaian tugas",
+     "Tidak mampu melakukan perawatan diri"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.09096",
+    "nama": "Tingkat Depresi Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi kehilangan yang dihadapi",
+     "Identifikasi proses berduka yang dialami"
+    ],
+    "terapeutik": [
+     "Tunjukkan sikap menerima dan empati",
+     "Fasilitasi mengekspresikan perasaan dengan cara yang nyaman (menulis, bercerita)"
+    ],
+    "edukasi": [
+     "Jelaskan pada keluarga cara mendampingi anggota keluarga yang berduka",
+     "Anjurkan mengidentifikasi ketakutan terbesar pada situasi kehilangan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan rohaniwan/psikolog, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0083",
+   "nama": "Gangguan Citra Tubuh",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Mengungkapkan kecacatan atau kehilangan bagian tubuh",
+     "Kehilangan bagian tubuh",
+     "Fungsi atau struktur tubuh berubah atau hilang"
+    ],
+    "minor": [
+     "Tidak mau mengungkapkan kecacatan atau kehilangan bagian tubuh",
+     "Mengungkapkan perasaan negatif tentang perubahan tubuh",
+     "Menyembunyikan atau menunjukkan bagian tubuh secara berlebihan",
+     "Menghindari melihat atau menyentuh bagian tubuh",
+     "Respons nonverbal pada perubahan tubuh",
+     "Fokus berlebihan pada perubahan tubuh"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.09067",
+    "nama": "Citra Tubuh Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi harapan citra tubuh berdasarkan tahap perkembangan",
+     "Monitor apakah pasien bisa melihat bagian tubuh yang berubah"
+    ],
+    "terapeutik": [
+     "Diskusikan perubahan tubuh dan fungsinya",
+     "Diskusikan perbedaan penampilan fisik terhadap harga diri"
+    ],
+    "edukasi": [
+     "Jelaskan kepada keluarga tentang perawatan perubahan citra tubuh",
+     "Latih peningkatan penampilan diri (mis. berdandan)"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan psikolog, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0092",
+   "nama": "Ketidakberdayaan",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Menyatakan frustasi atau tidak mampu melaksanakan aktivitas sebelumnya",
+     "Bergantung pada orang lain"
+    ],
+    "minor": [
+     "Merasa diasingkan",
+     "Menyatakan keraguan tentang kemampuan mengatasi situasi",
+     "Menyatakan kurang kontrol",
+     "Tidak berpartisipasi dalam perawatan",
+     "Pengasingan"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.09092",
+    "nama": "Keberdayaan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi kegiatan jangka pendek dan panjang sesuai tujuan",
+     "Identifikasi kemampuan yang dimiliki"
+    ],
+    "terapeutik": [
+     "Libatkan pasien dalam pengambilan keputusan terkait perawatan",
+     "Dukung penggunaan mekanisme koping yang sesuai"
+    ],
+    "edukasi": [
+     "Anjurkan mengungkapkan perasaan dan persepsi",
+     "Latih keterampilan sosial sesuai kebutuhan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan psikolog, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0119",
+   "nama": "Gangguan Komunikasi Verbal",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Tidak mampu bicara atau mendengar",
+     "Menunjukkan respons tidak sesuai"
+    ],
+    "minor": [
+     "Afasia",
+     "Disfasia",
+     "Disartria",
+     "Apraksia",
+     "Tidak ada kontak mata",
+     "Sulit memahami komunikasi",
+     "Sulit mempertahankan komunikasi",
+     "Sulit menggunakan ekspresi wajah atau tubuh"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.13118",
+    "nama": "Komunikasi Verbal Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor kecepatan, tekanan, kuantitas, volume, dan diksi bicara",
+     "Identifikasi perilaku emosional dan fisik sebagai bentuk komunikasi"
+    ],
+    "terapeutik": [
+     "Gunakan metode komunikasi alternatif (mis. papan tulis, bahasa isyarat, gambar)",
+     "Sesuaikan gaya komunikasi dengan kebutuhan pasien"
+    ],
+    "edukasi": [
+     "Anjurkan berbicara perlahan",
+     "Ajarkan pasien dan keluarga proses kognitif, anatomis, dan fisiologis yang berhubungan dengan kemampuan bicara"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan terapis wicara, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0129",
+   "nama": "Gangguan Integritas Kulit/Jaringan",
+   "jenis": "Aktual",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [
+     "Kerusakan jaringan atau lapisan kulit"
+    ],
+    "minor": [
+     "Nyeri",
+     "Perdarahan",
+     "Kemerahan",
+     "Hematoma"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.14125",
+    "nama": "Integritas Kulit dan Jaringan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi penyebab gangguan integritas kulit (mis. perubahan sirkulasi, perubahan status nutrisi)",
+     "Monitor karakteristik luka (drainase, warna, ukuran, bau)"
+    ],
+    "terapeutik": [
+     "Ubah posisi setiap 2 jam jika tirah baring",
+     "Bersihkan area luka dengan cairan NaCl atau pembersih nontoksik sesuai kebutuhan"
+    ],
+    "edukasi": [
+     "Anjurkan menggunakan pelembab",
+     "Anjurkan meningkatkan asupan nutrisi dan cairan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian terapi (mis. debridement, antibiotik topikal), jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0131",
+   "nama": "Risiko Perlambatan Pemulihan Pascabedah",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Prosedur pembedahan mayor",
+     "Durasi operasi lama",
+     "Komorbiditas diabetes atau penyakit jantung",
+     "Usia lanjut",
+     "Obesitas",
+     "Riwayat infeksi"
+    ]
+   },
+   "luaran": {
+    "kode": "L.14129",
+    "nama": "Pemulihan Pascabedah Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tanda vital dan tingkat kesadaran pascaoperasi",
+     "Monitor tanda infeksi dan perdarahan pada area insisi",
+     "Monitor asupan dan keluaran cairan"
+    ],
+    "terapeutik": [
+     "Pertahankan teknik steril saat perawatan luka",
+     "Fasilitasi mobilisasi dini sesuai toleransi"
+    ],
+    "edukasi": [
+     "Jelaskan tanda dan gejala komplikasi yang harus segera dilaporkan",
+     "Anjurkan latihan napas dalam dan batuk efektif pascaoperasi"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian analgetik dan antibiotik profilaksis sesuai program"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0136",
+   "nama": "Risiko Cedera",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Terpapar bahan kimia berbahaya",
+     "Ketidakmampuan mengenali bahaya lingkungan",
+     "Gangguan penglihatan atau pendengaran",
+     "Gangguan koordinasi",
+     "Kondisi klinis terkait kejang"
+    ]
+   },
+   "luaran": {
+    "kode": "L.14136",
+    "nama": "Tingkat Cedera Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi kebutuhan keselamatan pasien",
+     "Monitor perubahan status keselamatan lingkungan"
+    ],
+    "terapeutik": [
+     "Hilangkan bahaya keselamatan lingkungan, jika memungkinkan",
+     "Sediakan alat bantu keamanan (pagar tempat tidur, penerangan cukup)"
+    ],
+    "edukasi": [
+     "Ajarkan individu/keluarga/kelompok risiko tinggi cara mengenali bahaya di lingkungan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan tim keselamatan pasien rumah sakit, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0139",
+   "nama": "Risiko Gangguan Integritas Kulit/Jaringan",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Perubahan sirkulasi",
+     "Perubahan status nutrisi kelebihan atau kekurangan",
+     "Penurunan mobilitas",
+     "Kelembapan",
+     "Suhu lingkungan ekstrem",
+     "Penekanan pada tonjolan tulang"
+    ]
+   },
+   "luaran": {
+    "kode": "L.14125",
+    "nama": "Integritas Kulit dan Jaringan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi penyebab gangguan integritas kulit",
+     "Monitor tanda kerusakan kulit di area tertekan"
+    ],
+    "terapeutik": [
+     "Ubah posisi setiap 2 jam jika tirah baring",
+     "Gunakan matras/kasur khusus pencegah dekubitus, jika perlu"
+    ],
+    "edukasi": [
+     "Anjurkan menggunakan pelembab",
+     "Anjurkan meningkatkan asupan nutrisi dan cairan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan ahli gizi terkait status nutrisi jika berisiko tinggi"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0142",
+   "nama": "Risiko Infeksi",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Penyakit kronis",
+     "Efek prosedur invasif",
+     "Malnutrisi",
+     "Peningkatan paparan organisme patogen lingkungan",
+     "Ketidakadekuatan pertahanan tubuh primer kulit tidak utuh atau trauma jaringan",
+     "Imunosupresi"
+    ]
+   },
+   "luaran": {
+    "kode": "L.14137",
+    "nama": "Tingkat Infeksi Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tanda dan gejala infeksi lokal dan sistemik"
+    ],
+    "terapeutik": [
+     "Batasi jumlah pengunjung",
+     "Berikan perawatan kulit pada area edema",
+     "Cuci tangan sebelum dan sesudah kontak dengan pasien dan lingkungan pasien",
+     "Pertahankan teknik aseptik pada pasien berisiko tinggi"
+    ],
+    "edukasi": [
+     "Jelaskan tanda dan gejala infeksi",
+     "Ajarkan cara mencuci tangan dengan benar",
+     "Anjurkan meningkatkan asupan nutrisi dan cairan"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian imunisasi, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "D.0143",
+   "nama": "Risiko Jatuh",
+   "jenis": "Risiko",
+   "is_sdki": true,
+   "kriteria": {
+    "mayor": [],
+    "minor": [],
+    "faktor_risiko": [
+     "Usia lebih dari 65 tahun atau kurang dari 2 tahun",
+     "Riwayat jatuh sebelumnya",
+     "Penggunaan alat bantu berjalan",
+     "Penurunan tingkat kesadaran",
+     "Gangguan penglihatan",
+     "Gangguan keseimbangan",
+     "Efek obat sedasi atau hipnotik"
+    ]
+   },
+   "luaran": {
+    "kode": "L.14138",
+    "nama": "Tingkat Jatuh Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi faktor risiko jatuh",
+     "Monitor kemampuan berpindah dari tempat tidur ke kursi roda dan sebaliknya"
+    ],
+    "terapeutik": [
+     "Pasang handrail tempat tidur",
+     "Atur tempat tidur pada posisi terendah",
+     "Tempatkan pasien berisiko tinggi jatuh dekat dengan pos perawat",
+     "Gunakan alat bantu berjalan"
+    ],
+    "edukasi": [
+     "Anjurkan memanggil perawat jika membutuhkan bantuan berpindah",
+     "Anjurkan menggunakan alas kaki antiselip"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan fisioterapi untuk program latihan keseimbangan, jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "Sesuai MAPPING SDKI"
+  },
+  {
+   "kode": "LOKAL.001",
+   "nama": "Gangguan Perfusi Serebral",
+   "jenis": "Aktual",
+   "is_sdki": false,
+   "kriteria": {
+    "mayor": [
+     "Gangguan kesadaran",
+     "Perubahan reaktivitas pupil",
+     "Kesulitan berkomunikasi",
+     "Kelemahan ekstremitas",
+     "Tekanan darah tidak stabil"
+    ],
+    "minor": [
+     "Sakit kepala berat",
+     "Nilai gcs menurun",
+     "Papiledema",
+     "Mual muntah proyektil",
+     "Gelisah",
+     "Tekanan intrakranial meningkat"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.02014",
+    "nama": "Perfusi Serebral Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tanda dan gejala peningkatan TIK",
+     "Monitor tingkat kesadaran dan GCS",
+     "Monitor status pernapasan dan tanda vital"
+    ],
+    "terapeutik": [
+     "Minimalkan stimulus dengan lingkungan yang tenang",
+     "Pertahankan posisi kepala elevasi 30 derajat",
+     "Cegah terjadinya kejang"
+    ],
+    "edukasi": [
+     "Jelaskan tujuan dan prosedur pemantauan pada keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian obat untuk menurunkan TIK (mis. manitol) sesuai indikasi"
+    ]
+   },
+   "catatan": "versi aktual dari resiko perfusi cerebral tidak efektif",
+   "terkait": [],
+   "status_verifikasi": "PERLU VERIFIKASI"
+  },
+  {
+   "kode": "LOKAL.002",
+   "nama": "Gangguan Status Kardiopulmonal",
+   "jenis": "Aktual",
+   "is_sdki": false,
+   "kriteria": {
+    "mayor": [
+     "Hasil ekg abnormal",
+     "Saturasi oksigen menurun",
+     "Tekanan darah tidak stabil",
+     "Frekuensi jantung abnormal"
+    ],
+    "minor": [
+     "Dispnea",
+     "Keletihan",
+     "Sianosis",
+     "Edema",
+     "Akral dingin",
+     "Penurunan kesadaran"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.02016",
+    "nama": "Status Kardiopulmonal Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor status kardiopulmonal secara komprehensif (nadi, napas, saturasi, EKG)",
+     "Monitor tanda perburukan hemodinamik"
+    ],
+    "terapeutik": [
+     "Posisikan semi-Fowler",
+     "Siapkan alat kegawatdaruratan di dekat pasien"
+    ],
+    "edukasi": [
+     "Jelaskan kondisi dan rencana perawatan pada keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan tim multidisiplin (kardiologi, intensivis) untuk tata laksana lanjutan"
+    ]
+   },
+   "catatan": "versi aktual dari resiko syok",
+   "terkait": [],
+   "status_verifikasi": "PERLU VERIFIKASI"
+  },
+  {
+   "kode": "LOKAL.003",
+   "nama": "Ketidakseimbangan Asam Basa",
+   "jenis": "Aktual",
+   "is_sdki": false,
+   "kriteria": {
+    "mayor": [
+     "Ph darah diluar rentang normal",
+     "Gangguan pola napas kompensasi kussmaul atau hipoventilasi",
+     "Gangguan irama jantung"
+    ],
+    "minor": [
+     "Mual",
+     "Lemah",
+     "Gelisah",
+     "Kesadaran menurun",
+     "Hasil agd abnormal pco2 atau hco3",
+     "Tremor",
+     "Kejang"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.02009",
+    "nama": "Keseimbangan Asam Basa Membaik"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor hasil analisa gas darah",
+     "Monitor status pernapasan dan tanda kompensasi",
+     "Monitor tanda gangguan neurologis"
+    ],
+    "terapeutik": [
+     "Pertahankan kepatenan jalan napas",
+     "Atur posisi yang nyaman untuk memaksimalkan ventilasi"
+    ],
+    "edukasi": [
+     "Jelaskan penyebab dan tanda perburukan pada keluarga"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian terapi koreksi asam basa (mis. bikarbonat, cairan) sesuai indikasi"
+    ]
+   },
+   "catatan": "dapat terkait dengan diagnosa lain : cairan, elektroli, sirkulasi atau oksineginasi",
+   "terkait": [],
+   "status_verifikasi": "PERLU VERIFIKASI"
+  },
+  {
+   "kode": "LOKAL.004",
+   "nama": "Hambatan Ambulasi",
+   "jenis": "Aktual",
+   "is_sdki": false,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh sulit berjalan",
+     "Penurunan kemampuan berjalan pada permukaan datar atau menaiki tangga"
+    ],
+    "minor": [
+     "Nyeri saat berjalan",
+     "Cemas saat berjalan",
+     "Keterbatasan rentang gerak ekstremitas bawah",
+     "Gaya berjalan tidak stabil"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.05001",
+    "nama": "Ambulasi Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi adanya nyeri atau keluhan fisik lainnya",
+     "Monitor kemampuan pasien dalam melakukan ambulasi"
+    ],
+    "terapeutik": [
+     "Fasilitasi aktivitas ambulasi dengan alat bantu (tongkat/walker), jika perlu",
+     "Libatkan keluarga untuk membantu pasien meningkatkan ambulasi"
+    ],
+    "edukasi": [
+     "Jelaskan tujuan dan prosedur ambulasi",
+     "Anjurkan melakukan ambulasi dini"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan fisioterapi untuk latihan ambulasi lanjutan"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "PERLU VERIFIKASI"
+  },
+  {
+   "kode": "LOKAL.005",
+   "nama": "Sindrom Nyeri Kronis",
+   "jenis": "Aktual",
+   "is_sdki": false,
+   "kriteria": {
+    "mayor": [
+     "Mengeluh nyeri persisten atau hilang timbul lebih dari 3 bulan",
+     "Tampak gelisah terkait nyeri"
+    ],
+    "minor": [
+     "Mengungkapkan gangguan pola hidup sehari hari akibat nyeri",
+     "Gangguan pola tidur",
+     "Penurunan berat badan",
+     "Keluhan ansietas atau depresi terkait nyeri"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.08064",
+    "nama": "Tingkat Kenyamanan Meningkat"
+   },
+   "intervensi": {
+    "observasi": [
+     "Identifikasi dampak nyeri terhadap aspek psikologis dan sosial",
+     "Monitor keberhasilan terapi komplementer yang sudah diberikan"
+    ],
+    "terapeutik": [
+     "Fasilitasi istirahat dan tidur",
+     "Libatkan keluarga dalam pemberian dukungan"
+    ],
+    "edukasi": [
+     "Jelaskan penyebab, periode, dan pemicu nyeri",
+     "Ajarkan teknik nonfarmakologis"
+    ],
+    "kolaborasi": [
+     "Kolaborasi dengan tim manajemen nyeri multidisiplin (psikologi, rehabilitasi medik), jika perlu"
+    ]
+   },
+   "catatan": null,
+   "terkait": [],
+   "status_verifikasi": "PERLU VERIFIKASI"
+  },
+  {
+   "kode": "LOKAL.006",
+   "nama": "Infeksi",
+   "jenis": "Aktual",
+   "is_sdki": false,
+   "kriteria": {
+    "mayor": [
+     "Demam",
+     "Kemerahan",
+     "Nyeri",
+     "Bengkak",
+     "Cairan purulen",
+     "Peningkatan jumlah leukosit"
+    ],
+    "minor": [
+     "Malaise",
+     "Menggigil",
+     "Letargi"
+    ],
+    "faktor_risiko": []
+   },
+   "luaran": {
+    "kode": "L.14137",
+    "nama": "Tingkat Infeksi Menurun"
+   },
+   "intervensi": {
+    "observasi": [
+     "Monitor tanda dan gejala infeksi lokal dan sistemik",
+     "Monitor hasil pemeriksaan laboratorium terkait infeksi (leukosit, kultur)"
+    ],
+    "terapeutik": [
+     "Berikan perawatan kulit pada area yang terinfeksi",
+     "Pertahankan teknik aseptik dalam setiap tindakan"
+    ],
+    "edukasi": [
+     "Jelaskan tanda dan gejala infeksi pada pasien/keluarga",
+     "Ajarkan cara merawat luka secara mandiri di rumah"
+    ],
+    "kolaborasi": [
+     "Kolaborasi pemberian antibiotik sesuai hasil kultur dan sensitivitas"
+    ]
+   },
+   "catatan": "versi aktual dari resiko infeksi",
+   "terkait": [],
+   "status_verifikasi": "PERLU VERIFIKASI"
+  }
+ ]
+}

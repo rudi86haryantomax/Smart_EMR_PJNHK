@@ -1,0 +1,6 @@
+# Dependensi ALAT ADMIN saja (ekstraksi PDF), dijalankan di komputer lokal.
+# Dipisah dari requirements.txt supaya tidak ikut terpasang saat deploy:
+# pdfplumber menarik pdfminer.six, pillow, dan cryptography sekaligus.
+#
+#   pip install -r requirements-tools.txt
+pdfplumber>=0.11

@@ -1,0 +1,11 @@
+[server]
+# Aplikasi ini tidak menerima unggahan berkas dari pengguna; batas kecil
+# mengurangi permukaan serangan.
+maxUploadSize = 5
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#0d9488"

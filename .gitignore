@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Rahasia — JANGAN pernah di-commit
+.streamlit/secrets.toml
+.env
+
+# Basis data kerja (isi bergantung lingkungan, bukan bagian kode)
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Hasil kerja alat konversi
+data/*.xlsx
+data/*.backup-*.json
+*.ekstrak.xlsx
+
+# OS
+.DS_Store
+Thumbs.db

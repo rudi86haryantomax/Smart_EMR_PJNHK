@@ -1,0 +1,1715 @@
+{
+ "meta": {
+  "judul": "Indikator Luaran Keperawatan (SLKI)",
+  "versi": "1.0",
+  "jumlah_luaran": 41,
+  "jumlah_indikator": 225,
+  "skala": "Skala 1-5 SLKI: 1 = paling buruk, 5 = paling baik menurut arah luaran",
+  "peringatan": "Nilai target dan rentang normal bersifat UMUM untuk dewasa. Sesuaikan dengan usia, kondisi, dan target individual pasien — mis. target tekanan darah pada pasien tertentu berbeda dari rentang umum. Waktu evaluasi juga hanya saran awal; percepat bila kondisi memburuk."
+ },
+ "luaran": {
+  "L.01001": {
+   "nama": "Bersihan Jalan Napas Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Kemampuan batuk efektif",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5 (cukup meningkat–meningkat)"
+    },
+    {
+     "nama": "Produksi sputum",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5 (cukup menurun–menurun)"
+    },
+    {
+     "nama": "Bunyi napas tambahan (ronkhi/mengi)",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5 (cukup menurun–menurun)"
+    },
+    {
+     "nama": "Frekuensi napas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "12-20",
+     "rentang_normal": "12-20"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 95",
+     "rentang_normal": "95-100"
+    },
+    {
+     "nama": "Dispnea",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5 (cukup menurun–menurun)"
+    }
+   ]
+  },
+  "L.01002": {
+   "nama": "Penyapihan Ventilator Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Kemampuan napas spontan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Penggunaan otot bantu napas",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi napas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "12-25",
+     "rentang_normal": "12-20"
+    },
+    {
+     "nama": "Volume tidal",
+     "jenis": "angka",
+     "satuan": "mL/kgBB",
+     "target": "≥ 5",
+     "rentang_normal": "6-8"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 92",
+     "rentang_normal": "95-100"
+    },
+    {
+     "nama": "Gelisah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.01003": {
+   "nama": "Pertukaran Gas Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Dispnea",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Bunyi napas tambahan",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "PO2",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "80-100",
+     "rentang_normal": "80-100"
+    },
+    {
+     "nama": "PCO2",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "35-45",
+     "rentang_normal": "35-45"
+    },
+    {
+     "nama": "pH arteri",
+     "jenis": "angka",
+     "satuan": "unit pH",
+     "target": "7,35-7,45",
+     "rentang_normal": "7,35-7,45"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 95",
+     "rentang_normal": "95-100"
+    },
+    {
+     "nama": "Sianosis",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.01004": {
+   "nama": "Pola Napas Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Dispnea",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Penggunaan otot bantu napas",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi napas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "12-20",
+     "rentang_normal": "12-20"
+    },
+    {
+     "nama": "Kedalaman napas",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 95",
+     "rentang_normal": "95-100"
+    }
+   ]
+  },
+  "L.01006": {
+   "nama": "Tingkat Aspirasi Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Kemampuan menelan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Tersedak saat makan/minum",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Batuk saat makan/minum",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Residu lambung",
+     "jenis": "angka",
+     "satuan": "mL",
+     "target": "< 200"
+    },
+    {
+     "nama": "Frekuensi napas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "12-20",
+     "rentang_normal": "12-20"
+    }
+   ]
+  },
+  "L.01007": {
+   "nama": "Ventilasi Spontan Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Volume tidal",
+     "jenis": "angka",
+     "satuan": "mL/kgBB",
+     "target": "≥ 5",
+     "rentang_normal": "6-8"
+    },
+    {
+     "nama": "Dispnea",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Penggunaan otot bantu napas",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "PCO2",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "35-45",
+     "rentang_normal": "35-45"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 92",
+     "rentang_normal": "95-100"
+    }
+   ]
+  },
+  "L.02008": {
+   "nama": "Curah Jantung Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Kekuatan nadi perifer",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi nadi",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "60-100",
+     "rentang_normal": "60-100"
+    },
+    {
+     "nama": "Tekanan darah sistolik",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "100-140",
+     "rentang_normal": "90-120"
+    },
+    {
+     "nama": "Dispnea",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Ortopnea",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Edema",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Distensi vena jugularis",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Pengisian kapiler (CRT)",
+     "jenis": "angka",
+     "satuan": "detik",
+     "target": "< 3",
+     "rentang_normal": "< 2"
+    }
+   ]
+  },
+  "L.02009": {
+   "nama": "Keseimbangan Asam Basa Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "6 jam",
+   "indikator": [
+    {
+     "nama": "pH arteri",
+     "jenis": "angka",
+     "satuan": "unit pH",
+     "target": "7,35-7,45",
+     "rentang_normal": "7,35-7,45"
+    },
+    {
+     "nama": "PCO2",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "35-45",
+     "rentang_normal": "35-45"
+    },
+    {
+     "nama": "HCO3",
+     "jenis": "angka",
+     "satuan": "mEq/L",
+     "target": "22-26",
+     "rentang_normal": "22-26"
+    },
+    {
+     "nama": "Kadar laktat",
+     "jenis": "angka",
+     "satuan": "mmol/L",
+     "target": "< 2",
+     "rentang_normal": "0,5-2"
+    },
+    {
+     "nama": "Tingkat kesadaran",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi napas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "12-20",
+     "rentang_normal": "12-20"
+    }
+   ]
+  },
+  "L.02010": {
+   "nama": "Perfusi Gastrointestinal/Miokard Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Nyeri abdomen/dada",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Bising usus",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Distensi abdomen",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Mual muntah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kadar hemoglobin",
+     "jenis": "angka",
+     "satuan": "g/dL",
+     "target": "≥ 10",
+     "rentang_normal": "L 13-17 / P 12-15"
+    }
+   ]
+  },
+  "L.02011": {
+   "nama": "Perfusi Perifer Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Kekuatan nadi perifer",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Pengisian kapiler (CRT)",
+     "jenis": "angka",
+     "satuan": "detik",
+     "target": "< 3",
+     "rentang_normal": "< 2"
+    },
+    {
+     "nama": "Akral dingin",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Warna kulit pucat",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri ekstremitas",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Ankle-brachial index",
+     "jenis": "angka",
+     "satuan": "rasio",
+     "target": "≥ 0,90",
+     "rentang_normal": "0,90-1,30"
+    }
+   ]
+  },
+  "L.02012": {
+   "nama": "Tingkat Perdarahan Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Perdarahan yang tampak",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Hemoglobin",
+     "jenis": "angka",
+     "satuan": "g/dL",
+     "target": "≥ 10",
+     "rentang_normal": "L 13-17 / P 12-15"
+    },
+    {
+     "nama": "Hematokrit",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 30",
+     "rentang_normal": "L 40-50 / P 36-46"
+    },
+    {
+     "nama": "Tekanan darah sistolik",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "≥ 100",
+     "rentang_normal": "90-120"
+    },
+    {
+     "nama": "Frekuensi nadi",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "60-100",
+     "rentang_normal": "60-100"
+    },
+    {
+     "nama": "Trombosit",
+     "jenis": "angka",
+     "satuan": "ribu/µL",
+     "target": "≥ 100",
+     "rentang_normal": "150-400"
+    }
+   ]
+  },
+  "L.02014": {
+   "nama": "Perfusi Serebral Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "4 jam",
+   "indikator": [
+    {
+     "nama": "Tingkat kesadaran",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nilai GCS",
+     "jenis": "angka",
+     "satuan": "poin (3-15)",
+     "target": "≥ 13",
+     "rentang_normal": "15"
+    },
+    {
+     "nama": "Sakit kepala",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gelisah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Reaksi pupil",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Tekanan darah sistolik",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "sesuai target individual"
+    }
+   ]
+  },
+  "L.02015": {
+   "nama": "Sirkulasi Spontan Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "1 jam",
+   "indikator": [
+    {
+     "nama": "Nadi teraba",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "5 (teraba kuat)"
+    },
+    {
+     "nama": "Tingkat kesadaran",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Tekanan darah sistolik",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "≥ 90",
+     "rentang_normal": "90-120"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 94",
+     "rentang_normal": "95-100"
+    },
+    {
+     "nama": "Gambaran EKG",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Produksi urine",
+     "jenis": "angka",
+     "satuan": "mL/kg/jam",
+     "target": "≥ 0,5",
+     "rentang_normal": "0,5-1"
+    }
+   ]
+  },
+  "L.02016": {
+   "nama": "Status Kardiopulmonal Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "4 jam",
+   "indikator": [
+    {
+     "nama": "Frekuensi nadi",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "60-100",
+     "rentang_normal": "60-100"
+    },
+    {
+     "nama": "Frekuensi napas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "12-20",
+     "rentang_normal": "12-20"
+    },
+    {
+     "nama": "Tekanan darah sistolik",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "≥ 100",
+     "rentang_normal": "90-120"
+    },
+    {
+     "nama": "Saturasi oksigen",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 95",
+     "rentang_normal": "95-100"
+    },
+    {
+     "nama": "Akral dingin",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kadar laktat",
+     "jenis": "angka",
+     "satuan": "mmol/L",
+     "target": "< 2",
+     "rentang_normal": "0,5-2"
+    },
+    {
+     "nama": "Produksi urine",
+     "jenis": "angka",
+     "satuan": "mL/kg/jam",
+     "target": "≥ 0,5",
+     "rentang_normal": "0,5-1"
+    }
+   ]
+  },
+  "L.03018": {
+   "nama": "Berat Badan Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "1 minggu",
+   "indikator": [
+    {
+     "nama": "Berat badan",
+     "jenis": "angka",
+     "satuan": "kg",
+     "target": "sesuai berat badan ideal"
+    },
+    {
+     "nama": "Indeks massa tubuh",
+     "jenis": "angka",
+     "satuan": "kg/m²",
+     "target": "18,5-24,9",
+     "rentang_normal": "18,5-24,9"
+    },
+    {
+     "nama": "Tebal lipatan kulit trisep",
+     "jenis": "angka",
+     "satuan": "mm",
+     "target": "dalam rentang normal usia"
+    }
+   ]
+  },
+  "L.03019": {
+   "nama": "Fungsi Gastrointestinal Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Toleransi terhadap makanan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Mual muntah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri abdomen",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Bising usus",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "5-30",
+     "rentang_normal": "5-30"
+    },
+    {
+     "nama": "Distensi abdomen",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.03021": {
+   "nama": "Keseimbangan Elektrolit Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "12 jam",
+   "indikator": [
+    {
+     "nama": "Kalium serum",
+     "jenis": "angka",
+     "satuan": "mEq/L",
+     "target": "3,5-5,0",
+     "rentang_normal": "3,5-5,0"
+    },
+    {
+     "nama": "Natrium serum",
+     "jenis": "angka",
+     "satuan": "mEq/L",
+     "target": "135-145",
+     "rentang_normal": "135-145"
+    },
+    {
+     "nama": "Kalsium serum",
+     "jenis": "angka",
+     "satuan": "mg/dL",
+     "target": "8,5-10,5",
+     "rentang_normal": "8,5-10,5"
+    },
+    {
+     "nama": "Magnesium serum",
+     "jenis": "angka",
+     "satuan": "mg/dL",
+     "target": "1,7-2,2",
+     "rentang_normal": "1,7-2,2"
+    },
+    {
+     "nama": "Kelemahan otot",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gambaran EKG (aritmia)",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.03028": {
+   "nama": "Status Cairan Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Keseimbangan cairan (intake-output)",
+     "jenis": "angka",
+     "satuan": "mL/24 jam",
+     "target": "seimbang sesuai program"
+    },
+    {
+     "nama": "Turgor kulit",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kelembapan membran mukosa",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Edema",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Distensi vena jugularis",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Berat badan harian",
+     "jenis": "angka",
+     "satuan": "kg",
+     "target": "stabil / sesuai berat kering"
+    },
+    {
+     "nama": "Produksi urine",
+     "jenis": "angka",
+     "satuan": "mL/kg/jam",
+     "target": "0,5-1",
+     "rentang_normal": "0,5-1"
+    },
+    {
+     "nama": "Tekanan darah sistolik",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "100-140",
+     "rentang_normal": "90-120"
+    }
+   ]
+  },
+  "L.03030": {
+   "nama": "Status Nutrisi Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Porsi makan yang dihabiskan",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 80"
+    },
+    {
+     "nama": "Nafsu makan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Berat badan",
+     "jenis": "angka",
+     "satuan": "kg",
+     "target": "stabil atau meningkat"
+    },
+    {
+     "nama": "Albumin serum",
+     "jenis": "angka",
+     "satuan": "g/dL",
+     "target": "≥ 3,5",
+     "rentang_normal": "3,5-5,0"
+    },
+    {
+     "nama": "Membran mukosa pucat",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kekuatan otot menelan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.04033": {
+   "nama": "Eliminasi Fekal Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Frekuensi defekasi",
+     "jenis": "angka",
+     "satuan": "x/hari",
+     "target": "1-3 atau sesuai pola biasa"
+    },
+    {
+     "nama": "Konsistensi feses",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5 (tipe 3-4 Bristol)"
+    },
+    {
+     "nama": "Nyeri saat defekasi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Mengejan saat defekasi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Distensi abdomen",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Bising usus",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "5-30",
+     "rentang_normal": "5-30"
+    }
+   ]
+  },
+  "L.04034": {
+   "nama": "Eliminasi Urin Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Produksi urine",
+     "jenis": "angka",
+     "satuan": "mL/24 jam",
+     "target": "1000-2000",
+     "rentang_normal": "800-2000"
+    },
+    {
+     "nama": "Frekuensi berkemih",
+     "jenis": "angka",
+     "satuan": "x/hari",
+     "target": "4-8"
+    },
+    {
+     "nama": "Desakan berkemih (urgensi)",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nokturia",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Distensi kandung kemih",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Residu urine pascaberkemih",
+     "jenis": "angka",
+     "satuan": "mL",
+     "target": "< 100"
+    }
+   ]
+  },
+  "L.04036": {
+   "nama": "Kontinensia Urin Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Kemampuan menahan berkemih",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi mengompol",
+     "jenis": "angka",
+     "satuan": "x/hari",
+     "target": "0"
+    },
+    {
+     "nama": "Kemampuan mencapai toilet tepat waktu",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Iritasi kulit perineal",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.05001": {
+   "nama": "Ambulasi Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Kemampuan berjalan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Jarak berjalan",
+     "jenis": "angka",
+     "satuan": "meter",
+     "target": "meningkat bertahap sesuai toleransi"
+    },
+    {
+     "nama": "Kemampuan menaiki tangga",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri saat berjalan",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kestabilan gaya berjalan",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.05040": {
+   "nama": "Konservasi Energi Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Kemampuan melakukan aktivitas sehari-hari",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Keluhan lelah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan mengatur jeda istirahat",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Jam tidur efektif",
+     "jenis": "angka",
+     "satuan": "jam/hari",
+     "target": "6-8",
+     "rentang_normal": "7-9"
+    }
+   ]
+  },
+  "L.05042": {
+   "nama": "Mobilitas Fisik Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Pergerakan ekstremitas",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kekuatan otot",
+     "jenis": "angka",
+     "satuan": "skala 0-5",
+     "target": "≥ 4",
+     "rentang_normal": "5"
+    },
+    {
+     "nama": "Rentang gerak (ROM)",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri saat bergerak",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kaku sendi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kecemasan saat bergerak",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.05045": {
+   "nama": "Status Tidur Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Durasi tidur",
+     "jenis": "angka",
+     "satuan": "jam/malam",
+     "target": "6-8",
+     "rentang_normal": "7-9"
+    },
+    {
+     "nama": "Keluhan sulit tidur",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Keluhan sering terjaga",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kepuasan terhadap tidur",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan beraktivitas setelah bangun",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.05047": {
+   "nama": "Toleransi Aktivitas Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "3 hari",
+   "indikator": [
+    {
+     "nama": "Keluhan lelah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Dispnea saat aktivitas",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi nadi setelah aktivitas",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "kenaikan < 20% dari istirahat"
+    },
+    {
+     "nama": "Tekanan darah setelah aktivitas",
+     "jenis": "angka",
+     "satuan": "mmHg",
+     "target": "perubahan < 20% dari istirahat"
+    },
+    {
+     "nama": "Saturasi oksigen saat aktivitas",
+     "jenis": "angka",
+     "satuan": "%",
+     "target": "≥ 92",
+     "rentang_normal": "95-100"
+    },
+    {
+     "nama": "Jarak jalan 6 menit",
+     "jenis": "angka",
+     "satuan": "meter",
+     "target": "meningkat dari baseline"
+    }
+   ]
+  },
+  "L.08064": {
+   "nama": "Tingkat Kenyamanan Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Keluhan tidak nyaman",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gelisah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan beristirahat",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Skala nyeri",
+     "jenis": "angka",
+     "satuan": "NRS 0-10",
+     "target": "≤ 3",
+     "rentang_normal": "0"
+    }
+   ]
+  },
+  "L.08066": {
+   "nama": "Tingkat Nyeri Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "1 jam setelah intervensi",
+   "indikator": [
+    {
+     "nama": "Skala nyeri",
+     "jenis": "angka",
+     "satuan": "NRS 0-10",
+     "target": "≤ 3",
+     "rentang_normal": "0"
+    },
+    {
+     "nama": "Meringis",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Sikap protektif",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gelisah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi nadi",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "60-100",
+     "rentang_normal": "60-100"
+    },
+    {
+     "nama": "Kesulitan tidur",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.09067": {
+   "nama": "Citra Tubuh Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "1 minggu",
+   "indikator": [
+    {
+     "nama": "Verbalisasi penerimaan perubahan tubuh",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Menyembunyikan bagian tubuh",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Fokus berlebihan pada perubahan tubuh",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan merawat diri",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.09074": {
+   "nama": "Memori Membaik",
+   "arah": "membaik",
+   "evaluasi_default": "1 minggu",
+   "indikator": [
+    {
+     "nama": "Kemampuan mengingat informasi baru",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan mengingat peristiwa lampau",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Keluhan lupa",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan melakukan kegiatan terjadwal",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.09082": {
+   "nama": "Orientasi Kognitif Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "8 jam",
+   "indikator": [
+    {
+     "nama": "Orientasi waktu, tempat, dan orang",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "5 (orientasi penuh)"
+    },
+    {
+     "nama": "Tingkat kesadaran",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gelisah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Halusinasi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan berkonsentrasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.09092": {
+   "nama": "Keberdayaan Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "1 minggu",
+   "indikator": [
+    {
+     "nama": "Keyakinan mampu mengatasi masalah",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Keterlibatan dalam pengambilan keputusan perawatan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Verbalisasi ketidakberdayaan",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Partisipasi dalam perawatan diri",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.09093": {
+   "nama": "Tingkat Ansietas Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Verbalisasi kekhawatiran",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gelisah",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Ketegangan otot",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan berkonsentrasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Frekuensi nadi",
+     "jenis": "angka",
+     "satuan": "x/menit",
+     "target": "60-100",
+     "rentang_normal": "60-100"
+    },
+    {
+     "nama": "Pola tidur",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.09096": {
+   "nama": "Tingkat Depresi Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "1 minggu",
+   "indikator": [
+    {
+     "nama": "Perasaan sedih",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Minat terhadap aktivitas",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Pola tidur",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nafsu makan",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Perasaan tidak berharga",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ],
+   "catatan": "Bila muncul pikiran menyakiti diri atau ingin mengakhiri hidup, lakukan penilaian risiko segera dan libatkan tenaga kesehatan jiwa — jangan menunggu waktu evaluasi terjadwal."
+  },
+  "L.13118": {
+   "nama": "Komunikasi Verbal Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "1 minggu",
+   "indikator": [
+    {
+     "nama": "Kemampuan berbicara",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kesesuaian ekspresi wajah dan tubuh",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kemampuan memahami komunikasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kontak mata",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Penggunaan alat bantu komunikasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.14125": {
+   "nama": "Integritas Kulit dan Jaringan Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Kerusakan jaringan/lapisan kulit",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Luas luka",
+     "jenis": "angka",
+     "satuan": "cm²",
+     "target": "berkurang dari baseline"
+    },
+    {
+     "nama": "Kemerahan di sekitar luka",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri pada luka",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Jaringan granulasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Elastisitas dan kelembapan kulit",
+     "jenis": "skala5",
+     "arah": "membaik",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.14129": {
+   "nama": "Pemulihan Pascabedah Meningkat",
+   "arah": "meningkat",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Penyembuhan luka operasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri luka operasi",
+     "jenis": "angka",
+     "satuan": "NRS 0-10",
+     "target": "≤ 3",
+     "rentang_normal": "0"
+    },
+    {
+     "nama": "Kemampuan mobilisasi",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Suhu tubuh",
+     "jenis": "angka",
+     "satuan": "°C",
+     "target": "36,5-37,5",
+     "rentang_normal": "36,5-37,5"
+    },
+    {
+     "nama": "Tanda infeksi luka",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Toleransi asupan oral",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.14136": {
+   "nama": "Tingkat Cedera Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Kejadian cedera",
+     "jenis": "angka",
+     "satuan": "kejadian",
+     "target": "0"
+    },
+    {
+     "nama": "Kemampuan mengenali bahaya lingkungan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Penggunaan alat bantu keamanan",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Gangguan koordinasi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    }
+   ]
+  },
+  "L.14137": {
+   "nama": "Tingkat Infeksi Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "24 jam",
+   "indikator": [
+    {
+     "nama": "Suhu tubuh",
+     "jenis": "angka",
+     "satuan": "°C",
+     "target": "36,5-37,5",
+     "rentang_normal": "36,5-37,5"
+    },
+    {
+     "nama": "Leukosit",
+     "jenis": "angka",
+     "satuan": "ribu/µL",
+     "target": "4-11",
+     "rentang_normal": "4-11"
+    },
+    {
+     "nama": "Kemerahan pada area terinfeksi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Bengkak pada area terinfeksi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Cairan purulen",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Nyeri pada area terinfeksi",
+     "jenis": "skala5",
+     "arah": "menurun",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kadar CRP",
+     "jenis": "angka",
+     "satuan": "mg/L",
+     "target": "menurun dari baseline",
+     "rentang_normal": "< 5"
+    }
+   ]
+  },
+  "L.14138": {
+   "nama": "Tingkat Jatuh Menurun",
+   "arah": "menurun",
+   "evaluasi_default": "per shift",
+   "indikator": [
+    {
+     "nama": "Kejadian jatuh",
+     "jenis": "angka",
+     "satuan": "kejadian",
+     "target": "0"
+    },
+    {
+     "nama": "Skor risiko jatuh (Morse/Humpty Dumpty)",
+     "jenis": "angka",
+     "satuan": "skor",
+     "target": "menurun dari baseline"
+    },
+    {
+     "nama": "Kemampuan berpindah dengan aman",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Penggunaan alat bantu jalan yang tepat",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    },
+    {
+     "nama": "Kepatuhan memanggil bantuan saat berpindah",
+     "jenis": "skala5",
+     "arah": "meningkat",
+     "target": "4-5"
+    }
+   ]
+  }
+ }
+}
