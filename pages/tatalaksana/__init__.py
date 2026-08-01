@@ -62,13 +62,19 @@ def _rekam_suara() -> None:
                 st.warning("Tidak ada ucapan yang dikenali.")
             else:
                 lama = st.session_state.get("dok_temuan", "")
-                st.session_state["dok_temuan"] = f"{lama} {teks}".strip() if lama else teks
-                st.success("Transkripsi ditambahkan.")
+                # Simpan ke key sementara agar tidak langsung menimpa widget yang terkunci
+                st.session_state["temp_transkripsi"] = f"{lama} {teks}".strip() if lama else teks
+                st.success("Transkripsi berhasil, memperbarui...")
                 st.rerun()
 
 
 def _langkah_input() -> None:
     st.subheader("1. Temuan Klinis")
+
+    # Cek apakah ada data transkripsi baru dari penekanan tombol sebelumnya
+    if "temp_transkripsi" in st.session_state:
+        st.session_state["dok_temuan"] = st.session_state.pop("temp_transkripsi")
+
     st.text_area(
         "Anamnesis, pemeriksaan fisik, dan hasil penunjang",
         key="dok_temuan",
@@ -80,7 +86,6 @@ def _langkah_input() -> None:
         ),
     )
     _rekam_suara()
-
 
 # =====================================================
 # USULAN
