@@ -136,6 +136,8 @@ def _sidebar() -> str:
                 key=f"nav_{kode}",
                 use_container_width=True,
             ):
+                if kode == "asesmen":
+                    _mulai_asesmen_baru()
                 st.session_state["halaman"] = kode
                 st.rerun()
 
@@ -161,6 +163,30 @@ def _reset_profesi() -> None:
     for kunci in ("profesi", "halaman", "dok_ppk_dipilih", "dok_temuan",
                   "asesmen_tersimpan", "riwayat_dibuka"):
         st.session_state.pop(kunci, None)
+
+
+def _mulai_asesmen_baru() -> None:
+    """
+    Bersihkan draf asesmen yang sedang berjalan sebelum masuk ke menu
+    "Asesmen Baru" di sidebar.
+
+    Tombol menu ini murni navigasi (pindah `halaman`) -- beda dari
+    tombol "➕ Buat asesmen baru" di halaman hasil asesmen yang sudah
+    memicu reset sendiri lewat `on_click`. Tanpa pemanggilan eksplisit
+    ini, S/O, penanda, dan diagnosis yang belum tersimpan tetap
+    nempel setiap kali menu ini ditekan -- termasuk saat perawat
+    sedang di halaman lain lalu kembali ke "Asesmen Baru".
+
+    Dibungkus try/except supaya urutan pemasangan patch tidak saling
+    menjatuhkan: kalau `pages/asesmen/__init__.py` belum diperbarui
+    dengan `reset_asesmen()`, menu tetap bisa dipakai untuk pindah
+    halaman seperti sebelumnya, hanya saja belum membersihkan draf.
+    """
+    try:
+        from pages.asesmen import reset_asesmen
+        reset_asesmen()
+    except ImportError:
+        pass
 
 
 def _status() -> None:
