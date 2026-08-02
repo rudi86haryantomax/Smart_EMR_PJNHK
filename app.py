@@ -160,7 +160,11 @@ def _sidebar() -> str:
 
 def _reset_profesi() -> None:
     """Kembali ke pemilihan profesi dan bersihkan state alur kerja."""
-    for kunci in ("profesi", "halaman", "dok_ppk_dipilih", "dok_temuan",
+    # "dok_data" menggantikan "dok_temuan" setelah data dipisahkan dari
+    # key widget di pages/tatalaksana; keduanya dibersihkan agar sisa
+    # dari versi lama ikut terhapus.
+    for kunci in ("profesi", "halaman", "dok_ppk_dipilih",
+                  "dok_data", "dok_temuan", "dok_versi",
                   "asesmen_tersimpan", "riwayat_dibuka"):
         st.session_state.pop(kunci, None)
 
