@@ -188,8 +188,14 @@ def main() -> int:
     check("Semua tercentang sebelum reset", len(dipilih(KODE)) == total)
 
     A._reset_form()
-    sisa = [k for k in _st.session_state if k.startswith("iv_")]
-    check("Tidak ada sisa state checkbox setelah reset", not sisa, sisa[:3])
+    # State checkbox di-set False, BUKAN dihapus dengan `del`. `del` saat
+    # dipanggil dari dalam callback `on_click` memicu galat session_state
+    # di tengah jalan, sehingga reset berhenti sebelum tuntas dan halaman
+    # hasil tidak pernah berpindah ke form baru.
+    tercentang = [k for k in _st.session_state
+                  if k.startswith("iv_") and _st.session_state[k]]
+    check("Tidak ada checkbox yang masih tercentang setelah reset",
+          not tercentang, tercentang[:3])
 
     _st.session_state["intervensi_pilih"] = {}
     A._pilih_intervensi(KODE)
@@ -205,10 +211,12 @@ def main() -> int:
           len(dipilih(KODE)) > 0 and len(dipilih("D.0077")) > 0)
 
     A._bersihkan_centang_intervensi(KODE)
-    sisa_kode = [k for k in _st.session_state if k.startswith(f"iv_{KODE}_")]
-    sisa_lain = [k for k in _st.session_state if k.startswith("iv_D.0077_")]
-    check(f"State {KODE} terhapus", not sisa_kode, sisa_kode[:3])
-    check("State diagnosis lain TIDAK ikut terhapus", len(sisa_lain) > 0)
+    sisa_kode = [k for k in _st.session_state
+                 if k.startswith(f"iv_{KODE}_") and _st.session_state[k]]
+    sisa_lain = [k for k in _st.session_state
+                 if k.startswith("iv_D.0077_") and _st.session_state[k]]
+    check(f"Centang {KODE} direset", not sisa_kode, sisa_kode[:3])
+    check("Centang diagnosis lain TIDAK ikut direset", len(sisa_lain) > 0)
 
     print("\n" + "=" * 62)
     print("TEST 7 -- Diagnosis tanpa sebagian kategori tetap aman")
