@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from services import speech_service
+from services import speech_service, translate_service
 from services.ppk_service import PpkService
 
 _service = PpkService()
@@ -33,8 +33,29 @@ _LABEL_TATALAKSANA = {
 }
 
 
+# Data disimpan pada kunci TERSENDIRI, terpisah dari key widget --
+# pola yang sama dengan pages/asesmen.
+#
+# Sebelumnya teks temuan disimpan langsung di key widget ("dok_temuan"),
+# sehingga hasil transkripsi suara gagal dengan galat:
+#     st.session_state.dok_temuan cannot be modified after the widget
+#     with key dok_temuan is instantiated.
+# Ini bug yang sama dengan yang pernah terjadi di halaman perawat; halaman
+# dokter terlewat saat perbaikan pertama.
+
+
+def _versi() -> int:
+    return st.session_state.get("dok_versi", 0)
+
+
+def _segarkan_form() -> None:
+    """Paksa widget teks dibuat ulang agar membaca data terbaru."""
+    st.session_state["dok_versi"] = _versi() + 1
+
+
 def _init_state() -> None:
-    st.session_state.setdefault("dok_temuan", "")
+    st.session_state.setdefault("dok_data", "")
+    st.session_state.setdefault("dok_versi", 0)
     st.session_state.setdefault("dok_ppk_dipilih", None)
 
 
@@ -42,50 +63,115 @@ def _init_state() -> None:
 # INPUT
 # =====================================================
 
+def _tambah_teks(teks: str) -> None:
+    """Sambung hasil transkripsi ke teks yang ada, bukan menimpanya."""
+    lama = st.session_state.get("dok_data", "")
+    st.session_state["dok_data"] = f"{lama} {teks}".strip() if lama else teks
+    _segarkan_form()
+
+
+def _proses_audio(audio_bytes: bytes, mime: str) -> None:
+    with st.spinner("Mengubah suara jadi teks..."):
+        teks, galat = speech_service.transcribe_safe(audio_bytes, mime)
+
+    if galat:
+        st.error(galat)
+        return
+    if not teks:
+        st.warning("Tidak ada ucapan yang dikenali. Coba bicara lebih dekat ke mikrofon.")
+        return
+
+    _tambah_teks(teks)
+    st.rerun()
+
+
 def _rekam_suara() -> None:
+    """
+    Perekam satu tombol: tekan untuk mulai, tekan lagi untuk berhenti,
+    dan teks langsung muncul — sama dengan alur di halaman perawat.
+    """
     if not speech_service.is_available():
         return
 
+    try:
+        from streamlit_mic_recorder import mic_recorder
+
+        rekaman = mic_recorder(
+            start_prompt="🎤  Rekam temuan klinis",
+            stop_prompt="⏹️  Berhenti — ubah ke teks",
+            just_once=True,
+            use_container_width=True,
+            format="wav",
+            key=f"mic_dok_{_versi()}",
+        )
+        if rekaman and rekaman.get("bytes"):
+            _proses_audio(rekaman["bytes"], "audio/wav")
+        return
+    except ImportError:
+        pass
+
+    # Cadangan bila streamlit-mic-recorder tidak terpasang.
     with st.expander("🎤 Rekam temuan klinis", expanded=False):
         st.caption("Maksimal sekitar 60 detik per rekaman.")
-        audio = st.audio_input("Rekam", key="audio_dok")
+        audio = st.audio_input("Rekam", key=f"audio_dok_{_versi()}")
         if audio is not None and st.button(
-            "Transkripsi", key="btn_stt_dok", use_container_width=True
+            "Ubah ke teks", key="btn_stt_dok", use_container_width=True
         ):
-            with st.spinner("Mentranskripsi..."):
-                teks, error = speech_service.transcribe_safe(
-                    audio.getvalue(), getattr(audio, "type", "audio/wav")
-                )
-            if error:
-                st.error(error)
-            elif not teks:
-                st.warning("Tidak ada ucapan yang dikenali.")
-            else:
-                lama = st.session_state.get("dok_temuan", "")
-                # Simpan ke key sementara agar tidak langsung menimpa widget yang terkunci
-                st.session_state["temp_transkripsi"] = f"{lama} {teks}".strip() if lama else teks
-                st.success("Transkripsi berhasil, memperbarui...")
-                st.rerun()
+            _proses_audio(audio.getvalue(), getattr(audio, "type", "audio/wav"))
+
+
+def _terjemahkan() -> None:
+    """
+    Terjemahkan temuan ke bahasa Indonesia.
+
+    Berguna karena kriteria PPK ditulis dalam bahasa Indonesia: bagian
+    catatan yang ditulis dalam bahasa Inggris tidak akan cocok sebelum
+    diterjemahkan. Hanya muncul bila API key Translate tersedia.
+    """
+    if not translate_service.is_available():
+        return
+    if not st.session_state.get("dok_data", "").strip():
+        return
+
+    if st.button("🌐 Terjemahkan ke Indonesia", key=f"tr_dok_{_versi()}",
+                 use_container_width=True):
+        with st.spinner("Menerjemahkan..."):
+            hasil, galat = translate_service.translate_safe(
+                st.session_state["dok_data"], "id"
+            )
+        if galat:
+            st.error(galat)
+        elif hasil and hasil.strip() != st.session_state["dok_data"].strip():
+            st.session_state["dok_data"] = hasil
+            _segarkan_form()
+            st.rerun()
+        else:
+            st.info("Teks sudah berbahasa Indonesia.")
 
 
 def _langkah_input() -> None:
     st.subheader("1. Temuan Klinis")
 
-    # Cek apakah ada data transkripsi baru dari penekanan tombol sebelumnya
-    if "temp_transkripsi" in st.session_state:
-        st.session_state["dok_temuan"] = st.session_state.pop("temp_transkripsi")
+    if not speech_service.is_available():
+        st.caption(
+            "Fitur suara nonaktif — pustaka pengenalan suara belum terpasang "
+            "(`pip install SpeechRecognition`). Input teks tetap bisa dipakai."
+        )
 
-    st.text_area(
+    st.session_state["dok_data"] = st.text_area(
         "Anamnesis, pemeriksaan fisik, dan hasil penunjang",
-        key="dok_temuan",
+        value=st.session_state.get("dok_data", ""),
         height=140,
         label_visibility="collapsed",
         placeholder=(
             "mis. nyeri dada retrosternal 30 menit menjalar ke lengan kiri, "
             "keringat dingin, EKG elevasi ST di V1-V4"
         ),
+        key=f"dok_w_{_versi()}",
     )
     _rekam_suara()
+    _terjemahkan()
+
 
 # =====================================================
 # USULAN
@@ -114,7 +200,7 @@ def _kartu_usulan(item: dict, urutan: int) -> None:
 def _langkah_usulan() -> None:
     st.subheader("2. Kemungkinan Diagnosis")
 
-    temuan = st.session_state.get("dok_temuan", "")
+    temuan = st.session_state.get("dok_data", "")
     if not temuan.strip():
         st.info("Isi temuan klinis di atas untuk memunculkan usulan.")
         _cari_manual()
