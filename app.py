@@ -91,6 +91,8 @@ def _pilih_profesi() -> None:
         "Pilihan ini tidak membatasi akses dan tidak menyimpan identitas — "
         "hanya menentukan tampilan alur kerja."
     )
+    st.caption("Developed by Ns. Rudi Haryanto, S.Kep., M.M " \
+    "(rudi07haryanto@gmail.com)")
 
 
 def _peringatan_lingkungan() -> None:
@@ -134,6 +136,8 @@ def _sidebar() -> str:
                 key=f"nav_{kode}",
                 use_container_width=True,
             ):
+                if kode == "asesmen":
+                    _mulai_asesmen_baru()
                 st.session_state["halaman"] = kode
                 st.rerun()
 
@@ -144,15 +148,49 @@ def _sidebar() -> str:
             st.caption("⚠️ Aplikasi publik — jangan masukkan identitas pasien.")
         _status()
 
+        st.divider()
+        st.markdown("💬 [Saran & Masukan](https://forms.gle/mhmcJk7mHX4WNPBRA)")
+        st.caption("Developed by Ns. Rudi Haryanto, S.Kep., M.M " \
+            "(rudi07haryanto@gmail.com)")
+
+
     profesi = st.session_state.get("profesi", prof.DEFAULT)
     return st.session_state.get("halaman", prof.halaman_awal(profesi))
 
 
 def _reset_profesi() -> None:
     """Kembali ke pemilihan profesi dan bersihkan state alur kerja."""
-    for kunci in ("profesi", "halaman", "dok_ppk_dipilih", "dok_temuan",
+    # "dok_data" menggantikan "dok_temuan" setelah data dipisahkan dari
+    # key widget di pages/tatalaksana; keduanya dibersihkan agar sisa
+    # dari versi lama ikut terhapus.
+    for kunci in ("profesi", "halaman", "dok_ppk_dipilih",
+                  "dok_data", "dok_temuan", "dok_versi",
                   "asesmen_tersimpan", "riwayat_dibuka"):
         st.session_state.pop(kunci, None)
+
+
+def _mulai_asesmen_baru() -> None:
+    """
+    Bersihkan draf asesmen yang sedang berjalan sebelum masuk ke menu
+    "Asesmen Baru" di sidebar.
+
+    Tombol menu ini murni navigasi (pindah `halaman`) -- beda dari
+    tombol "➕ Buat asesmen baru" di halaman hasil asesmen yang sudah
+    memicu reset sendiri lewat `on_click`. Tanpa pemanggilan eksplisit
+    ini, S/O, penanda, dan diagnosis yang belum tersimpan tetap
+    nempel setiap kali menu ini ditekan -- termasuk saat perawat
+    sedang di halaman lain lalu kembali ke "Asesmen Baru".
+
+    Dibungkus try/except supaya urutan pemasangan patch tidak saling
+    menjatuhkan: kalau `pages/asesmen/__init__.py` belum diperbarui
+    dengan `reset_asesmen()`, menu tetap bisa dipakai untuk pindah
+    halaman seperti sebelumnya, hanya saja belum membersihkan draf.
+    """
+    try:
+        from pages.asesmen import reset_asesmen
+        reset_asesmen()
+    except ImportError:
+        pass
 
 
 def _status() -> None:

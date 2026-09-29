@@ -67,37 +67,28 @@ def _detail(item: dict[str, Any]) -> None:
         )
         return
 
-    st.markdown(
-        f"**Luaran (SLKI):** {luaran.get('kode', '-')} — {luaran.get('nama', '-')}"
-    )
+    # Luaran ditampilkan sebagai SATU KESATUAN kalimat askep, sama persis
+    # dengan bentuk yang keluar di ekspor Word/Excel. Versi sebelumnya
+    # memisahkan indikator ke tabel tersendiri — lebih rapi dibaca, tetapi
+    # membuat apa yang terlihat di layar berbeda dari apa yang tercetak,
+    # dan perawat harus menyusun ulang sendiri saat menyalin.
+    st.markdown(f"**Luaran (SLKI):** {luaran.get('kode', '-')} — {luaran.get('nama', '-')}")
 
     indikator = item.get("indikator") or []
     if indikator:
-        evaluasi = item.get("evaluasi_default") or "24 jam"
-        st.caption(f"Evaluasi dijadwalkan: **{evaluasi}** setelah intervensi dimulai")
-
-        # Baseline sengaja dibiarkan kosong untuk diisi perawat saat
-        # penilaian awal. Mengisinya otomatis akan menjadi tebakan, dan
-        # baseline yang salah membuat evaluasi kemajuan ikut salah.
-        df = pd.DataFrame([
-            {
-                "Indikator": i["nama"],
-                "Baseline": "",
-                "Target": i.get("target", ""),
-                "Satuan": i.get("satuan", "") or ("skala 1-5" if i["jenis"] == "skala5" else ""),
-            }
-            for i in indikator
-        ])
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        waktu = item.get("evaluasi_default") or "24 jam"
+        teks = [
+            f"Setelah dilakukan intervensi keperawatan selama **{waktu}**, "
+            f"maka **{luaran.get('nama', '')}**, dengan kriteria hasil:",
+            "",
+        ]
+        for nomor, i in enumerate(indikator, start=1):
+            satuan = f" {i['satuan']}" if i.get("satuan") and i["satuan"] != "—" else ""
+            teks.append(f"{nomor}. {i['nama']} **{i.get('target', '')}**{satuan} (awal: ....)")
+        st.markdown("\n".join(teks))
 
         if item.get("catatan_luaran"):
             st.warning(item["catatan_luaran"])
-    if item.get("perlu_verifikasi"):
-        st.warning(
-            "Diagnosis tambahan internal — belum diverifikasi terhadap SDKI resmi."
-        )
-    if item.get("catatan"):
-        st.info(item["catatan"])
 
     kriteria = item.get("kriteria") or {}
     with st.expander("Kriteria diagnostik", expanded=False):

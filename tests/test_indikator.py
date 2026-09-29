@@ -163,13 +163,21 @@ def main() -> int:
     print("\n" + "=" * 62)
     print("TEST 6 -- Indikator ikut di ekspor")
     print("=" * 62)
+    # Luaran, waktu evaluasi, dan indikator harus menyatu sebagai SATU
+    # kalimat askep yang siap disalin — bukan beberapa blok terpisah yang
+    # masih harus disusun ulang oleh perawat.
     sel = E._sel_luaran(baris)
     check("Kolom luaran memuat kode SLKI", "L.02008" in sel)
-    check("Kolom luaran memuat waktu evaluasi", "Evaluasi: 8 jam" in sel, sel[:80])
-    check("Kolom luaran memuat daftar indikator", "Indikator" in sel)
-    check("Baseline dikosongkan untuk diisi tangan", "......." in sel)
+    check("Berbentuk kalimat askep baku",
+          "Setelah dilakukan intervensi keperawatan selama" in sel, sel[:90])
+    check("Waktu evaluasi menyatu dalam kalimat", "selama 8 jam" in sel, sel[:120])
+    check("Memakai frasa 'dengan kriteria hasil'", "dengan kriteria hasil:" in sel)
+    check("Indikator bernomor urut", "1. " in sel and "2. " in sel)
+    check("Baseline disediakan sebagai isian", "(awal: ....)" in sel)
     check("Target tercantum", "60-100" in sel)
     check("Satuan tercantum", "x/menit" in sel)
+    check("Tidak ada blok terpisah 'Indikator (baseline'",
+          "Indikator (baseline" not in sel)
 
     print("\n" + "=" * 62)
     print("TEST 7 -- Ketahanan bila berkas indikator hilang")

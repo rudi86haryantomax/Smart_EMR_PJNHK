@@ -65,7 +65,9 @@ def main() -> int:
     repo = SdkiRepository()
     laporan = repo.validate()
     check("Master data valid", laporan["valid"], laporan["masalah"][:3])
-    check("55 diagnosis termuat", laporan["jumlah"] == 55, laporan["jumlah"])
+    # Master data telah diperluas (55 -> 59) sejak test ini ditulis; angka
+    # disesuaikan dengan isi berkas saat ini.
+    check("59 diagnosis termuat", laporan["jumlah"] == 59, laporan["jumlah"])
     check("Kategori diturunkan dari kode SLKI",
           kategori_dari_luaran("L.02008") == "Sirkulasi")
 
@@ -99,7 +101,10 @@ def main() -> int:
         ("slem kental banyak kuning, batuk tidak efektif", "D.0001", "slem -> sputum"),
         ("Kalium 2,9 hasil laboratorium", "D.0034", "kalium -> elektrolit"),
         ("terpasang ventilator mode SIMV, PEEP 10", "D.0004", "SIMV/PEEP -> ventilasi"),
-        ("AGD asidosis, PH 7,20, PCO2 50", "LOKAL.003", "asidosis/AGD -> pH"),
+        # Diagnosis LOKAL kini disingkirkan dari usulan (kebijakan: CDSS hanya
+        # SDKI resmi). Gambaran gangguan asam-basa jatuh ke padanan SDKI
+        # terdekat, D.0003 Gangguan Pertukaran Gas (kriteria PCO2/PO2/pH).
+        ("AGD asidosis, PH 7,20, PCO2 50", "D.0003", "asidosis/AGD -> D.0003 (LOKAL disingkirkan)"),
     ]
     for teks, kode, keterangan in padanan:
         hasil = [u["kode"] for u in service.usulkan("", teks, limit=6)]
@@ -124,8 +129,12 @@ def main() -> int:
     check("D.0003 Gangguan Pertukaran Gas muncul di layar", "D.0003" in tampil, tampil)
     check("D.0001 Bersihan Jalan Napas muncul di layar", "D.0001" in tampil, tampil)
     check("D.0004 Gangguan Ventilasi Spontan muncul", "D.0004" in tampil, tampil)
-    check("LOKAL.003 Ketidakseimbangan Asam Basa muncul", "LOKAL.003" in tampil, tampil)
     check("D.0008 Penurunan Curah Jantung muncul", "D.0008" in tampil, tampil)
+    # Diagnosis LOKAL disingkirkan dari usulan (kebijakan CDSS = SDKI resmi).
+    # (LOKAL.003 Asam Basa tak lagi muncul; gangguan asam-basa terwakili
+    # D.0003 di atas.) Yang dipastikan: tak ada LOKAL.* di hasil.
+    check("Usulan CDSS tidak memuat diagnosis LOKAL (kebijakan)",
+          all(not k.startswith("LOKAL") for k in tampil), tampil)
 
     # Penanda laboratorium alfanumerik harus terbaca; pola tokenizer lama
     # membuang "PCO2" menjadi "pco" lalu menghapusnya karena terlalu pendek.

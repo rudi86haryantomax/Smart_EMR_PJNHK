@@ -196,6 +196,66 @@ def main() -> int:
           all("_w_" in k and not k.endswith("_w_2") for k in keys), sorted(keys))
 
     print("\n" + "=" * 62)
+    print("TEST 4b -- Menu 'Asesmen Baru' membersihkan draf")
+    print("=" * 62)
+    # Tombol menu di sidebar murni navigasi. Tanpa titik masuk publik,
+    # pindah ke menu ini hanya mengganti halaman tanpa membersihkan draf,
+    # karena _init_state() memakai setdefault dan tidak pernah menimpa.
+    check("reset_asesmen() tersedia sebagai titik masuk publik",
+          callable(getattr(A, "reset_asesmen", None)))
+
+    _st.session_state["s_data"] = "draf lama"
+    _st.session_state["o_data"] = "observasi lama"
+    render()  # widget dirender lebih dulu — kondisi bug lama
+    try:
+        A.reset_asesmen()
+        check("reset_asesmen() tidak melanggar aturan Streamlit", True)
+    except Exception as exc:
+        check("reset_asesmen() tidak melanggar aturan Streamlit", False, str(exc)[:80])
+    check("Draf dibersihkan", _st.session_state["s_data"] == "" and
+          _st.session_state["o_data"] == "")
+
+    print("\n" + "=" * 62)
+    print("TEST 4c -- Centang direset, bukan dihapus")
+    print("=" * 62)
+    # `del` pada key checkbox saat dipanggil dari dalam callback on_click
+    # memicu galat di tengah jalan, sehingga callback berhenti sebelum
+    # tuntas dan halaman hasil tidak pernah berpindah ke form baru.
+    _st.session_state["iv_D.0008_observasi_0"] = True
+    A._bersihkan_centang_intervensi()
+    check("Key checkbox masih ada (tidak di-del)",
+          "iv_D.0008_observasi_0" in _st.session_state)
+    check("Nilainya jadi False",
+          _st.session_state["iv_D.0008_observasi_0"] is False)
+
+    print("\n" + "=" * 62)
+    print("TEST 4d -- Halaman dokter: data terpisah dari key widget")
+    print("=" * 62)
+    from pages import tatalaksana as T
+
+    T._init_state()
+    DIRENDER.clear()
+    T._langkah_input()
+    keys_dok = set(DIRENDER)
+    check("Widget dokter memakai key ber-versi",
+          all("_w_" in k for k in keys_dok), sorted(keys_dok))
+    check("Kunci data BUKAN key widget", "dok_data" not in keys_dok)
+
+    try:
+        T._tambah_teks("nyeri dada retrosternal")
+        check("Transkripsi dokter tidak melanggar aturan Streamlit", True)
+    except Exception as exc:
+        check("Transkripsi dokter tidak melanggar aturan Streamlit", False, str(exc)[:80])
+    check("Teks masuk ke data dokter",
+          _st.session_state["dok_data"] == "nyeri dada retrosternal",
+          _st.session_state.get("dok_data"))
+
+    T._tambah_teks("keringat dingin")
+    check("Transkripsi dokter kedua DISAMBUNG",
+          _st.session_state["dok_data"] == "nyeri dada retrosternal keringat dingin",
+          _st.session_state["dok_data"])
+
+    print("\n" + "=" * 62)
     print("TEST 5 -- Layanan terjemahan opsional")
     print("=" * 62)
     from services import translate_service as T

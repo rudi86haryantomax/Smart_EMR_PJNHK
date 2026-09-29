@@ -144,6 +144,13 @@ def main() -> int:
     check("Kolom diagnosis memuat kode & nama",
           "D.0008" in b1[1].text and "Penurunan Curah Jantung" in b1[1].text)
     check("Kolom luaran memuat kode SLKI", "L.02008" in b1[2].text)
+    # Sel Word sempat dibangun terpisah dari _sel_luaran(), sehingga
+    # indikator dan waktu evaluasi tidak ikut tercetak — perbedaan yang
+    # tidak terlihat sampai berkasnya dibuka.
+    check("Kolom luaran memuat kalimat askep lengkap",
+          "dengan kriteria hasil:" in b1[2].text, b1[2].text[:80])
+    check("Kolom luaran memuat indikator bernomor",
+          "1. " in b1[2].text and "(awal: ....)" in b1[2].text)
     check("Kolom intervensi punya sub-judul kategori",
           "Observasi" in b1[3].text and "Terapeutik" in b1[3].text)
     check("Intervensi bernomor & multi-baris",
@@ -236,6 +243,20 @@ def main() -> int:
     check("Data S & O ikut di lembar",
           "sesak saat berbaring" in semua_teks and "JVP meningkat" in semua_teks)
     check("Catatan ikut di lembar", "Latihan kelas B" in semua_teks)
+
+    print("\n" + "=" * 62)
+    print("TEST 5b -- Word, Excel, dan Markdown menghasilkan isi identik")
+    print("=" * 62)
+    # Ketiganya harus memakai penyusun sel yang sama. Bila salah satu
+    # dibangun sendiri, perbedaannya baru ketahuan saat berkas dibuka.
+    sel_word = dok.tables[0].rows[1].cells[2].text.strip()
+    sel_excel = str(ws.cell(row=r1, column=3).value).strip()
+    check("Kolom luaran Word == Excel", sel_word == sel_excel,
+          f"word={sel_word[:40]!r} excel={sel_excel[:40]!r}")
+    check("Keduanya memuat kriteria hasil", "dengan kriteria hasil:" in sel_word)
+
+    md_luaran = E.ke_markdown(asesmen, tabel)
+    check("Markdown juga memuat indikator", "Kekuatan nadi perifer" in md_luaran)
 
     print("\n" + "=" * 62)
     print("TEST 6 -- Nama berkas")

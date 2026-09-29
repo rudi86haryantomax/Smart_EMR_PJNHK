@@ -77,24 +77,48 @@ def _sel_diagnosis(item: dict[str, Any]) -> str:
 
 def _sel_luaran(item: dict[str, Any]) -> str:
     """
-    Kolom luaran beserta indikator terukurnya.
+    Kolom luaran sebagai SATU KESATUAN kalimat askep.
 
-    Baseline dikosongkan dengan garis titik-titik agar dapat diisi tangan
-    setelah dicetak — nilai awal harus berasal dari penilaian perawat,
-    bukan dari perkiraan sistem.
+    Mengikuti rumusan yang lazim dipakai di lembar asuhan keperawatan:
+
+        Setelah dilakukan intervensi keperawatan selama 8 jam,
+        maka Curah Jantung Meningkat, dengan kriteria hasil:
+        1. Kekuatan nadi perifer 4-5 (awal: ....)
+        2. Frekuensi nadi 60-100 x/menit (awal: ....)
+
+    Versi sebelumnya memisahkan luaran, waktu evaluasi, dan daftar
+    indikator menjadi beberapa blok. Bentuk itu lebih rapi untuk dibaca
+    sebagai data, tetapi bukan bentuk yang bisa langsung disalin ke
+    lembar askep — sedangkan justru itulah tujuan ekspor ini.
+
+    Baseline tetap disediakan sebagai isian titik-titik dalam kurung,
+    bukan kolom tersendiri: nilai awal harus berasal dari penilaian
+    perawat, dan menaruhnya inline membuat kalimatnya tetap utuh.
     """
     luaran = item.get("luaran") or {}
-    baris = [x for x in (luaran.get("kode"), luaran.get("nama")) if x]
+    kode = luaran.get("kode", "")
+    nama = luaran.get("nama", "")
+
+    baris: list[str] = []
+    if kode or nama:
+        baris.append(" — ".join(x for x in (kode, nama) if x))
 
     indikator = item.get("indikator") or []
-    if indikator:
-        if item.get("evaluasi_default"):
-            baris.append(f"Evaluasi: {item['evaluasi_default']}")
-        baris.append("")
-        baris.append("Indikator (baseline → target):")
-        for i in indikator:
-            satuan = f" {i['satuan']}" if i.get("satuan") else ""
-            baris.append(f"• {i['nama']}: ....... → {i.get('target', '')}{satuan}")
+    if not indikator:
+        return "\n".join(baris)
+
+    waktu = item.get("evaluasi_default") or "24 jam"
+    baris.append("")
+    baris.append(
+        f"Setelah dilakukan intervensi keperawatan selama {waktu}, "
+        f"maka {nama or 'luaran tercapai'}, dengan kriteria hasil:"
+    )
+
+    for nomor, i in enumerate(indikator, start=1):
+        satuan = f" {i['satuan']}" if i.get("satuan") and i["satuan"] != "—" else ""
+        target = i.get("target", "")
+        baris.append(f"{nomor}. {i['nama']} {target}{satuan} (awal: ....)")
+
     return "\n".join(baris)
 
 
@@ -157,6 +181,20 @@ def ke_markdown(asesmen: Asesmen, tabel: list[dict[str, Any]]) -> str:
         baris.append(
             f"- **Luaran (SLKI):** {luaran.get('kode', '-')} — {luaran.get('nama', '-')}"
         )
+        # Sisipkan kriteria hasil dari penyusun yang sama dengan Word dan
+        # Excel, supaya ketiga format tidak berbeda isi.
+        indikator = item.get("indikator") or []
+        if indikator:
+            waktu = item.get("evaluasi_default") or "24 jam"
+            baris.append("")
+            baris.append(
+                f"Setelah dilakukan intervensi keperawatan selama **{waktu}**, maka "
+                f"**{luaran.get('nama', '')}**, dengan kriteria hasil:"
+            )
+            baris.append("")
+            for nomor, i in enumerate(indikator, start=1):
+                satuan = f" {i['satuan']}" if i.get("satuan") and i["satuan"] != "—" else ""
+                baris.append(f"{nomor}. {i['nama']} **{i.get('target', '')}**{satuan} (awal: ....)")
         if item.get("catatan"):
             baris.append(f"- **Catatan:** {item['catatan']}")
         baris += ["", "**Intervensi (SIKI)**", ""]
@@ -293,13 +331,23 @@ def ke_docx(asesmen: Asesmen, tabel: list[dict[str, Any]]) -> bytes:
             r.font.size = Pt(8)
             r.font.color.rgb = RGBColor(0x66, 0x66, 0x66)
 
+        # Kolom luaran memakai _sel_luaran() yang sama dengan Excel dan
+        # Markdown, supaya ketiga format menghasilkan isi yang identik.
+        # Sebelumnya sel ini dibangun terpisah, sehingga indikator dan
+        # waktu evaluasi tidak ikut tercetak di Word — perbedaan yang
+        # tidak terlihat sampai berkasnya dibuka.
         luaran = item.get("luaran") or {}
         sel[2].text = ""
         p = sel[2].paragraphs[0]
-        if luaran.get("kode"):
-            p.add_run(luaran["kode"]).bold = True
-        if luaran.get("nama"):
-            p.add_run(("\n" if luaran.get("kode") else "") + luaran["nama"])
+        potongan = _sel_luaran(item).split("\n")
+        for nomor, teks in enumerate(potongan):
+            r = p.add_run(("\n" if nomor else "") + teks)
+            # Baris pertama berisi kode dan nama luaran — ditebalkan agar
+            # tetap menonjol di antara daftar kriteria hasil.
+            if nomor == 0:
+                r.bold = True
+            else:
+                r.font.size = Pt(9)
 
         # Kolom intervensi: satu paragraf per kategori + tindakan bernomor.
         sel[3].text = ""

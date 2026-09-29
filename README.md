@@ -381,6 +381,22 @@ Tiap indikator memuat:
 | **Arah** | meningkat / menurun / membaik |
 | **Baseline** | **dikosongkan** - diisi perawat saat penilaian awal |
 
+Semuanya **menyatu dalam satu sel** kolom Luaran, memakai rumusan askep
+baku sehingga bisa langsung disalin:
+
+```
+L.02008 — Curah Jantung Meningkat
+
+Setelah dilakukan intervensi keperawatan selama 8 jam,
+maka Curah Jantung Meningkat, dengan kriteria hasil:
+1. Kekuatan nadi perifer 4-5 (awal: ....)
+2. Frekuensi nadi 60-100 x/menit (awal: ....)
+3. Tekanan darah sistolik 100-140 mmHg (awal: ....)
+```
+
+Tampilan di aplikasi dan hasil ekspor **sama persis** — apa yang terlihat
+di layar itulah yang tercetak.
+
 **Baseline sengaja tidak diisi otomatis.** Nilai awal harus berasal dari
 penilaian perawat; mengisinya dengan perkiraan membuat evaluasi kemajuan
 ikut salah.

@@ -12,7 +12,7 @@ deploy ke Streamlit Community Cloud** — tidak ada penghalang.
 | `requirements.txt` minimal & benar | ✅ 3 paket |
 | Tidak ada path absolut / rahasia ter-commit | ✅ |
 | `.gitignore` melindungi `secrets.toml` & `.env` | ✅ |
-| 398 test lolos | ✅ |
+| 416 test lolos | ✅ |
 | **Aman dipakai banyak orang sekaligus** | ✅ diuji 30 pengguna serentak |
 | Penyimpanan sementara | ℹ️ wajar untuk alat pembelajaran |
 | Tanpa login | ℹ️ wajar untuk alat pembelajaran |
