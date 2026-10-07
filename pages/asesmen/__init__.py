@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from components import tabel_asuhan
+from components import kriteria_sdki, tabel_asuhan
 from database.connection import baca_saja, unit_of_work
 from models.asesmen import Asesmen, DiagnosisPilihan
 from repositories.asesmen_repository import AsesmenRepository
@@ -256,7 +256,7 @@ def _langkah_usulan() -> None:
         st.caption(
             "Usulan berasal dari pencocokan kata kunci terhadap kriteria SDKI — "
             "**bukan penegakan diagnosis**. Periksa dasar kecocokannya, lalu "
-            "pilih sendiri yang sesuai kondisi pasien."
+            "pilih sendiri yang sesuai kondisi pasien. " + kriteria_sdki.KETERANGAN
         )
 
         dipilih = st.session_state["dipilih"]
@@ -267,8 +267,11 @@ def _langkah_usulan() -> None:
 
             with col_info:
                 tanda = "⚠️ " if item.get("perlu_verifikasi") else ""
+                # Skor & label prioritas -- sama dengan ranking CDSS smart_emr.
+                lencana = kriteria_sdki.html_lencana(
+                    item.get("label_prioritas", ""), item.get("skor"))
                 st.markdown(
-                    f"**{tanda}{kode} — {item['nama']}**  \n"
+                    f"**{tanda}{kode} — {item['nama']}** &nbsp;{lencana}  \n"
                     f"<span style='color:#666;font-size:0.85em'>"
                     f"{item['jenis']} · {item['kategori']} · "
                     f"cocok pada: {', '.join(item['kata_cocok'])}</span>",
@@ -280,14 +283,16 @@ def _langkah_usulan() -> None:
                         "(tambahan internal). Pastikan sesuai kebijakan unit Anda."
                     )
                 with st.expander("Lihat kriteria", expanded=False):
-                    kriteria = item["diagnosis"].get("kriteria", {})
-                    for label, kunci in (("Mayor", "mayor"), ("Minor", "minor"),
-                                         ("Faktor risiko", "faktor_risiko")):
-                        isi = kriteria.get(kunci) or []
-                        if isi:
-                            st.markdown(f"*{label}*")
-                            for k in isi:
-                                st.markdown(f"- {k}")
+                    # ✓ = kriteria yang terpenuhi oleh data S/O (dasar skor).
+                    st.markdown(
+                        kriteria_sdki.html_dasar_skor(
+                            item.get("kriteria_cek"),
+                            dari_konteks=bool(item.get("dari_konteks")),
+                            konteks=bool(item.get("konteks_boost")),
+                            numerik=bool(item.get("numerik_boost")),
+                        ),
+                        unsafe_allow_html=True,
+                    )
 
             with col_aksi:
                 if sudah:

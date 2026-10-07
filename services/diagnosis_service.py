@@ -26,11 +26,40 @@ ukuran kepastian klinis dan sebaiknya tidak dibaca sebagai persentase.
 
 from __future__ import annotations
 
+import logging
+import math
 from typing import Any
 
 from core.kategori import kategori_dari_luaran, urutkan_prioritas
 from models.asesmen import Asesmen, DiagnosisPilihan
 from repositories.sdki_repository import SdkiRepository
+# Pencocok kriteria milik mesin itu sendiri, dipakai ulang HANYA untuk menandai
+# kriteria mana yang terpenuhi (tampilan) -- supaya tanda ✓ selalu sama dengan
+# pencocokan yang masuk ke skor, bukan pencocok kedua yang bisa berbeda.
+from repositories.sdki_repository import _ekstrak_vital, _nilai_kelompok, _tokenize
+
+_log = logging.getLogger(__name__)
+
+_KELOMPOK_KRITERIA = ("mayor", "minor", "faktor_risiko")
+
+
+def label_prioritas(skor: float) -> str:
+    """
+    Label prioritas dari skor relatif: CRITICAL >= 8, HIGH >= 4, MEDIUM >= 2,
+    selebihnya LOW.
+
+    Ambangnya SAMA PERSIS dengan `_prioritas()` di adapter smart_emr
+    (modules/services/sdki_engine/adapter.py) supaya skor yang sama berlabel
+    sama di kedua aplikasi. Bila diubah, ubah keduanya (dan teks KETERANGAN
+    di components/kriteria_sdki.py).
+    """
+    if skor >= 8:
+        return "CRITICAL"
+    if skor >= 4:
+        return "HIGH"
+    if skor >= 2:
+        return "MEDIUM"
+    return "LOW"
 
 
 class DiagnosisService:
@@ -65,10 +94,42 @@ class DiagnosisService:
             item["kategori"] = kategori_dari_luaran(entry.get("luaran", {}).get("kode"))
             item["luaran"] = entry.get("luaran", {})
             item["perlu_verifikasi"] = self.repo.perlu_verifikasi(entry["kode"])
+            # Tampilan skor & kriteria (sama dengan ranking CDSS smart_emr).
+            item["label_prioritas"] = label_prioritas(float(item.get("skor") or 0.0))
+            item["kriteria_cek"] = self.cek_kriteria(teks, entry)
         return hasil
 
     def usulkan_untuk(self, asesmen: Asesmen, limit: int = 8) -> list[dict[str, Any]]:
         return self.usulkan(asesmen.data_subjektif, asesmen.data_objektif, limit)
+
+    def cek_kriteria(self, teks: str, entry: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+        """
+        Tandai tiap kriteria mayor / minor / faktor risiko: terpenuhi oleh
+        data S/O atau belum.
+
+        Memakai `_nilai_kelompok` milik mesin per kriteria, sehingga hasilnya
+        identik dengan pencocokan yang dihitung ke skor (termasuk penjaga arah
+        vital & anti-negasi). Murni tampilan: skor dan urutan tidak berubah.
+        Kembar dengan `_cek_kriteria()` di adapter smart_emr.
+        """
+        kriteria = entry.get("kriteria") or {}
+        hasil = {
+            kunci: [{"teks": str(k), "cocok": False} for k in (kriteria.get(kunci) or [])]
+            for kunci in _KELOMPOK_KRITERIA
+        }
+        try:
+            tokens = _tokenize(teks)
+            if tokens:
+                vital = _ekstrak_vital(teks)
+                bobot = self.repo._bobot_kata()
+                bawaan = math.log(1 + len(self.repo._entries()))
+                for daftar in hasil.values():
+                    for k in daftar:
+                        k["cocok"] = _nilai_kelompok(
+                            [k["teks"]], tokens, vital, bobot, bawaan)[3] > 0
+        except Exception:  # tampilan saja -- jangan gagalkan usulan
+            _log.warning("Gagal menandai kriteria SDKI", exc_info=True)
+        return hasil
 
     # =================================================
     # PRIORITAS

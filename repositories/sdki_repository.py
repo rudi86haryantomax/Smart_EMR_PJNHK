@@ -213,6 +213,10 @@ _SINGKATAN_PENTING = {
     # paling menentukan, tapi akan terbuang oleh filter panjang minimum.
     "iabp", "simv", "peep", "crrt", "ards", "ett", "cvp", "map",
     "vte", "hr", "rr", "td",
+    # Kelainan jantung bawaan yang DISEBUT di teks kriteria ("mis. VSD besar"
+    # pada Risiko Penurunan Curah Jantung). Tanpa ini "VSD" terbuang (3 huruf)
+    # dan kecocokannya hanya kebetulan lewat kata umum "besar".
+    "vsd",
     # Penanda laboratorium: gabungan huruf-angka, sebagian hanya 3 karakter
     # sehingga perlu didaftarkan eksplisit.
     "po2", "ph", "abg", "be", "bun",
@@ -335,6 +339,38 @@ _LABEL_ARAH = {"naik": "tinggi", "turun": "rendah"}
 # Ambang bobot IDF di mana sebuah kata dianggap cukup spesifik untuk
 # menopang kecocokan kriteria seorang diri (mis. "jvp", "sputum").
 _IDF_SPESIFIK = 3.0
+
+# Kata yang hanya menyatakan LETAK, BAGIAN TUBUH, WAKTU, UKURAN/ARAH, atau
+# kata umum -- bukan temuan klinis. Kata ini tetap dihitung bila kriterianya
+# terpenuhi lewat kata lain (atau separuh katanya cocok), tetapi TIDAK boleh
+# SENDIRIAN memenuhi sebuah kriteria lewat jalur `_IDF_SPESIFIK`.
+#
+# Kenapa perlu: dengan 59 diagnosis, ~89% kosakata master lolos ambang IDF
+# 3.0, jadi kata apa pun bisa jadi "bukti tunggal". Akibatnya pada pasien
+# STEMI dewasa, "nyeri dada KIRI" memenuhi "Kelainan struktur jantung
+# kongenital (... jantung KIRI hipoplastik)", "ronkhi basal kedua PARU"
+# memenuhi "mesin pintas jantung PARU", dan "TD TINGGI" memenuhi "Kadar
+# kolesterol TINGGI". Kata klinis yang bermakna sendiri (ginjal, hati,
+# terpasang, selang, operasi, jvp, sputum, ...) sengaja TIDAK dimasukkan.
+_KATA_UMUM = frozenset({
+    # letak, posisi & bagian tubuh (TEMPAT temuan, bukan temuannya)
+    "kiri", "kanan", "atas", "bawah", "anterior", "posterior", "samping",
+    "posisi", "basal", "paru", "kepala", "mata", "mulut", "muka", "wajah",
+    "hidung", "rongga", "thoraks", "tulang", "sendi", "kulit", "mukosa",
+    "usus", "kandung",
+    # waktu & urutan
+    "hari", "bulan", "tahun", "sehari", "seminggu", "kali", "satu",
+    "pertama", "terakhir", "baru", "lama", "lanjut", "sudah", "pernah",
+    "sebelum", "sesudah", "selama", "sampai", "tiba", "timbul", "muncul",
+    # ukuran, arah & mutu (pengubah -- temuannya ada di kata lain)
+    "tinggi", "rendah", "naik", "turun", "cepat", "lambat", "besar", "kecil",
+    "panjang", "minimal", "banyak", "jumlah", "cukup", "penuh", "terlalu",
+    "baik", "buruk", "kering", "warna", "dosis", "frekuensi",
+    # orang & kata umum
+    "anak", "bayi", "dewasa", "orang", "lain", "sendiri", "mesin", "alat",
+    "obat", "nilai", "hasil", "status", "umum", "khas", "tertentu", "utuh",
+    "antara", "tentang", "sesuai", "masuk",
+})
 
 # Frasa kriteria yang menyatakan KETIADAAN tanda ("Nadi tidak teraba",
 # "Tidak ada napas"). Karena "tidak" ikut terbuang stopword, tanpa penjaga
@@ -493,7 +529,8 @@ def _nilai_kelompok(
             continue
         cukup = (
             len(cocok) >= max(1, (len(ctoks) + 1) // 2)
-            or any(bobot.get(k, bobot_bawaan) >= _IDF_SPESIFIK for k in cocok)
+            or any(bobot.get(k, bobot_bawaan) >= _IDF_SPESIFIK
+                   and k not in _KATA_UMUM for k in cocok)
         )
         if not cukup:
             continue
