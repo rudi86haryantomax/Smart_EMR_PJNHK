@@ -3,16 +3,18 @@ components/kriteria_sdki.py
 ==========================================
 Tampilan skor CDSS dan kriteria SDKI (mayor / minor / faktor risiko).
 
-Berkas ini SENGAJA IDENTIK di dua aplikasi:
-  * asuhan    -> components/kriteria_sdki.py               (smartcare.streamlit.app)
-  * smart_emr -> emr_ai_system/components/kriteria_sdki.py (smart-emr.streamlit.app)
+Berkas ini SENGAJA IDENTIK di tiga aplikasi:
+  * asuhan        -> components/kriteria_sdki.py               (smartcare.streamlit.app)
+  * smart_emr     -> emr_ai_system/components/kriteria_sdki.py (smart-emr.streamlit.app)
+  * smartcare-web -> smartcare-web/components/kriteria_sdki.py (portal SmartCare platform)
 supaya perawat melihat skor, label prioritas, dan tanda kriteria yang SAMA
 untuk diagnosis yang sama di aplikasi mana pun. Bila diubah, salin ke
-keduanya.
+ketiganya.
 
 Murni TAMPILAN: hanya menyusun HTML dari data yang sudah dihitung mesin
-(DiagnosisService di asuhan, adapter sdki_engine di smart_emr). Tidak ada
-pencocokan atau perhitungan skor di sini.
+(DiagnosisService di asuhan, adapter sdki_engine di smart_emr,
+NursingAssessmentService di platform). Tidak ada pencocokan atau
+perhitungan skor di sini.
 
 `kriteria_cek` berbentuk:
     {"mayor": [{"teks": "Dispnea", "cocok": True}, ...],
@@ -30,8 +32,8 @@ KELOMPOK = (
     ("faktor_risiko", "Faktor risiko"),
 )
 
-# Ambang di teks ini mengikuti label_prioritas() asuhan & _prioritas()
-# adapter smart_emr. Bila ambangnya diubah, ubah juga teks ini.
+# Ambang di teks ini mengikuti label_prioritas() asuhan & platform dan
+# _prioritas() adapter smart_emr. Bila ambangnya diubah, ubah juga teks ini.
 KETERANGAN = (
     "✓ = kriteria terpenuhi oleh data S/O. Skor hanya bobot relatif untuk "
     "mengurutkan usulan, bukan persentase: CRITICAL ≥ 8 · HIGH ≥ 4 · "
